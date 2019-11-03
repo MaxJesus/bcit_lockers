@@ -1,216 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Personal Locker Management</title>
-    
-    <meta charset="utf-8"/>
-    
-        <!-- Bootstrap for Mobile-first -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-    <style>
+<head>
+  <title>Personal Locker Management</title>
+
+  <meta charset="utf-8" />
+
+  <!-- Bootstrap for Mobile-first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <style>
+
+    body{height: 100vmax}
+
+    /*header includes logo and */
+    .spinner-grow{
+      float: left;
+    }
+
+    #headerContainer {
+      width: 100vw;
+      position: relative;
+      top: 0vh;
+      text-align: center;
+      display: inline-block;
+      height: 10vh;
+      margin: 0vh;
+    }
+    #header {
       
+      position: relative;
+      top: 0vh;
+      text-align: center;
+      display: inline;
       
-      /*header includes logo and */
-      #header{
-        width: 100vw;
-        position: sticky;
-        top: 0vh;
-        text-align: center;
-        display: inline;
-        height: 10vh;
-        margin: 0vh;
-      }
-      
-      #logo{
-        left: calc(50vw - 8vh);
-        position: relative;
-        width: calc(10vh - 2vh);
-        top: 1vh;
-        padding:0vh;
-        margin:0vh;
-        }
-        
-      
-      
-      
-      
-      #profile{
-        position: relative;
-        width: calc(10vh - 1vh);
-        float: right}
-      
-      /*the promptbox tells the user what to do*/
-      #promptBox{
-        top:11vh;
-        margin-top: 0vh;
-        position: sticky;
-        font-size: 3.5vh;
-        height: 21vh;
-        margin-bottom: 10vh;
-        
-      }
-      
-      #dragBox{
-        display: block;
-        position: relative;
-        margin-top: 5vh;
-        font-size:12pt;
-        width:100vw;
-        height: 20vh;
-        margin-bottom: 0vh;
-      }
-      
-      #dragBoxButtons{
-        display: block;
-        position: relative;
-        margin-top: 5vh;
-        font-size:12pt;
-        width:100vw;
-        height: 20vh;
-        margin-bottom: 0vh;
-      }
-      
-      #leftCard{
-        width:48vw;
-        height: 40vh;
-        float:left;
-        margin-right: 1vw;
-        margin-bottom: 0vh;
-      }
-      
-       #rightCard{
-        width:48vw;
-        height: 40vh;
-        float:right;
-        margin-bottom: 0vh;
-        margin-left: 1vw;
-      }
-      
-      #dragBoxButtons{
-        height: 6vh;
-        width: 100vw;
-        margin-top: 0vh;
-        padding: 0vh;
-      }
-      
-      #picView{
-        float: left;
-        font-size: 3vh;
-        width: 35vw;
-        height: 6vh;
-        margin: 0vh;
-      }
-      
-      #skip{
-        float: right;
-        width: 25vw;
-        height: 6vh;
-        font-size: 3vh;
-      }
-      
-      #bottomToolBar{
-        position: absolute;
-        top: 90vh;
-        left: 0vw;
-        display: inline;
-        width: 100vw;
-        height: 12vh;
-      }
-      
-      #mapBtn{
-        width: 20vw;
-      }
-      
-      #checklistBtn{
-        width: 20vw;
-      }
-      
-      #unlockBtn{
-        width: 20vw;
-      }
-    </style>
-  </head>
-  <body>
+      margin: 0vh;
+    }
+
+    #promptBox {
+      top: 1vh;
+      margin-top: 1vh;
+      position: relative;
+      font-size: 3.5vh;
+      height: 21vh;
+      margin-bottom: 0vh;
+      padding-bottom: 0vh;
+    }
+
+    #logo {
+      position: relative;
+      width: calc(10vh - 2vh);
+      top: 1vh;
+      padding: 0vh;
+      margin: 0vh;
+    }
+
+
+
+
+
+    #profile {
+      position: relative;
+      width: calc(10vh - 1vh);
+      float: right
+    }
+
+    /*the promptbox tells the user what to do*/
+    
+
+    #dragBoxDiv {
+      display: block;
+      position: absolute;
+      margin-top: 0vh;
+      font-size: 12pt;
+      width: 100vw;
+      height: 50vh;
+      margin-bottom: 0vh;
+    }
+
+    #dragBox {
+      display: block;
+      position: relative;
+      margin-top: 1vh;
+      font-size: 12pt;
+      width: 100vw;
+      height: 38vh;
+      margin-bottom: 0vh;
+    }
+
+    
+
+    #leftCard {
+      width: 48vw;
+      height: 45vh;
+      float: left;
+      margin-right: 0.5vw;
+      margin-bottom: 0vh;
+    }
+
+    #rightCard {
+      width: 48vw;
+      height: 45vh;
+      float: right;
+      margin-bottom: 0vh;
+      margin-left: 1vw;
+    }
+
+    #dragBoxButtons {
+      height: 6vh;
+      width: 100vw;
+      margin-top: 0vh;
+      padding: 0vh;
+    }
+
+    #dragBoxButtons {
+      display: block;
+      position: relative;
+      bottom:  0vh;
+      font-size: 12pt;
+      width: 100vw;
+      height: 20vh;
+      margin-bottom: 0vh;
+    }
+
+    #picView {
+      float: left;
+      font-size: 2.5vh;
+      width: 35vw;
+      height: 6vh;
+      margin: 0vh;
+    }
+
+    #skip {
+      float: right;
+      width: 25vw;
+      height: 6vh;
+      font-size: 3vh;
+    }
+
+    #bottomToolBar {
+      position: relative;
+      width:100vw;
+      top: 55vh;
+      left: 0vw;
+      display: flex;
+      margin: 0px;
+
+    }
+
+    #mapBtn {
+      width: 20vw;
+    }
+    #mapBtn:hover {
+      width: 20.5vw;
+      filter: saturate(5.5);
+    }
+
+    #checklistBtn {
+      width: 20vw;
+    }
+
+    #checklistBtn:hover {
+      filter: saturate(5.5);
+      width: 20.5vw;
+    }
+
+    #unlockBtn {
+
+      width: 20vw;
+    }
+
+    #unlockBtn:hover {
+      filter: saturate(5.5);
+      width: 20.5vw;
+    }
+
+    .bottomToolBarButtonDiv{
+      display: flex;
+      width: 20vw;}
+  </style>
+</head>
+
+<body>
+  <div id="headerContainer">
     <div id="header">
-      
-      <div class="spinner-grow" role="status">
+
+      <div class="spinner-grow" role="status" >
         <span class="sr-only">Loading...</span>
       </div>
-      
-      <img src=img/logo.jpg id="logo" alt="logo"/>
-      
-      <img src="img/profile.png" id="profile" alt="profilePic"/>
-      
-    </div>
-    
-    <div id="promptBox" class="alert alert-success" role="alert">
-    <strong>Hi,</strong> Let's see what you have got for me, Master
-    </div>
-    
-          <!-- Tip: use bg-* and text-* utilities to style the card -->
-    <div id="dragBoxDiv">
-      <div id="dragBox">
-        <div class="card text-white bg-primary mb-3 d-inline-block" style="max-width: 20rem;" id="leftCard">
-          <div class="card-header">In hand</div>
-          <div class="card-body">
-            <h4 class="card-title">Cheese</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div>
 
-        <div class="card text-white bg-dark mb-3 d-inline-block" style="max-width: 20rem;" id="rightCard">
-          <div class="card-header">Inventory</div>
-          <div class="card-body">
-            <h4 class="card-title">Primary card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
+      <img src=img/logo.jpg id="logo" alt="logo" />
+
+      <img src="img/profile.png" id="profile" alt="profilePic" />
+
+    </div>
+
+    
+  </div>
+
+  <div id="promptBox" class="alert alert-success" role="alert">
+      <strong>Hi,</strong> Let's see what you have got for me, Master
+    </div>
+  <!-- Tip: use bg-* and text-* utilities to style the card -->
+  <div id="dragBoxDiv">
+    <div id="dragBox">
+      <div class="card text-white bg-primary mb-3 d-inline-block" style="max-width: 40rem;" id="leftCard">
+        <div class="card-header">In hand</div>
+        <div class="card-body">
+          <h4 class="card-title">Cheese</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
         </div>
-       </div>
-      
-       <div id="dragBoxButtons">
-        <button type="button" class="btn btn-outline-primary" id="picView">Picture View</button>
-        <button type="button" class="btn btn-outline-success" id="skip">SKIP</button>
+      </div>
+
+      <div class="card text-white bg-dark mb-3 d-inline-block" style="max-width: 40rem;" id="rightCard">
+        <div class="card-header">Inventory</div>
+        <div class="card-body">
+          <h4 class="card-title">Primary card title</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+        </div>
       </div>
     </div>
-    
-    <div id="bottomToolBar">
-       <img src = "img/mapBtn.png" id="mapBtn" alt="mapBtn"/>
-      <img src = "img/checklistBtn.png" id="checklistBtn" alt="checklist"/>
-      <img src = "img/unlockBtn.png" id="unlockBtn" alt="unlockBtn"/>
+
+    <div id="dragBoxButtons">
+      <button type="button" class="btn btn-outline-primary" id="picView">Picture View</button>
+      <button type="button" class="btn btn-outline-success" id="skip">SKIP</button>
     </div>
+  </div>
 
+  <div id="bottomToolBar">
+    <div> <img src="img/mapBtn.png" id="mapBtn" alt="mapBtn" class="bottomToolBarButtonDiv"/></div>
    
-    
-    
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <!--import jquery-->
+    <div><img src="img/checklistBtn.png" id="checklistBtn" alt="checklist" class="bottomToolBarButtonDiv"/></div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
+    <div><img src="img/unlockBtn.png" id="unlockBtn" alt="unlockBtn" class="bottomToolBarButtonDiv"/></div>
+  </div>
+
+
+
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <!--import jquery-->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  </script>
+
+  <script>
+
+    $("#profile").click(function () {
+      $("body").append("<div></div>");
+    })
+
+    $("#skip").click(function () {
+      $("#dragBoxDiv").fadeOut(1000);
+    })
+
     
- <script>
-          
-          $("#profile").click(function(){
-            $("body").append("<div>wrf</div>");
-          })
-   
-           $("#skip").click(function(){
-            $("#dragBox").fadeOut(1000);
-          })
-      
- </script>
-  </body>
+    
+
+    $("#dragBoxDiv").show();
+
+  </script>
+</body>
+
 </html>

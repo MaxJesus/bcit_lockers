@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Personal Locker Management</title>
     
-    <meta lang="en"/>
+    <meta charset="utf-8"/>
     
         <!-- Bootstrap for Mobile-first -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -62,10 +62,21 @@
       }
       
       #dragBox{
+        display: block;
         position: relative;
         margin-top: 5vh;
         font-size:12pt;
-        width:100%;
+        width:100vw;
+        height: 20vh;
+        margin-bottom: 0vh;
+      }
+      
+      #dragBoxButtons{
+        display: block;
+        position: relative;
+        margin-top: 5vh;
+        font-size:12pt;
+        width:100vw;
         height: 20vh;
         margin-bottom: 0vh;
       }
@@ -87,13 +98,15 @@
       }
       
       #dragBoxButtons{
+        height: 6vh;
+        width: 100vw;
         margin-top: 0vh;
         padding: 0vh;
       }
       
       #picView{
         float: left;
-        font-size: 12pt;
+        font-size: 3vh;
         width: 35vw;
         height: 6vh;
         margin: 0vh;
@@ -103,7 +116,7 @@
         float: right;
         width: 25vw;
         height: 6vh;
-        font-size: 12pt;
+        font-size: 3vh;
       }
       
       #bottomToolBar{
@@ -146,22 +159,24 @@
     </div>
     
           <!-- Tip: use bg-* and text-* utilities to style the card -->
-    <div id="dragBox">
-      <div class="card text-white bg-primary mb-3 d-inline-block" style="max-width: 20rem;" id="leftCard">
-        <div class="card-header">In hand</div>
-        <div class="card-body">
-          <h4 class="card-title">Cheese</h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <div id="dragBoxDiv">
+      <div id="dragBox">
+        <div class="card text-white bg-primary mb-3 d-inline-block" style="max-width: 20rem;" id="leftCard">
+          <div class="card-header">In hand</div>
+          <div class="card-body">
+            <h4 class="card-title">Cheese</h4>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
         </div>
-      </div>
-      
-      <div class="card text-white bg-dark mb-3 d-inline-block" style="max-width: 20rem;" id="rightCard">
-        <div class="card-header">Inventory</div>
-        <div class="card-body">
-          <h4 class="card-title">Primary card title</h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+        <div class="card text-white bg-dark mb-3 d-inline-block" style="max-width: 20rem;" id="rightCard">
+          <div class="card-header">Inventory</div>
+          <div class="card-body">
+            <h4 class="card-title">Primary card title</h4>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
         </div>
-      </div>
+       </div>
       
        <div id="dragBoxButtons">
         <button type="button" class="btn btn-outline-primary" id="picView">Picture View</button>
@@ -170,9 +185,9 @@
     </div>
     
     <div id="bottomToolBar">
-       <img src = "img/mapBtn.png" id="mapBtn"/ >
-      <img src = "img/checklistBtn.png" id="checklistBtn"/>
-      <img src = "img/unlockBtn.png" id="unlockBtn"/>
+       <img src = "img/mapBtn.png" id="mapBtn" alt="mapBtn"/>
+      <img src = "img/checklistBtn.png" id="checklistBtn" alt="checklist"/>
+      <img src = "img/unlockBtn.png" id="unlockBtn" alt="unlockBtn"/>
     </div>
 
    

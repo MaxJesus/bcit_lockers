@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title></title>
     <head>
-    <title>Soilder HUD</title>
+    <title>Login-BCIT_LOCKERs</title>
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -22,11 +22,37 @@
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
       
-     
+<style>
+  
+  
+  #intro{position: sticky;
+    top: 0vh;
+    display: inline-block;
+    height: 5vh;
+  margin-bottom: 1vh;
+  }
+  #Welcome{font-size: 3vh}
+  #notice{font-size: 2vh}
+  
+  body{text-align: center}
+  
+  #loginDiv{
+    transform: scale(1.6,1.6);
+    width: 100vw;
+    position: relative;
+    height: 25vh;
+    top: 10vh;
+    margin-top: 5vh;}
+</style>
 </head>
   
   
 <body>
+  <div id="intro">
+  <h1 id="Welcome">Welcome to BCIT LOCKERS</h1>
+  <p id="notice">Please login with your my.bcit.ca email</p>
+  </div>
+  
    <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
@@ -44,10 +70,10 @@
   firebase.analytics();
 </script>
   
-  
+ <div id="loginDiv">
  <div id="firebaseui-auth-container"></div>
     <div id="loader">Loading...</div>
-
+ </div>
     <script>
         // Initialize the FirebaseUI Widget using Firebase.
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -87,9 +113,7 @@
         ui.start('#firebaseui-auth-container', uiConfig);
     </script>
   
-    <h1>Locker Map</h1>
-    <p>This page allows the user to choose their locker</p>
-    <iframe width='600' height='500' frameborder='5' style='border:0' src='https://www.google.com/maps/embed/v1/place?key=AIzaSyCoBmMoTzGkWkg5QLW5fWaLxLV5jwO5e-0&q=Space+Needle,Seattle+WA' allowfullscreen></iframe>
+    
   
 
 

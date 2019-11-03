@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BCIT LOCKERS</title>
+    <title>Personal Locker Management</title>
     
     <meta lang="en"/>
     
@@ -21,68 +21,100 @@
     <style>
       
       
+      /*header includes logo and */
+      #header{
+        width: 100vw;
+        position: sticky;
+        top: 0vh;
+        text-align: center;
+        display: inline;
+        height: 10vh;
+        margin: 0vh;
+      }
       
-      #logo{position: absolute;
-        width: 20vw;
-        height: 20vw;
-        left: 45%;
-        top: 8px;}
+      #logo{
+        left: calc(50vw - 8vh);
+        position: relative;
+        width: calc(10vh - 2vh);
+        top: 1vh;
+        padding:0vh;
+        margin:0vh;
+        }
+        
       
       
       
       
-      #profile{width:20vw;
-        height: 20vw;
+      #profile{
+        position: relative;
+        width: calc(10vh - 1vh);
         float: right}
       
-
-      #promptBox{margin-top: 5vh;
+      /*the promptbox tells the user what to do*/
+      #promptBox{
+        top:11vh;
+        margin-top: 0vh;
+        position: sticky;
+        font-size: 3.5vh;
+        height: 21vh;
+        margin-bottom: 10vh;
+        
+      }
+      
+      #dragBox{
         position: relative;
-        top: 100px;
-        font-size: 200%;
-        font-size: 200%;
-        margin-bottom: 1vh;
-      }
-      
-      #dragBox{margin-top: 5vh;
+        margin-top: 5vh;
+        font-size:12pt;
         width:100%;
-        height: 45%;
-        font-size:35pt;
+        height: 20vh;
+        margin-bottom: 0vh;
       }
       
-      #leftCard{width:48vw;
+      #leftCard{
+        width:48vw;
+        height: 40vh;
         float:left;
-        margin-top: 1vh;
         margin-right: 1vw;
+        margin-bottom: 0vh;
       }
       
-       #rightCard{width:48vw;
-        float:left;
-         margin-top: 1vh;
+       #rightCard{
+        width:48vw;
+        height: 40vh;
+        float:right;
+        margin-bottom: 0vh;
         margin-left: 1vw;
+      }
+      
+      #dragBoxButtons{
+        margin-top: 0vh;
+        padding: 0vh;
       }
       
       #picView{
         float: left;
-        font-size: 35pt;
-        width: 25vw;
-        height: 8vh;
+        font-size: 12pt;
+        width: 35vw;
+        height: 6vh;
+        margin: 0vh;
       }
       
       #skip{
         float: right;
         width: 25vw;
-        height: 8vh;
-        font-size: 35pt;
+        height: 6vh;
+        font-size: 12pt;
       }
+      
       #bottomToolBar{
         position: absolute;
-        bottom: 0vh;
+        top: 90vh;
         left: 0vw;
         display: inline;
         width: 100vw;
-        height: 40vh;
+        height: 12vh;
       }
+      
       #mapBtn{
         width: 20vw;
       }
@@ -106,22 +138,25 @@
       <img src=img/logo.jpg id="logo" alt="logo"/>
       
       <img src="img/profile.png" id="profile" alt="profilePic"/>
+      
     </div>
+    
     <div id="promptBox" class="alert alert-success" role="alert">
     <strong>Hi,</strong> Let's see what you have got for me, Master
     </div>
     
           <!-- Tip: use bg-* and text-* utilities to style the card -->
     <div id="dragBox">
-      <div class="card text-white bg-primary mb-3 d-inline-block" style="max-width: 40rem;" id="leftCard">
-        <div class="card-header">Header</div>
+      <div class="card text-white bg-primary mb-3 d-inline-block" style="max-width: 20rem;" id="leftCard">
+        <div class="card-header">In hand</div>
         <div class="card-body">
           <h4 class="card-title">Cheese</h4>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
       </div>
-      <div class="card text-white bg-dark mb-3 d-inline-block" style="max-width: 100rem;" id="rightCard">
-        <div class="card-header">Header</div>
+      
+      <div class="card text-white bg-dark mb-3 d-inline-block" style="max-width: 20rem;" id="rightCard">
+        <div class="card-header">Inventory</div>
         <div class="card-body">
           <h4 class="card-title">Primary card title</h4>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -154,7 +189,7 @@
  <script>
           
           $("#profile").click(function(){
-            $("body").append("<div>wtf</div>");
+            $("body").append("<div>wrf</div>");
           })
    
            $("#skip").click(function(){

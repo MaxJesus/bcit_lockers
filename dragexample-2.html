@@ -26,8 +26,9 @@
   #trash .gallery h5 { display: none; }
   </style>
   
- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script>
   $( function() {
  
@@ -145,7 +146,7 @@
   
 <body>
  
-<div class="ui-widget ui-helper-clearfix">
+<div class="ui-widget ui-helper-clearfix" id="widget">
  
 <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
   <li class="ui-widget-content ui-corner-tr">
@@ -176,5 +177,6 @@
 </div>
  
  
+ <script>$("*.widget").draggable();</script>
 </body>
 </html>

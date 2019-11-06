@@ -323,22 +323,64 @@
 
     
     function lockerEvent(){
-    function unlock() {
-
-      //to prevent user from clicking twice or more and create weird display
-      let clicked = false;
-
-      $("#unlockBtn").click(function () {
-        let unlocked = false;
-        $(promptBox).html("<strong>Unlocking...</strong>")
-        if (clicked == false) {
-
-          clicked = true;
-          var progressBar = $("<div class='progress'> </div>");
+    let clicked = false;
+    let unlocked = false;
+      
+      var progressBar = $("<div class='progress'> </div>");
           var progress = $("<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100' ></div>");
           $(progressBar).append(progress);
           $("#promptBox").after(progressBar);
           progressBar.css("margin-top", "5vh");
+      
+       function showProgress(){
+          setTimeout(() => {
+            for (i = 0; i < 10; i++) {
+              $(progress).css('width', i + "%");
+            }
+
+          }, 300);
+
+          setTimeout(() => {
+            for (i = 0; i < 35; i++) {
+              $(progress).css('width', i + "%");
+            }
+
+          }, 1000);
+
+          setTimeout(() => {
+            for (i = 50; i < 65; i++) {
+              $(progress).css('width', i + "%");
+            }
+          }, 2000);
+
+          setTimeout(() => {
+            for (i = 65; i < 85; i++) {
+              $(progress).css('width', i + "%");
+            }
+          }, 3000);
+
+          setTimeout(() => {
+            for (i = 85; i < 110; i++) {
+              $(progress).css('width', i + "%");
+            }
+          }, 4000);
+
+          setTimeout(() => {
+            $(promptBox).html("<strong>Locked</strong>")
+          }, 4100);
+        }
+      
+      
+      
+      
+      
+      
+    function unlock() {
+      //to prevent user from clicking twice or more and create weird display
+    
+        $(promptBox).html("<strong>Unlocking...</strong>")
+        
+          
 
           function showProgress(){
           setTimeout(() => {
@@ -379,7 +421,10 @@
 
         } showProgress();
     
-        
+         setTimeout(() => {unlocked=true;
+                          clicked=false;
+          }, 4100);
+          
           
 
           
@@ -387,94 +432,44 @@
           $("#dragBoxDiv").fadeOut(300);
           
           $("#unlockBtn").attr("src","img/lockBtn.png");
-         
-          
-        }
-        else return;
-        
-           
-         
-       
-      })
     }
-    unlock();
+      
+     
+    
     
     function lock() {
 
-      //to prevent user from clicking twice or more and create weird display
-      let clicked = false;
-
-      $("#unlockBtn").click(function () {
-        let unlocked = false;
-        $(promptBox).html("<strong>Unlocking...</strong>")
-        if (clicked == false) {
-
-          clicked = true;
-          var progressBar = $("<div class='progress'> </div>");
-          var progress = $("<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100' ></div>");
-          $(progressBar).append(progress);
-          $("#promptBox").after(progressBar);
-          progressBar.css("margin-top", "5vh");
-
-          function showProgress(){
-          setTimeout(() => {
-            for (i = 0; i < 10; i++) {
-              $(progress).css('width', i + "%");
-            }
-
-          }, 300);
-
-          setTimeout(() => {
-            for (i = 0; i < 35; i++) {
-              $(progress).css('width', i + "%");
-            }
-
-          }, 1000);
-
-          setTimeout(() => {
-            for (i = 50; i < 65; i++) {
-              $(progress).css('width', i + "%");
-            }
-          }, 2000);
-
-          setTimeout(() => {
-            for (i = 65; i < 85; i++) {
-              $(progress).css('width', i + "%");
-            }
-          }, 3000);
-
-          setTimeout(() => {
-            for (i = 85; i < 110; i++) {
-              $(progress).css('width', i + "%");
-            }
-          }, 4000);
-
-          setTimeout(() => {
-            $(promptBox).html("<strong>Sucessful Unlocked</strong>")
-          }, 4100);
-
-        } showProgress();
+      
+       showProgress();
     
-        
+         setTimeout(() => {unlocked=false;
+                           clicked=false;
+          }, 4100);
+      
           
 
           
           //the dragbox fades out while the progress bar advances
           $("#dragBoxDiv").fadeOut(300);
           
-          $("#unlockBtn").attr("src","img/lockBtn.png");
-         
-          
-        }
-        else return;
-        
-           
-         
-       
-      })
+          $("#unlockBtn").attr("src","img/unlockBtn.png");
+      
     }
-    lock();
-}
+      
+      //If locked, unlock. If unlocked, lock.
+      //to prevent user from clicking twice or more and create weird display
+       $("#unlockBtn").click(function(){
+         if(clicked==false && unlocked==false){
+           unlock();
+         }
+         else if(clicked==false && unlocked==true){
+           lock();}
+         else return;
+       });
+      
+      
+      
+}lockerEvent();
     
   var drag = $("<iframe></iframe> ");
   $(drag).attr("src","dragexample-2.html");

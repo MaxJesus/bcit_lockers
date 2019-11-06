@@ -332,6 +332,7 @@
           $("#promptBox").after(progressBar);
           progressBar.css("margin-top", "5vh");
       
+      
        function showProgress(){
           setTimeout(() => {
             for (i = 0; i < 10; i++) {
@@ -380,7 +381,7 @@
     
         $(promptBox).html("<strong>Unlocking...</strong>")
         
-          
+          clicked=true;
 
           function showProgress(){
           setTimeout(() => {
@@ -416,16 +417,16 @@
           }, 4000);
 
           setTimeout(() => {
-            $(promptBox).html("<strong>Sucessful Unlocked</strong>")
+            $(promptBox).html("<strong>Sucessfully Unlocked</strong>")
           }, 4100);
 
         } showProgress();
     
-         setTimeout(() => {unlocked=true;
-                          clicked=false;
+         setTimeout(() => {unlocked=true;clicked=false;
+                          
           }, 4100);
           
-          
+      
 
           
           //the dragbox fades out while the progress bar advances
@@ -439,7 +440,48 @@
     
     function lock() {
 
+      $(promptBox).html("<strong>locking...</strong>")
+      clicked=true;
       
+       function showProgress(){
+          setTimeout(() => {
+            for (i = 100; i > 85; i--) {
+              $(progress).css('width', i + "%");
+            }
+
+          }, 300);
+
+          setTimeout(() => {
+            for (i = 85; i > 65; i--) {
+              $(progress).css('width', i + "%");
+            }
+
+          }, 1000);
+
+          setTimeout(() => {
+            for (i = 65; i > 35; i--) {
+              $(progress).css('width', i + "%");
+            }
+          }, 2000);
+
+          setTimeout(() => {
+            for (i = 35; i > 0; i--) {
+              $(progress).css('width', i + "%");
+            }
+          }, 3000);
+
+          setTimeout(() => {
+            for (i = 35; i > -1; i--) {
+              $(progress).css('width', i + "%");
+            }
+          }, 4000);
+
+          setTimeout(() => {
+            
+            $(promptBox).html("<strong>locked</strong>")
+          }, 4100);
+
+        }
        showProgress();
     
          setTimeout(() => {unlocked=false;
@@ -460,9 +502,11 @@
       //to prevent user from clicking twice or more and create weird display
        $("#unlockBtn").click(function(){
          if(clicked==false && unlocked==false){
+           
            unlock();
          }
          else if(clicked==false && unlocked==true){
+           
            lock();}
          else return;
        });

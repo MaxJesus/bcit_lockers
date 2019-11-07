@@ -31,29 +31,49 @@
     height: 5vh;
   margin-bottom: 1vh;
   }
-  #Welcome{font-size: 3vh}
-  #notice{font-size: 2vh}
   
-  body{text-align: center}
+  #Welcome{font-size: 3vh;
+  color: ghostwhite;
+  font: bold;}
+  
+  #notice{font-size: 1vh;
+    position: relative;
+    top: 5vh;
+    z-index: 14;
+    }
+  
+  body{
+    background-image: url(img/background.jpg);
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    border: 5px solid black;
+    text-align: center;height: 100vh;
+    box-shadow: 10px 10px 5px #888888;
+  }
+
   
   #loginDiv{
     transform: scale(1.6,1.6);
-    width: 100vw;
+    width: 70vw;
     position: relative;
     height: 25vh;
+    left: 13%;
     top: 10vh;
-    margin-top: 5vh;}
+    margin-top: 1vh;}
+  
+   #continue{
+    position: relative;
+    top: 0vh;
+     z-index: 10;
+    background: green;
+     color: white;
+     height:4vh;
+     font: bold;
+    top: 1vh;}
+  
+  
 </style>
-</head>
-  
-  
-<body>
-  <div id="intro">
-  <h1 id="Welcome">Welcome to BCIT LOCKERS</h1>
-  <p id="notice">Please login with your my.bcit.ca email</p>
-  </div>
-  
-   <script>
+         <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
@@ -69,11 +89,38 @@
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 </script>
+</head>
+  
+  
+<body>
+  <div id="landing">
+  <div id="intro">
+  <h1 id="Welcome">Welcome to BCIT LOCKERS</h1>
+ 
+  </div>
+  
+
+  
+  <div id="headerContainer">
+    <div id="header">
+      </div>
+
+      <img src=img/logo.png id="logo" alt="logo" />
+
+    </div>
+
+
+
   
  <div id="loginDiv">
- <div id="firebaseui-auth-container"></div>
+ <div id="firebaseui-auth-container"><p id="notice"><strong>Please login with your my.bcit.ca email</strong></p></div>
     <div id="loader">Loading...</div>
+   
+    <button id="continue">Continue without login</button>
+     
  </div>
+    </div>
+  
     <script>
         // Initialize the FirebaseUI Widget using Firebase.
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -96,8 +143,8 @@
             signInSuccessUrl: 'app.html',
             signInOptions: [
                 // Leave the lines as is for the providers you want to offer your users.
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+//                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+//                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
                 // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
                 // firebase.auth.GithubAuthProvider.PROVIDER_ID,
                 firebase.auth.EmailAuthProvider.PROVIDER_ID,

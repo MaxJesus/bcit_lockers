@@ -24,12 +24,14 @@
 
   <style>
     body {
-      height: 100vmax
+      height: 100vmax;
+      
     }
 
     /*header includes logo and */
     .spinner-grow {
       float: left;
+      filter: invert(100%);
     }
 
     #headerContainer {
@@ -40,6 +42,8 @@
       display: inline-block;
       height: 10vh;
       margin: 0vh;
+      background-image: url(img/lockermanagement_background.jpg);
+        
     }
 
     #header {
@@ -53,7 +57,7 @@
 
     #promptBox {
       top: 1vh;
-      margin-top: 1vh;
+      margin-top: 0vh;
       position: relative;
       font-size: 3.5vh;
       height: 21vh;
@@ -76,7 +80,8 @@
     #profile {
       position: relative;
       width: calc(10vh - 1vh);
-      float: right
+      float: right;
+      clip-path:circle(48%);
     }
 
     /*the promptbox tells the user what to do*/
@@ -189,11 +194,25 @@
       filter: saturate(5.5);
       width: 20.5vw;
     }
+    
+    #checkContentBtn{
+      width: 20vw;
+    }
+    
+    #checkContentBtn:hover{
+      filter: saturate(5.5);
+      width: 20.5vw;
+    }
+    
 
     .bottomToolBarButtonDiv {
       display: flex;
       width: 20vw;
     }
+    
+    
+    
+    
   </style>
 
   <!-- the following code should be converted into script version later-->
@@ -350,7 +369,7 @@
       var progress = $("<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100' ></div>");
       $(progressBar).append(progress);
       $("#promptBox").after(progressBar);
-      progressBar.css("margin-top", "5vh");
+      progressBar.css("margin-top", "1vh");
 
 
       function showProgress() {
@@ -455,6 +474,22 @@
 
         $("#unlockBtn").attr("src", "img/lockBtn.png");
       }
+      
+       $("#picView").click(function () {
+         var upload = $("<iframe></iframe>");
+        $(upload).attr("src", "iframePhotoUpload.html");
+    $(upload).css("position", "absolute");
+    $(upload).css("left", "0px");
+    $(upload).css("top", "35vh");
+    $(upload).css("height", "100%");
+    $(upload).css("width", "100%");
+    $(upload).attr("frameborder", "0");
+    $(upload).attr("seamless");
+    $(progressBar).append(upload);
+         $(dragBoxDiv).hide();
+           
+           
+        })
 
 
 
@@ -527,6 +562,7 @@
 
           unlock();
         }
+      
         else if (clicked == false && unlocked == true) {
 
           lock();
@@ -537,7 +573,10 @@
 
 
     } lockerEvent();
-
+    
+   
+        
+    
     var drag = $("<iframe></iframe> ");
     $(drag).attr("src", "dragexample-2.html");
     $(drag).css("position", "absolute");

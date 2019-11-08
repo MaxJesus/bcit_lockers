@@ -1,0 +1,217 @@
+
+    body {
+      height: 100vmax;
+      background-image: url(../img/lockermanagement_background2.jpg);
+      
+    }
+
+    /*header includes logo and */
+    .spinner-grow {
+      float: left;
+      filter: invert(100%);
+    }
+
+    #headerContainer {
+      width: 100vw;
+      position: relative;
+      top: 0vh;
+      text-align: center;
+      display: inline-block;
+      height: 10vh;
+      margin: 0vh;
+      background-image: url(../img/lockermanagement_background.jpg);
+        
+    }
+
+    #header {
+
+      position: relative;
+      top: 0vh;
+      text-align: center;
+      display: inline;
+      margin: 0vh;
+    }
+
+    #promptBox {
+      top: 1vh;
+      margin-top: 0vh;
+      position: relative;
+      font-size: 3.5vh;
+      height: 21vh;
+      margin-bottom: 0vh;
+      padding-bottom: 0vh;
+      filter: opacity(80%)
+    }
+
+    #logo {
+      position: relative;
+      width: calc(10vh - 2vh);
+      top: 1vh;
+      padding: 0vh;
+      margin: 0vh;
+    }
+
+
+
+
+
+    #profile {
+      position: relative;
+      width: calc(10vh - 1vh);
+      float: right;
+      clip-path:circle(48%);
+    }
+
+    /*the promptbox tells the user what to do*/
+
+
+    #dragBoxDiv {
+      display: block;
+      position: absolute;
+      margin-top: 0vh;
+      font-size: 12pt;
+      width: 100vw;
+      height: 50vh;
+      margin-bottom: 0vh;
+      filter: opacity(75%);
+    }
+
+    #dragBox {
+      display: block;
+      position: relative;
+      margin-top: 1vh;
+      font-size: 12pt;
+      width: 100vw;
+      height: 38vh;
+      margin-bottom: 0vh;
+    }
+
+
+
+    #leftCard {
+      width: 48vw;
+      height: 45vh;
+      float: left;
+      margin-right: 0.5vw;
+      margin-bottom: 0vh;
+    }
+
+    #rightCard {
+      width: 48vw;
+      height: 45vh;
+      float: right;
+      margin-bottom: 0vh;
+      margin-left: 1vw;
+    }
+
+    #dragBoxButtons {
+      height: 6vh;
+      width: 100vw;
+      margin-top: 0vh;
+      padding: 0vh;
+    }
+
+    #dragBoxButtons {
+      display: block;
+      position: relative;
+      bottom: 0vh;
+      font-size: 12pt;
+      width: 100vw;
+      height: 20vh;
+      margin-bottom: 0vh;
+    }
+
+    #picView {
+      float: left;
+      font-size: 2.5vh;
+      width: 35vw;
+      height: 6vh;
+      margin: 0vh;
+    }
+
+    #skip {
+      float: right;
+      width: 25vw;
+      height: 6vh;
+      font-size: 3vh;
+    }
+
+    #bottomToolBar {
+      position: absolute;
+      width: 100vw;
+      top: 90vh;
+      left: 0vw;
+      display: flex;
+      margin: 0px;
+
+    }
+
+    #mapBtn {
+      width: 19vw;
+    }
+
+    #mapBtn:hover {
+      width: 20vw;
+      filter: saturate(5.5);
+    }
+
+    #checklistBtn {
+      width: 20vw;
+    }
+
+    #checklistBtn:hover {
+      filter: saturate(5.5);
+      width: 20.5vw;
+    }
+
+    #unlockBtn {
+
+      width: 20vw;
+    }
+
+    #unlockBtn:hover {
+      filter: saturate(5.5);
+      width: 20.5vw;
+    }
+    
+    #checkContentBtn{
+      width: 20vw;
+    }
+    
+    #checkContentBtn:hover{
+      filter: saturate(5.5);
+      width: 20.5vw;
+    }
+    
+
+    .bottomToolBarButtonDiv {
+      display: flex;
+      width: 20vw;
+    }
+    
+    
+    
+    
+ 
+
+  /*the following code should be converted into script version later*/
+
+    #sortable {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      width: 60%;
+    }
+
+    #sortable li[class="ui-state-default"] {
+      margin: 10px 3px 3px 3px;
+      padding: 0.4em;
+      padding-left: 1.5em;
+      font-size: 1.4em;
+      height: 18px;
+    }
+
+    #sortable li[class="ui-state-default"] span[class="ui-icon ui-icon-arrowthick-2-n-s"] {
+      position: absolute;
+      margin-left: -1.3em;
+    }

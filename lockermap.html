@@ -1,105 +1,64 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
-    <meta charset="utf-8">
-    <title></title>
-    <head>
-    <title>Soilder HUD</title>
-    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+<head>
+  <title>Personal Locker Management</title>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+  <meta charset="utf-8" />
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
-      
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+  <!-- Bootstrap for Mobile-first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <!--Authentication Sign in with a pre-built UI-->
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-      
-     
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  
+  <!--This file works as the overall stylesheet for the project-->
+  <link type="text/css" rel="stylesheet" href="style/lockermanagement.css">
+
+  <!--This file works as the overall stylesheet for lockermap-->
+  <link type="text/css" rel="stylesheet" href="style/lockermap.css">
+
+  
 </head>
-  
-  
+
 <body>
-   <script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
-    authDomain: "bcit-lockers.firebaseapp.com",
-    databaseURL: "https://bcit-lockers.firebaseio.com",
-    projectId: "bcit-lockers",
-    storageBucket: "bcit-lockers.appspot.com",
-    messagingSenderId: "380958555512",
-    appId: "1:380958555512:web:3a1928344614d15da51c8d",
-    measurementId: "G-R8V8WMCJRB"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-</script>
-  
-  
- <div id="firebaseui-auth-container"></div>
-    <div id="loader">Loading...</div>
+  <div id="headerContainer">
+    <div id="header">
 
-    <script>
-        // Initialize the FirebaseUI Widget using Firebase.
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-        var uiConfig = {
-            callbacks: {
-                signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-                    // User successfully signed in.
-                    // Return type determines whether we continue the redirect automatically
-                    // or whether we leave that to developer to handle.
-                    return true;
-                },
-                uiShown: function () {
-                    // The widget is rendered.
-                    // Hide the loader.
-                    document.getElementById('loader').style.display = 'none';
-                }
-            },
-            // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-            signInFlow: 'popup',
-            signInSuccessUrl: 'app.html',
-            signInOptions: [
-                // Leave the lines as is for the providers you want to offer your users.
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                // firebase.auth.GithubAuthProvider.PROVIDER_ID,
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                // firebase.auth.PhoneAuthProvider.PROVIDER_ID
-            ],
-            // Terms of service url.
-            tosUrl: 'app.html',
-            // Privacy policy url.
-            privacyPolicyUrl: '<your-privacy-policy-url>'
-        };
+      <div class="spinner-grow" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
 
-        // The start method will wait until the DOM is loaded.
-        ui.start('#firebaseui-auth-container', uiConfig);
-    </script>
-  
-    <h1>Locker Map</h1>
-    <p>This page allows the user to choose their locker</p>
-  
-<div>
-    <iframe width="600" height="500" frameborder="0" style="border:0"
-src="https://www.google.com/maps/embed/v1/view?zoom=16&center=49.2511%2C-123.0005&key=AIzaSyCoBmMoTzGkWkg5QLW5fWaLxLV5jwO5e-0" allowfullscreen>
-  </iframe>
-  <img src="">
+      <img src=img/logo.png id="logo" alt="logo"/>
 
-</div>
+      <img src="img/profile.png" id="profile" alt="profilePic" />
+
+    </div>
 
 
+  </div>
+
+  <div id="promptBox" class="alert alert-success" role="alert">
+    <strong>Please Choose a building to view the available lockers</strong>
+  </div>
+  <!-- Tip: use bg-* and text-* utilities to style the card -->
+  <div id="sectionChoice">
+    <div id="NW"> NW </div>
+    <div id="NE"> NE </div>
+    <div id="SW"> SW </div>
+    <div id="SE"> SE </div>
+    
+    
+  </div>
 
 </body>
-</html>
 
+</html>

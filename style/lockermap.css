@@ -1,0 +1,30 @@
+#sectionChoice{
+  display: grid;
+  width: 100vw;
+  height: 40vh;
+  grid-template-areas:
+            "NW NW NE NE"
+            "NW NW NE NE"
+            "SW SW SE SE"
+            "SW SW SE SE";
+}
+
+#NW{
+  grid-area: NW;
+  background: blue;
+}
+
+#NE{
+  grid-area: NE;
+  background: green;
+}
+
+#SW{
+  grid-area: SW;
+  background: orange;
+}
+
+#SE{
+  grid-area: SE;
+  background: red;
+}

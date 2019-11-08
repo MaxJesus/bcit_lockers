@@ -47,18 +47,61 @@
   </div>
 
   <div id="promptBox" class="alert alert-success" role="alert">
-    <strong>Please Choose a building to view the available lockers</strong>
+    <span>Please Choose a <span>section</span> to view the available lockers</span>
   </div>
-  <!-- Tip: use bg-* and text-* utilities to style the card -->
+  
+  <!--A div that allows the user to choose a section to view avaiable lockers-->
   <div id="sectionChoice">
-    <div id="NW"> NW </div>
-    <div id="NE"> NE </div>
-    <div id="SW"> SW </div>
-    <div id="SE"> SE </div>
+    <div id="NW"><span>NW:</span> <span id="counterNW"> </span> <span>available lockers left</span></div>
+    <div id="NE"><span>NE:</span> <span id="counterNE"> </span> <span>available lockers left</span></div>
+    <div id="SW"><span>SW:</span> <span id="counterSW"> </span> <span>available lockers left</span></div>
+    <div id="SE"><span>SE:</span> <span id="counterSE"> </span> <span>available lockers left</span></div>
+  </div>
+  
+  
+  <!--A div that allows the user to choose a building to view avaiable lockers-->
+  <div id="buildings">
+  <div id="NW-buildings">
+    <div id="NW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW3Btn" >NW3</button><span>NW3</span> <span id="NW3data"> </span> <span>available lockers left</span></div>
     
+    <div id="NW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW1Btn" >NW1</button><span>NW1:</span> <span id="NW1data"> </span> <span>available lockers left</span></div>
+    
+    <div id="NW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW5Btn" >NW5</button><span>NW3</span> <span id="NW5data"> </span> <span>available lockers left</span></div>
+    
+    <div id="NW6"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW6Btn" >NW6</button><span>NW1:</span> <span id="NW6data"> </span> <span>available lockers left</span></div>
     
   </div>
-
+  
+  <div id="SW-buildings">
+    <div id="SW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW1Btn" >SW1</button><span>SW1</span> <span id="SW1data"> </span> <span>available lockers left</span></div>
+    
+    <div id="SW2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW2Btn" >SW2</button><span>SW2:</span> <span id="SW2data"> </span> <span>available lockers left</span></div>
+    
+    <div id="SW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW3Btn" >SW3</button><span>SW3</span> <span id="SW3data"> </span> <span>available lockers left</span></div>
+    
+    <div id="SW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW5Btn" >SW5</button><span>SW5:</span> <span id="SW5data"> </span> <span>available lockers left</span></div>
+    
+    <div id="SW9"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW9Btn" >SW9</button><span>SW9:</span> <span id="SW9data"> </span> <span>available lockers left</span></div>
+  </div>
+    
+</div>
+  
+  
+  <script>
+    $("#NW-buildings").hide();
+    $("#NW").click(function(){
+      $("#NW-buildings").show();
+      $("#sectionChoice").hide();
+    });
+    
+    $("#SW-buildings").hide();
+    $("#SW").click(function(){
+      $("#SW-buildings").show();
+      $("#sectionChoice").hide();
+    });
+    
+    
+  </script>
 </body>
 
 </html>

@@ -62,26 +62,30 @@
   <!--A div that allows the user to choose a building to view avaiable lockers-->
   <div id="buildings">
   <div id="NW-buildings" class="2">
-    <div id="NW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW3Btn" >NW3</button><span>NW3</span> <span id="NW3data"> </span> <span>available lockers left</span></div>
+    <div id="NW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW3Btn" name="NW3" >NW3</button><span>NW3</span> <span id="NW3data"> </span> <span>available lockers left</span></div>
     
-    <div id="NW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW1Btn" >NW1</button><span>NW1:</span> <span id="NW1data"> </span> <span>available lockers left</span></div>
+    <div id="NW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW1Btn" name="NW1" >NW1</button><span>NW1:</span> <span id="NW1data"> </span> <span>available lockers left</span></div>
     
-    <div id="NW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW5Btn" >NW5</button><span>NW3</span> <span id="NW5data"> </span> <span>available lockers left</span></div>
+    <div id="NW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW5Btn" name="NW5" >NW5</button><span>NW5</span> <span id="NW5data"> </span> <span>available lockers left</span></div>
     
-    <div id="NW6"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW6Btn" >NW6</button><span>NW1:</span> <span id="NW6data"> </span> <span>available lockers left</span></div>
+    <div id="NW6"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW6Btn" name="NW6">NW6</button><span>NW6:</span> <span id="NW6data"> </span> <span>available lockers left</span></div>
     
   </div>
   
   <div class="SW-buildings" class="2">
-    <div id="SW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW1Btn" >SW1</button><span>SW1</span> <span id="SW1data"> </span> <span>available lockers left</span></div>
+    <div id="SW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW1Btn" name="SW1" >SW1</button><span>SW1</span> <span id="SW1data"> </span> <span>available lockers left</span></div>
     
-    <div id="SW2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW2Btn" >SW2</button><span>SW2:</span> <span id="SW2data"> </span> <span>available lockers left</span></div>
+    <div id="SW2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW2Btn" name="SW2">SW2</button> <span>SW2: </span> <span id="SW2data" name="SW2"> </span> <span>available lockers left</span></div>
     
-    <div id="SW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW3Btn" >SW3</button><span>SW3</span> <span id="SW3data"> </span> <span>available lockers left</span></div>
+    <div id="SW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW3Btn" name="SW3">SW3</button><span>SW3: </span> <span id="SW3data" name="SW3"> </span> <span>available lockers left</span></div>
     
-    <div id="SW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW5Btn" >SW5</button><span>SW5:</span> <span id="SW5data"> </span> <span>available lockers left</span></div>
+    <div id="SW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW5Btn" name="SW5">SW5</button><span>SW5: </span> <span id="SW5data" name="SW5"> </span> <span>available lockers left</span></div>
     
-    <div id="SW9"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW9Btn" >SW9</button><span>SW9:</span> <span id="SW9data"> </span> <span>available lockers left</span></div>
+    <div id="SW9"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW9Btn" name="SW9">SW9</button><span>SW9: </span> <span id="SW9data" name="SW9"> </span> <span>available lockers left</span></div>
+  </div>
+    
+  <div class="3" class="floor">
+      
   </div>
     
     
@@ -104,6 +108,7 @@
           $("#goBackBtn").hide();
           $(".1").show();
           $(".2").hide();
+//          $(".SW-buildings").hide();
          
           break;
         case 2:
@@ -149,7 +154,7 @@
     
      
     
-    stepControl();
+    
     
     $("#goBackBtn").click(function(){
       console.log(step);
@@ -157,26 +162,68 @@
       stepControl();
     });
     
+    
     var buildingButton = $(".btnbuilding");
-    $(".btnbuilding").click(function(e){
+    
+    $(buildingButton).click(function(e){
+         
+          var buildingNum = $(e.target).attr("name");
+          console.log(buildingButton.length);
+           console.log("Current Sections is ", buildingNum);
+          step = 3;
+          return buildingNum;
+     });
+    
+    var firebaseConfig = {
+      apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
+      authDomain: "bcit-lockers.firebaseapp.com",
+      databaseURL: "https://bcit-lockers.firebaseio.com",
+      projectId: "bcit-lockers",
+      storageBucket: "bcit-lockers.appspot.com",
+      messagingSenderId: "380958555512",
+      appId: "1:380958555512:web:3a1928344614d15da51c8d",
+      measurementId: "G-R8V8WMCJRB"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+    function showVacancy() {
       
-      console.log(buildingButton.length);
-      console.log($(e.target).attr("id"));
-      return $(e.target).attr("id");
-           
+    db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').onSnapshot(function(snap){
+         
+          $("#counterNE").html(snap.data().NE);
+          $("#counterNW").html(snap.data().NW);
+          $("#counterSW").html(snap.data().SW);
+          $("#counterSE").html(snap.data().SE);
+      }
+    )}
+    showVacancy()
+      
+    
+    
+    
+    
+    
+    
+    
+   stepControl();
+    
+  
    
-    });
+  
+
     
     
     
-    $(".SW-buildings").click(function(){
-         var SW = $("button[id^='SW']");
+    
+//    $(".SW-buildings").click(function(){
+//         var SW = $("button[name^='SW']");
 //      var SWlist = [1];
 //      SWlist.push(SW.forEach());
 //      let buildingNum = -1;
 //      SWlist[]
-      
-    })
+//
+//    })
     
   </script>
 </body>

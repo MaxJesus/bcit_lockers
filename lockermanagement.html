@@ -42,6 +42,7 @@
       <div class="spinner-grow" role="status">
         <span class="sr-only">Loading...</span>
       </div>
+      <div id="welcome"></div>
 
       <img src=img/logo.png id="logo" alt="logo" />
 
@@ -145,6 +146,13 @@
       $("#dragBoxDiv").toggle(200);
     })
 
+    mapBtn
+     $("#mapBtn").click(function () {
+      window.location.href = "lockermap.html";
+    })
+    
+    
+    
     $("#dragBoxDiv").show();
 
 
@@ -174,29 +182,29 @@
             $(progress).css('width', i + "%");
           }
 
-        }, 1000);
+        }, 500);
 
         setTimeout(() => {
           for (i = 50; i < 65; i++) {
             $(progress).css('width', i + "%");
           }
-        }, 2000);
+        }, 800);
 
         setTimeout(() => {
           for (i = 65; i < 85; i++) {
             $(progress).css('width', i + "%");
           }
-        }, 3000);
+        }, 1000);
 
         setTimeout(() => {
           for (i = 85; i < 110; i++) {
             $(progress).css('width', i + "%");
           }
-        }, 4000);
+        }, 1200);
 
         setTimeout(() => {
           $(promptBox).html("<strong>Locked</strong>")
-        }, 4100);
+        }, 1400);
       }
 
 
@@ -224,36 +232,36 @@
               $(progress).css('width', i + "%");
             }
 
-          }, 1000);
+          }, 500);
 
           setTimeout(() => {
             for (i = 50; i < 65; i++) {
               $(progress).css('width', i + "%");
             }
-          }, 2000);
+          }, 800);
 
           setTimeout(() => {
             for (i = 65; i < 85; i++) {
               $(progress).css('width', i + "%");
             }
-          }, 3000);
+          }, 1000);
 
           setTimeout(() => {
             for (i = 85; i < 110; i++) {
               $(progress).css('width', i + "%");
             }
-          }, 4000);
+          }, 1200);
 
           setTimeout(() => {
             $(promptBox).html("<strong>Sucessfully Unlocked</strong>")
-          }, 4100);
+          }, 1400);
 
         } showProgress();
 
         setTimeout(() => {
           unlocked = true; clicked = false;
 
-        }, 4100);
+        }, 1400);
 
 
 
@@ -301,30 +309,30 @@
               $(progress).css('width', i + "%");
             }
 
-          }, 1000);
+          }, 500);
 
           setTimeout(() => {
             for (i = 65; i > 35; i--) {
               $(progress).css('width', i + "%");
             }
-          }, 2000);
+          }, 800);
 
           setTimeout(() => {
             for (i = 35; i > 0; i--) {
               $(progress).css('width', i + "%");
             }
-          }, 3000);
+          }, 1000);
 
           setTimeout(() => {
             for (i = 35; i > -1; i--) {
               $(progress).css('width', i + "%");
             }
-          }, 4000);
+          }, 1200);
 
           setTimeout(() => {
 
             $(promptBox).html("<strong>locked</strong>")
-          }, 4100);
+          }, 1400);
 
         }
         showProgress();
@@ -332,7 +340,7 @@
         setTimeout(() => {
           unlocked = false;
           clicked = false;
-        }, 4100);
+        }, 1400);
 
 
 
@@ -377,7 +385,33 @@
     $(drag).attr("seamless");
     $("#dragBox").append(drag);
 
-  </script>
+    
+    
+     var firebaseConfig = {
+    apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
+    authDomain: "bcit-lockers.firebaseapp.com",
+    databaseURL: "https://bcit-lockers.firebaseio.com",
+    projectId: "bcit-lockers",
+    storageBucket: "bcit-lockers.appspot.com",
+    messagingSenderId: "380958555512",
+    appId: "1:380958555512:web:3a1928344614d15da51c8d",
+    measurementId: "G-R8V8WMCJRB"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+    
+    
+      var db = firebase.firestore();
+    firebase.auth().onAuthStateChanged(function(user){
+      db.collection('user').doc(user.uid).onSnapshot(function(snap){
+       console.log("Current uid is ", user.uid);
+       $("#welcome").html("Welcome back " + snap.data().name);
+        $("#welcome").css("font-size","2vh");
+        $("#welcome").css("float","left");
+        $("#welcome").css("color","white")
+     })
+    })
+</script>
 </body>
 
 </html>

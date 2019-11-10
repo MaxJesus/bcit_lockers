@@ -51,7 +51,7 @@
   </div>
   
   <!--A div that allows the user to choose a section to view avaiable lockers-->
-  <div id="sectionChoice">
+  <div id="sectionChoice" class="1">
     <div id="NW"><span>NW:</span> <span id="counterNW"> </span> <span>available lockers left</span></div>
     <div id="NE"><span>NE:</span> <span id="counterNE"> </span> <span>available lockers left</span></div>
     <div id="SW"><span>SW:</span> <span id="counterSW"> </span> <span>available lockers left</span></div>
@@ -61,7 +61,7 @@
   
   <!--A div that allows the user to choose a building to view avaiable lockers-->
   <div id="buildings">
-  <div id="NW-buildings">
+  <div id="NW-buildings" class="2">
     <div id="NW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW3Btn" >NW3</button><span>NW3</span> <span id="NW3data"> </span> <span>available lockers left</span></div>
     
     <div id="NW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW1Btn" >NW1</button><span>NW1:</span> <span id="NW1data"> </span> <span>available lockers left</span></div>
@@ -72,7 +72,7 @@
     
   </div>
   
-  <div id="SW-buildings">
+  <div id="SW-buildings" class="2">
     <div id="SW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW1Btn" >SW1</button><span>SW1</span> <span id="SW1data"> </span> <span>available lockers left</span></div>
     
     <div id="SW2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW2Btn" >SW2</button><span>SW2:</span> <span id="SW2data"> </span> <span>available lockers left</span></div>
@@ -84,20 +84,85 @@
     <div id="SW9"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW9Btn" >SW9</button><span>SW9:</span> <span id="SW9data"> </span> <span>available lockers left</span></div>
   </div>
     
+    
+  <div id="goBackBtnDiv">
+    <button id="goBackBtn">goBack</button>
+  </div>
+    
 </div>
   
   
   <script>
-    $("#NW-buildings").hide();
+      let step = 1;
+    
+    //the "step" variable stores which step the process is at.
+  
+    
+    function stepControl(){
+      switch(step) {
+        case 1:
+          $("#goBackBtn").hide();
+          $(".1").show();
+          $(".2").hide();
+         
+          break;
+        case 2:
+          $("#goBackBtn").show();
+          
+           break;
+          
+        case 3:
+          $("#sectionChoice").hide();
+           break;
+        case 4:
+           break;
+      }
+    }
+    
+    
+    
+    
     $("#NW").click(function(){
       $("#NW-buildings").show();
       $("#sectionChoice").hide();
+      step=2;
+      stepControl();
     });
     
-    $("#SW-buildings").hide();
+    
+    
     $("#SW").click(function(){
       $("#SW-buildings").show();
       $("#sectionChoice").hide();
+      step=2;
+      stepControl();
+    });
+    
+    
+    
+    $("#NE").click(function(){
+      $("#NE-buildings").show();
+      $("#sectionChoice").hide();
+       step=2;
+       stepControl();
+    });
+    
+     
+    
+    stepControl();
+    
+    $("#goBackBtn").click(function(){
+      console.log(step);
+      step--;
+      stepControl();
+    });
+    
+    $(".btnbuilding").click(function(){
+       $(".btnbuilding").hide();
+//
+//      var SW = $("button[id^='SW']");
+//      SW.
+    
     });
     
     

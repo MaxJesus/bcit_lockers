@@ -2,6 +2,20 @@
 <html>
   <head>
     <title>BCIT LOCKERS</title>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+    
+      <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+
+    <!--Authentication Sign in with a pre-built UI-->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   </head>
   <body>
   <img src="img/LOGO.png" alt="BCIT LOCKERS">
@@ -10,8 +24,7 @@
        <a href="Why%20We%20Design.html">Why We Design</a>
    </nav>
     Welcome to BCIT lockers!
-<<<<<<< HEAD
-    <br>
+
     This is the page that shows the feature about changing the locker locations. We will be done in 5 weeks.
     <br>
 =======
@@ -23,10 +36,63 @@
     Boming Gong
     <br>
     Judao Zhong
+    <script>
+    // Fucntion that creates a new document in the users collection
+function createUser() {
+
+    // if the current user logged in user
+    // is authenticated, then grab "uid" "displayName" and "email"
+    // use "set()" with merge (if document did not exist it will be created)
+    firebase.auth().onAuthStateChanged(function(user){
+        console.log(user);
+        db.collection("user").doc(user.uid).set(
+    	{
+         
+        "name":user.displayName,
+         "studentname":user.email,
+        },{ merge: true });
+    });
+}createUser();
+    </script>
+    
+            <script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
+    authDomain: "bcit-lockers.firebaseapp.com",
+    databaseURL: "https://bcit-lockers.firebaseio.com",
+    projectId: "bcit-lockers",
+    storageBucket: "bcit-lockers.appspot.com",
+    messagingSenderId: "380958555512",
+    appId: "1:380958555512:web:3a1928344614d15da51c8d",
+    measurementId: "G-R8V8WMCJRB"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+    
+   <script>
+function createUser() {
+
+    // if the current user logged in user
+    // is authenticated, then grab "uid" "displayName" and "email"
+    // use "set()" with merge (if document did not exist it will be created)
+    firebase.auth().onAuthStateChanged(function(user){
+        console.log(user);
+        db.collection("user").doc(user.uid).set(
+    	{
+         
+        "name":user.displayName,
+         "studentname":user.email,
+        },{ merge: true });
+    });
+}createUser();
+</script>
+    
   </body>
   <style>
     img{width: 50px; justify-content: center;display:flex}
   </style>
-  <script>
-  </script>
+  
 </html>

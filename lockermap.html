@@ -72,7 +72,7 @@
     
   </div>
   
-  <div id="SW-buildings" class="2">
+  <div class="SW-buildings" class="2">
     <div id="SW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW1Btn" >SW1</button><span>SW1</span> <span id="SW1data"> </span> <span>available lockers left</span></div>
     
     <div id="SW2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW2Btn" >SW2</button><span>SW2:</span> <span id="SW2data"> </span> <span>available lockers left</span></div>
@@ -157,14 +157,26 @@
       stepControl();
     });
     
-    $(".btnbuilding").click(function(){
-       $(".btnbuilding").hide();
-//
-//      var SW = $("button[id^='SW']");
-//      SW.
-    
+    var buildingButton = $(".btnbuilding");
+    $(".btnbuilding").click(function(e){
+      
+      console.log(buildingButton.length);
+      console.log($(e.target).attr("id"));
+      return $(e.target).attr("id");
+           
+   
     });
     
+    
+    
+    $(".SW-buildings").click(function(){
+         var SW = $("button[id^='SW']");
+//      var SWlist = [1];
+//      SWlist.push(SW.forEach());
+//      let buildingNum = -1;
+//      SWlist[]
+      
+    })
     
   </script>
 </body>

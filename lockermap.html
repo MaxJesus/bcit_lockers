@@ -6,18 +6,7 @@
 
   <meta charset="utf-8" />
 
-  <!-- Bootstrap for Mobile-first -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-  <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
-  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   
   <!--This file works as the overall stylesheet for the project-->
@@ -47,12 +36,12 @@
   </div>
 
   <div id="promptBox" class="alert alert-success" role="alert">
-    <span>Please Choose a <span>section</span> to view the available lockers</span>
+    <span>Please Choose a <span id="choosingScope">section</span> to view the available lockers</span>
   </div>
   
   <!--A div that allows the user to choose a section to view avaiable lockers-->
   <div id="sectionChoice" class="1">
-    <div id="NW"><span>NW:</span> <span id="counterNW"> </span> <span>available lockers left</span></div>
+          <div id="NW"><span>NW:</span> <span id="counterNW"> </span> <span>available lockers left</span></div>
     <div id="NE"><span>NE:</span> <span id="counterNE"> </span> <span>available lockers left</span></div>
     <div id="SW"><span>SW:</span> <span id="counterSW"> </span> <span>available lockers left</span></div>
     <div id="SE"><span>SE:</span> <span id="counterSE"> </span> <span>available lockers left</span></div>
@@ -61,65 +50,86 @@
   
   <!--A div that allows the user to choose a building to view avaiable lockers-->
   <div id="buildings">
-  <div id="NW-buildings" class="2">
-    <div id="NW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW3Btn" name="NW3" >NW3</button><span>NW3</span> <span id="NW3data"> </span> <span>available lockers left</span></div>
-    
-    <div id="NW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW1Btn" name="NW1" >NW1</button><span>NW1:</span> <span id="NW1data"> </span> <span>available lockers left</span></div>
-    
-    <div id="NW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW5Btn" name="NW5" >NW5</button><span>NW5</span> <span id="NW5data"> </span> <span>available lockers left</span></div>
-    
-    <div id="NW6"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW6Btn" name="NW6">NW6</button><span>NW6:</span> <span id="NW6data"> </span> <span>available lockers left</span></div>
-    
-  </div>
+    <div id="NW-buildings" class="2">
+      <div id="NW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW3Btn" name="NW3" >NW3</button><span>NW3</span> <span id="NW3data"> </span> <span>available lockers left</span></div>
+
+      <div id="NW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW1Btn" name="NW1" >NW1</button><span>NW1:</span> <span id="NW1data"> </span> <span>available lockers left</span></div>
+
+      <div id="NW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW5Btn" name="NW5" >NW5</button><span>NW5</span> <span id="NW5data"> </span> <span>available lockers left</span></div>
+
+      <div id="NW6"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW6Btn" name="NW6">NW6</button><span>NW6:</span> <span id="NW6data"> </span> <span>available lockers left</span></div>
+
+    </div>
   
-  <div class="SW-buildings" class="2">
-    <div id="SW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW1Btn" name="SW1" >SW1</button><span>SW1</span> <span id="SW1data"> </span> <span>available lockers left</span></div>
+    <div id="SW-buildings" class="2">
+      <div id="SW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW1Btn" name="SW1" >SW1</button><span>SW1</span> <span id="SW1data"> </span> <span>available lockers left</span></div>
+
+      <div id="SW2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW2Btn" name="SW2">SW2</button> <span>SW2: </span> <span id="SW2data"> </span> <span>available lockers left</span></div>
+
+      <div id="SW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW3Btn" name="SW3">SW3</button><span>SW3: </span> <span id="SW3data"> </span> <span>available lockers left</span></div>
+
+      <div id="SW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW5Btn" name="SW5">SW5</button><span>SW5: </span> <span id="SW5data"> </span> <span>available lockers left</span></div>
+
+      <div id="SW9"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW9Btn" name="SW9">SW9</button><span>SW9: </span> <span id="SW9data"> </span> <span>available lockers left</span></div>
+    </div>
     
-    <div id="SW2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW2Btn" name="SW2">SW2</button> <span>SW2: </span> <span id="SW2data" name="SW2"> </span> <span>available lockers left</span></div>
-    
-    <div id="SW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW3Btn" name="SW3">SW3</button><span>SW3: </span> <span id="SW3data" name="SW3"> </span> <span>available lockers left</span></div>
-    
-    <div id="SW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW5Btn" name="SW5">SW5</button><span>SW5: </span> <span id="SW5data" name="SW5"> </span> <span>available lockers left</span></div>
-    
-    <div id="SW9"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW9Btn" name="SW9">SW9</button><span>SW9: </span> <span id="SW9data" name="SW9"> </span> <span>available lockers left</span></div>
-  </div>
-    
-  <div class="3" class="floor">
+    <div class="3" id="floors">
       
+    </div>
+    
+    
+    <div id="goBackBtnDiv">
+      <button id="goBackBtn">goBack</button>
+    </div>
+    
   </div>
+ 
+    <!-- Bootstrap for Mobile-first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     
     
-  <div id="goBackBtnDiv">
-    <button id="goBackBtn">goBack</button>
-  </div>
-    
-</div>
   
   
   <script>
-      let step = 1;
+      var step = 1;
     
     //the "step" variable stores which step the process is at.
   
     
     function stepControl(){
       switch(step) {
+        //case 1, the very first step is to choose a section(e.g. NE,SW)
+        //goBackBtn is not shown, because it is not needed.
         case 1:
           $("#goBackBtn").hide();
           $(".1").show();
           $(".2").hide();
+          $("#choosingScope").html("section");
+          break;
 //          $(".SW-buildings").hide();
          
-          break;
+        //case 2, allows you to press the goBackBtn
         case 2:
           $("#goBackBtn").show();
-          
+          $("#choosingScope").html("Building");
            break;
           
         case 3:
           $("#sectionChoice").hide();
+          $("#choosingScope").html("Floor");
            break;
         case 4:
+          $("#choosingScope").html("number");
            break;
       }
     }
@@ -169,7 +179,7 @@
          
           var buildingNum = $(e.target).attr("name");
           console.log(buildingButton.length);
-           console.log("Current Sections is ", buildingNum);
+          console.log("Current Sections is ", buildingNum);
           step = 3;
           return buildingNum;
      });
@@ -187,26 +197,30 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     var db = firebase.firestore();
+    
+    //This function shows the number of locker vacancy information
     function showVacancy() {
       
+    db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection('NE').doc('NE1').onSnapshot(function(snap){
+          $("#NE1").html(snap.data().vacant_lockers);
+      })
+                                                                       
     db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').onSnapshot(function(snap){
-         
           $("#counterNE").html(snap.data().NE);
           $("#counterNW").html(snap.data().NW);
           $("#counterSW").html(snap.data().SW);
           $("#counterSE").html(snap.data().SE);
-      }
-    )}
-    showVacancy()
-      
+      })
+}
     
     
     
     
+    //shows the vacancies through accessing firebase
+    showVacancy();
     
-    
-    
-   stepControl();
+    //When first executed, the step is 1.
+    stepControl();
     
   
    

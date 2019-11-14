@@ -122,7 +122,8 @@
           $("#choosingScope").html("section");
           /*whenever it comes back to step 1, backQuery should become 'null', because
           if not so, when going back to step 2, it becomes a rat.*/
-          backQuery_building=null;
+          backQuery_section=null;
+          $("#locationIndicator").html("");
           break;
 
          
@@ -130,14 +131,16 @@
           If you come back from case 3, it also knows what blocks of building you chose.
         */
         case 2:
+          $(`#${backQuery_section}`+"-buildings").show();
           $("#goBackBtn").show();
           $("#choosingScope").html("Building");
-          $(backQuery_building).show();
-          $("#locationIndicator").html("You are currently in Section" + backQuery_section);
+          $("#locationIndicator").html("You are currently in Section " + backQuery_section);
+          backQuery_building=null;
           break;
         
         //In case 2, it allows you to press the goBackBtn
         case 3:
+          $(backQuery_building).show();
           $("#sectionChoice").hide();
           $(".2").hide();
           $(".3").show();
@@ -151,8 +154,8 @@
     }
     
 
-    $(".1").click(function(e){
-     
+    $(".1").click(function(){
+      backQuery_section=`${this.id}`;
       
 //      var sectionNum = $(e.target).attr("id");
       console.log(`${this.id}`);
@@ -160,11 +163,13 @@
       
        $(`#${this.id}`+"-buildings").show();
       
+     // $(`#${backQuery_section}`+"-buildings").show();
+      
 //      $('#'+ sectionNum).show();
         $("#sectionChoice").hide();
         step=2;
         stepControl();
-        backQuery_section=`${this.id}`;
+        
         $("#locationIndicator").css("color","red");
         $("#locationIndicator").css("font-size","5vw");
     });
@@ -222,18 +227,22 @@
     
     $(buildingButton).click(function(e){
           
-          function getBuildingNum(){
+           
             var buildingNum = $(e.target).attr("name");
-            console.log(buildingButton.length);
+            
+            backQuery_building=buildingNum;
+            
             console.log("Current Building is ", buildingNum);
 
             step = 3;
-            stepControl();
+            
 
             $("#locationIndicator").css("color","red");
             $("#locationIndicator").css("font-size","5vw");
             $("#locationIndicator").html("You are currently in Building" + buildingNum );
-          }getBuildingNum();
+      console.log(backQuery_section);
+      stepControl();
+       
      });
     
     var firebaseConfig = {

@@ -36,15 +36,16 @@
   </div>
 
   <div id="promptBox" class="alert alert-success" role="alert">
+    <span id="locationIndicator"></span>
     <span>Please Choose a <span id="choosingScope">section</span> to view the available lockers</span>
   </div>
   
   <!--A div that allows the user to choose a section to view avaiable lockers-->
-  <div id="sectionChoice" class="1">
-          <div id="NW"><span>NW:</span> <span id="counterNW"> </span> <span>available lockers left</span></div>
-    <div id="NE"><span>NE:</span> <span id="counterNE"> </span> <span>available lockers left</span></div>
-    <div id="SW"><span>SW:</span> <span id="counterSW"> </span> <span>available lockers left</span></div>
-    <div id="SE"><span>SE:</span> <span id="counterSE"> </span> <span>available lockers left</span></div>
+  <div id="sectionChoice" class="1stuff">
+    <div id="NW" name='NW' class="1"><span>NW:</span> <span id="counterNW"> </span> <span>available lockers left</span></div>
+    <div id="NE" name='NE' class="1"><span>NE:</span> <span id="counterNE"> </span> <span>available lockers left</span></div>
+    <div id="SW" name='SW' class="1"><span>SW:</span> <span id="counterSW"> </span> <span>available lockers left</span></div>
+    <div id="SE" name='SW' class="1"><span>SE:</span> <span id="counterSE"> </span> <span>available lockers left</span></div>
   </div>
   
   
@@ -77,14 +78,14 @@
       
     </div>
     
-    
+    <!-- the id of the <div> is not necessarily used -->
     <div id="goBackBtnDiv">
       <button id="goBackBtn">goBack</button>
     </div>
     
   </div>
  
-    <!-- Bootstrap for Mobile-first -->
+  <!-- Bootstrap for Mobile-first -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -101,10 +102,14 @@
   
   
   <script>
-      var step = 1;
+     //the "step" variable stores which stage(section, building, floor, certain locker) the process is at.
+    var step = 1;
     
-    //the "step" variable stores which step the process is at.
-  
+    //a variable that stores the information of the building just entered
+    var backQuery_building;
+    
+     //a variable that stores the information of the sector just entered
+    var backQuery_section;
     
     function stepControl(){
       switch(step) {
@@ -112,57 +117,76 @@
         //goBackBtn is not shown, because it is not needed.
         case 1:
           $("#goBackBtn").hide();
-          $(".1").show();
+          $(".1stuff").show();
           $(".2").hide();
           $("#choosingScope").html("section");
+          /*whenever it comes back to step 1, backQuery should become 'null', because
+          if not so, when going back to step 2, it becomes a rat.*/
+          backQuery_building=null;
           break;
-//          $(".SW-buildings").hide();
+
          
-        //case 2, allows you to press the goBackBtn
+        /*In case 2, it allows you to press the goBackBtn
+          If you come back from case 3, it also knows what blocks of building you chose.
+        */
         case 2:
           $("#goBackBtn").show();
           $("#choosingScope").html("Building");
-           break;
-          
+          $(backQuery_building).show();
+          $("#locationIndicator").html("You are currently in Section" + backQuery_section);
+          break;
+        
+        //In case 2, it allows you to press the goBackBtn
         case 3:
           $("#sectionChoice").hide();
+          $(".2").hide();
+          $(".3").show();
           $("#choosingScope").html("Floor");
-           break;
+          break;
+          
         case 4:
           $("#choosingScope").html("number");
-           break;
+          break;
       }
     }
     
+
+    $(".1").click(function(e){
+     
+      
+//      var sectionNum = $(e.target).attr("id");
+      console.log(`${this.id}`);
+//      console.log("#" + sectionNum);
+      
+       $(`#${this.id}`+"-buildings").show();
+      
+//      $('#'+ sectionNum).show();
+        $("#sectionChoice").hide();
+        step=2;
+        stepControl();
+        backQuery_section=`${this.id}`;
+        $("#locationIndicator").css("color","red");
+        $("#locationIndicator").css("font-size","5vw");
+    });
+
     
     
     
+    
+//    The Following is a sample block of code, which was replaced by the above funciton
+    
+    /*
+      
     $("#NW").click(function(){
       $("#NW-buildings").show();
       $("#sectionChoice").hide();
       step=2;
       stepControl();
+      backQuery="#NW-buildings";
     });
-    
-    
-    
-    $("#SW").click(function(){
-      $("#SW-buildings").show();
-      $("#sectionChoice").hide();
-      step=2;
-      stepControl();
-    });
-    
-    
-    
-    $("#NE").click(function(){
-      $("#NE-buildings").show();
-      $("#sectionChoice").hide();
-       step=2;
-       stepControl();
-    });
-    
-     
+    */
+
+
     
     
     
@@ -170,18 +194,46 @@
       console.log(step);
       step--;
       stepControl();
+
     });
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //while in step 2, the user chooses a building
+    //during this step, buttons representing different buildings are shown to the user
     var buildingButton = $(".btnbuilding");
     
+    //when the user clicks the button, it does the following:
+    /*
+      1.gets the building number, changes the display in the status box.
+      2.enters the next step
+      3.returns the buildingNum, and the return is to be used to access the database
+      to get data.
+      
+    */
+    
     $(buildingButton).click(function(e){
-         
-          var buildingNum = $(e.target).attr("name");
-          console.log(buildingButton.length);
-          console.log("Current Sections is ", buildingNum);
-          step = 3;
-          return buildingNum;
+          
+          function getBuildingNum(){
+            var buildingNum = $(e.target).attr("name");
+            console.log(buildingButton.length);
+            console.log("Current Building is ", buildingNum);
+
+            step = 3;
+            stepControl();
+
+            $("#locationIndicator").css("color","red");
+            $("#locationIndicator").css("font-size","5vw");
+            $("#locationIndicator").html("You are currently in Building" + buildingNum );
+          }getBuildingNum();
      });
     
     var firebaseConfig = {

@@ -74,7 +74,23 @@
       <div id="SW9"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW9Btn" name="SW9">SW9</button><span>SW9: </span> <span id="SW9data"> </span> <span>available lockers left</span></div>
     </div>
     
-    <div class="3" id="floors">
+    <div id="floor-choice" class="3stuff">
+      <div id="b1"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="b1" name="b1" >b1</button><span>1F</span> <span id="b1data"> </span> <span>available lockers left</span></div>
+      
+      <div id="1f"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="1f" name="1f" >1f</button><span>1F</span> <span id="1Fdata"> </span> <span>available lockers left</span></div>
+      
+      <div id="2f"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="2f" name="2f" >2f</button><span>1F</span> <span id="2Fdata"> </span> <span>available lockers left</span></div>
+      
+      <div id="3f"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="3f" name="3f" >3f</button><span>1F</span> <span id="3Fdata"> </span> <span>available lockers left</span></div>
+    
+    </div>
+    
+    <div class="4stuff" id="lockerChoice">
+      <form>
+        <input type="text" id='searchByID'>
+        <br/>
+        <input type="submit">
+      </form>
       
     </div>
     
@@ -116,9 +132,12 @@
         //case 1, the very first step is to choose a section(e.g. NE,SW)
         //goBackBtn is not shown, because it is not needed.
         case 1:
+         
           $("#goBackBtn").hide();
           $(".1stuff").show();
           $(".2").hide();
+          $(".3stuff").hide();
+          $(".4stuff").hide();
           $("#choosingScope").html("section");
           /*whenever it comes back to step 1, backQuery should become 'null', because
           if not so, when going back to step 2, it becomes a rat.*/
@@ -131,9 +150,12 @@
           If you come back from case 3, it also knows what blocks of building you chose.
         */
         case 2:
+          
           $(`#${backQuery_section}`+"-buildings").show();
           $("#goBackBtn").show();
           $("#choosingScope").html("Building");
+          $(".3stuff").hide();
+          $(".4stuff").show();
           $("#locationIndicator").html("You are currently in Section " + backQuery_section);
           backQuery_building=null;
           break;
@@ -143,11 +165,14 @@
           $(backQuery_building).show();
           $("#sectionChoice").hide();
           $(".2").hide();
-          $(".3").show();
+          $(".3stuff").show();
+          $(".4stuff").hide();
+          
           $("#choosingScope").html("Floor");
           break;
           
         case 4:
+          $(".4stuff").show();
           $("#choosingScope").html("number");
           break;
       }
@@ -161,7 +186,7 @@
       console.log(`${this.id}`);
 //      console.log("#" + sectionNum);
       
-       $(`#${this.id}`+"-buildings").show();
+       $(`#${this.id}`+ "-buildings").show();
       
      // $(`#${backQuery_section}`+"-buildings").show();
       

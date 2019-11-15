@@ -2,7 +2,8 @@
     body {
       height: 100vmax;
       background-image: url(../img/lockermanagement_background2.jpg);
-      
+      background-repeat: no-repeat;
+      background-size: cover
     }
 
     /*header includes logo and */
@@ -19,8 +20,7 @@
       display: inline-block;
       height: 10vh;
       margin: 0vh;
-      background-image: url(../img/lockermanagement_background.jpg);
-        
+
     }
 
     #header {
@@ -173,26 +173,26 @@
       filter: saturate(5.5);
       width: 20.5vw;
     }
-    
+
     #checkContentBtn{
       width: 20vw;
     }
-    
+
     #checkContentBtn:hover{
       filter: saturate(5.5);
       width: 20.5vw;
     }
-    
+
 
     .bottomToolBarButtonDiv {
       display: flex;
       width: 20vw;
     }
-    
-    
-    
-    
- 
+
+
+
+
+
 
   /*the following code should be converted into script version later*/
 

@@ -1,0 +1,47 @@
+#sectionChoice{
+  margin-top: 5vh;
+  display: grid;
+  width: 100vw;
+  height: 40vh;
+  grid-template-areas:
+            "NE NE SE SE"
+            "NE NE SE SE"
+            "NW NW SW SW";
+  color: aliceblue;
+  font-size: 12pt;
+           
+}
+
+#NW{
+  grid-area: NW;
+  background: blue;
+  
+}
+
+#NE{
+  grid-area: NE;
+  background: green;
+}
+
+#SW{
+  grid-area: SW;
+  background: orange;
+}
+
+#SE{
+  grid-area: SE;
+  background: red;
+}
+
+#buildings{
+  color: aliceblue;
+  font-size: 12pt;
+}
+
+#SW-buildings{
+  display: inline-flex;
+}
+
+#NW-buildings{
+  display: inline-flex;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+<figure>
+ <img id="glassesgirl" src="" alt="A girl">
+glasses girl
+</figure>
+ 
+<script type="text/javascript">
+ 
+// 获取文件
+var glassesgirlStorage = localStorage.getItem("glassesgirl"),
+glassesgirl = document.getElementById("glassesgirl");
+if (glassesgirlStorage) {
+   //如果已经存在则直接重用已保存的数据
+  console.log("From Cache");
+ 	glassesgirl.setAttribute("src", glassesgirlStorage);
+}else{
+   // 创建XHR, BlobBuilder 和FileReader 对象
+   var xhr = new XMLHttpRequest();
+ 
+  var fileReader = new FileReader();
+ 
+   xhr.open("GET", "glasses.jpg", true);
+ 
+   xhr.responseType = 'blob';
+ 
+   //https://developer.mozilla.org/zh-CN/docs/Web/API/Blob    Blob可以用于存贮对象
+   //https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader/readAsDataURL
+   xhr.addEventListener("load", function () {
+     if (xhr.status === 200) {
+       var blob = this.response;
+      fileReader.onload = function (evt) {
+         // 用Data URI的格式读取文件内容
+       	var result = evt.target.result; //要点
+       	// 将图片的src指向Data URI
+       	glassesgirl.setAttribute("src", result);
+       	//保存到本地存储中
+         try {
+           localStorage.setItem("glassesgirl", result);
+         }
+         catch (e) {
+         console.log("Storage failed: " + e);
+         }
+       };
+       // 以Data URI的形式加载blob
+       fileReader.readAsDataURL(blob);
+     }
+   }, false);
+   // 发送异步请求
+   xhr.send();
+}
+ 
+ 
+</script>
+ 
+ 
+</body>
+</html>

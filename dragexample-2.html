@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>jQuery UI 放置（Droppable） - 购物车演示</title>
+  <title>In hand -> Inventory</title>
 <!--  <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script
@@ -14,16 +14,19 @@
   <style>
   #gallery { float: left; width: 50%; min-height: 12em; }
   .gallery.custom-state-active { background: transparent; }
-  .gallery li { float: left; width: 40px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+  .gallery li { float: left; width: 96px; height:auto; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
   .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
   .gallery li a { float: right; }
   .gallery li a.ui-icon-zoomin { float: left; }
   .gallery li img { width: 100%; cursor: move; }
  
-  #trash { float: right; width: 42%; min-height: 18em; padding: 1%; }
+  #trash { float: right; width: 42%; min-height: 18em; padding: 1%; background:transparent}
   #trash h4 { line-height: 16px; margin: 0 0 0.4em; }
   #trash h4 .ui-icon { float: left; }
-  #trash .gallery h5 { display: none; }
+  #trash .gallery h5 { display: inherit; }
+  
+  .ui-widget-header{font-size: 0.8vh}
+    
   </style>
   
  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>

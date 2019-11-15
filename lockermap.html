@@ -333,14 +333,18 @@
               var collectionSection = sections[i].getAttribute("id");
               
               if( buildingButton[j].getAttribute('id').startsWith(sections[i].getAttribute('id'))){
+            
                 var docBuilding = buildingButton[j].getAttribute('name');
-                
 //               alert(sections[i].getAttribute("id"));
 //               alert('#'+ docBuilding + 'data');
-              }
-              db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(collectionSection).doc(docBuilding).onSnapshot(function (snap) {
+          
+          
+                db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(collectionSection).doc(docBuilding).onSnapshot(function (snap) {
                   $('#'+ docBuilding + 'data').append(snap.data().vacant_lockers);
                 })
+     
+              }
+           
           }
 
       
@@ -349,6 +353,22 @@
 //      db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection('NW').doc('NW1').onSnapshot(function (snap) {
 //        $("#NW1").html(snap.data().vacant_lockers);
 //      })
+      
+      
+//      //Failed promise()
+//
+//              if( buildingButton[j].getAttribute('id').startsWith(sections[i].getAttribute('id'))){
+//              var promise = new Promise(function(resolve,reject){
+//                var docBuilding = buildingButton[j].getAttribute('name');
+//                });
+//                  promise.then(function(){ db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(collectionSection).doc(docBuilding).onSnapshot(function (snap) {
+//                  $('#'+ docBuilding + 'data').append(snap.data().vacant_lockers);
+//                })
+//             });
+//              }
+           
+      
+      
 
       db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').onSnapshot(function (snap) {
         $("#counterNE").html(snap.data().NE);

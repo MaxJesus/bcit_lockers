@@ -86,6 +86,7 @@
     measurementId: "G-R8V8WMCJRB"
   };
   // Initialize Firebase
+  
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 </script>
@@ -119,22 +120,24 @@
   
 <form>
   
-  <br>When did you choose your current locker?<br>
-  <input type="date"><br/>
+  <br>When did you choose your current locker?(Approximately)<br>
+  <input type="date" id="startDate"><br/>
   <br>Please provide your BCIT ID<br>
-   <input type="text" name="ID"><br/>
+   <input type="text" name="ID" id="stuID"><br/>
   <br>Please provide your my.BCIT email<br>
-  <input type="email"><br/>
+  <input type="email" id="stuEmail"><br/>
   <br>Please state the reason to change.<br>
-  <input type="text"><br/>
+  <input type="text" id="reason"><br/>
   <br>
-  <input type="submit"><br/>
+  <button onclick="dbUpdate()">submit</button>
+  
+  <br/>
   
 </form>
     
   
 <script>
-function createUser() {
+//createUser() deleted
 var db = firebase.firestore();
     // if the current user logged in user
     // is authenticated, then grab "uid" "displayName" and "email"
@@ -148,7 +151,41 @@ var db = firebase.firestore();
          "studentname":user.email,
         },{ merge: true });
     });
-}createUser();
+
+
+function dbUpdate() {
+
+  //  document.getElementById("startDate").value;
+  // alert(document.getElementById("startDate").value);
+
+  Q1 = document.getElementById("stuID").value;
+
+  
+  Q2 = document.getElementById("stuEmail").value;
+
+  
+  Q3 = document.getElementById("reason").value;
+
+
+  Q4 = document.getElementById("startDate").value;
+
+  db.collection("change_request").doc("all").collection(Q3).doc(Q3).set({
+   Q3:{stuID: Q1 ,
+   stuEmail : Q2,
+   reason :  Q3,
+   startDate :  Q4}
+  })
+  .then(function() {
+    console.log("Document successfully written!");
+  })
+  .catch(function(error) {
+    console.error("Error writing document: ", error);
+  });
+
+
+
+}
+
 </script>
 
 

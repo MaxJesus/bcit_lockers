@@ -43,7 +43,7 @@
     }
   
   body{
-    background-image: url(img/background.jpg);
+/*    background-image: url(img/background.jpg);*/
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
     border: 5px solid black;
@@ -86,6 +86,7 @@
     measurementId: "G-R8V8WMCJRB"
   };
   // Initialize Firebase
+  
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 </script>
@@ -95,7 +96,7 @@
 <body>
   <div id="landing">
   <div id="intro">
-  <h1 id="Welcome">Welcome to BCIT LOCKERS</h1>
+  <h1 id="Welcome">Change locker position</h1>
  
   </div>
   
@@ -112,58 +113,31 @@
 
 
   
- <div id="loginDiv">
- <div id="firebaseui-auth-container"><p id="notice"><strong>Please login with your my.bcit.ca email</strong></p></div>
-    <div id="loader">Loading...</div>
-   
-    <button id="continue">Continue without login</button>
-     
- </div>
-    </div>
-  
-    <script>
-        // Initialize the FirebaseUI Widget using Firebase.
-        var ui = new firebaseui.auth.AuthUI(firebase.auth());
-        var uiConfig = {
-            callbacks: {
-                signInSuccessWithAuthResult: function (authResult, redirectUrl) {
-                    // User successfully signed in.
-                    // Return type determines whether we continue the redirect automatically
-                    // or whether we leave that to developer to handle.
-                    return true;
-                },
-                uiShown: function () {
-                    // The widget is rendered.
-                    // Hide the loader.
-                    document.getElementById('loader').style.display = 'none';
-                }
-            },
-            // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-            signInFlow: 'popup',
-            signInSuccessUrl: 'lockermanagement.html',
-            signInOptions: [
-                // Leave the lines as is for the providers you want to offer your users.
-//                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                // firebase.auth.GithubAuthProvider.PROVIDER_ID,
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                // firebase.auth.PhoneAuthProvider.PROVIDER_ID
-            ],
-            // Terms of service url.
-            tosUrl: 'app.html',
-            // Privacy policy url.
-            privacyPolicyUrl: '<your-privacy-policy-url>'
-        };
 
-        // The start method will wait until the DOM is loaded.
-        ui.start('#firebaseui-auth-container', uiConfig);
-    </script>
+    </div>
+  <h3>Provide information for changing locker solution</h3>
+  <span><strong>May take at most 48 hours to be processed</strong></span>
   
+<form>
+  
+  <br>When did you choose your current locker?(Approximately)<br>
+  <input type="date" id="startDate"><br/>
+  <br>Please provide your BCIT ID<br>
+   <input type="text" name="ID" id="stuID"><br/>
+  <br>Please provide your my.BCIT email<br>
+  <input type="email" id="stuEmail"><br/>
+  <br>Please state the reason to change.<br>
+  <input type="text" id="reason"><br/>
+  <br>
+  <button onclick="dbUpdate()">submit</button>
+  
+  <br/>
+  
+</form>
     
   
 <script>
-function createUser() {
+//createUser() deleted
 var db = firebase.firestore();
     // if the current user logged in user
     // is authenticated, then grab "uid" "displayName" and "email"
@@ -177,7 +151,41 @@ var db = firebase.firestore();
          "studentname":user.email,
         },{ merge: true });
     });
-}createUser();
+
+
+function dbUpdate() {
+
+  //  document.getElementById("startDate").value;
+  // alert(document.getElementById("startDate").value);
+
+  Q1 = document.getElementById("stuID").value;
+
+  
+  Q2 = document.getElementById("stuEmail").value;
+
+  
+  Q3 = document.getElementById("reason").value;
+
+
+  Q4 = document.getElementById("startDate").value;
+
+  db.collection("change_request").doc("all").collection(Q3).doc(Q3).set({
+   Q3:{stuID: Q1 ,
+   stuEmail : Q2,
+   reason :  Q3,
+   startDate :  Q4}
+  })
+  .then(function() {
+    console.log("Document successfully written!");
+  })
+  .catch(function(error) {
+    console.error("Error writing document: ", error);
+  });
+
+
+
+}
+
 </script>
 
 

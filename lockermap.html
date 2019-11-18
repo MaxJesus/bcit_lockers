@@ -319,7 +319,7 @@
 //      var buildingNW = $('.btnbuildingNW');
 //      var floors = $()
 //      alert(sections[0].getAttribute("id"));
-      //I wanna merge these code because they repeat:
+
 
 //      for(var i in sections){
         
@@ -340,7 +340,10 @@
           
           
                 db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(collectionSection).doc(docBuilding).onSnapshot(function (snap) {
-                  $('#'+ docBuilding + 'data').append(snap.data().vacant_lockers);
+                  console.log(snap.data());
+                  console.log("docbuiding here" + docBuilding);
+                  console.log(snap.data().vacant_lockers);
+                  $('#'+ docBuilding + 'data').html(snap.data().vacant_lockers);
                 })
      
               }
@@ -348,19 +351,21 @@
           }
 
       
-
+      //I wanna merge these code because they repeat:
 //        //original
 //      db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection('NW').doc('NW1').onSnapshot(function (snap) {
 //        $("#NW1").html(snap.data().vacant_lockers);
 //      })
       
       
-//      //Failed promise()
-//
+      //Failed promise()
+
 //              if( buildingButton[j].getAttribute('id').startsWith(sections[i].getAttribute('id'))){
-//              var promise = new Promise(function(resolve,reject){
+//
+//
 //                var docBuilding = buildingButton[j].getAttribute('name');
-//                });
+//
+//
 //                  promise.then(function(){ db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(collectionSection).doc(docBuilding).onSnapshot(function (snap) {
 //                  $('#'+ docBuilding + 'data').append(snap.data().vacant_lockers);
 //                })
@@ -368,6 +373,20 @@
 //              }
            
       
+      
+              var docRef = db.collection("cities").doc("SF");
+
+              docRef.get().then(function(doc) {
+                  if (doc.exists) {
+                      console.log("Document data:", doc.data());
+                  } else {
+                      // doc.data() will be undefined in this case
+                      console.log("No such document!");
+                  }
+              }).catch(function(error) {
+                  console.log("Error getting document:", error);
+              });
+
       
 
       db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').onSnapshot(function (snap) {

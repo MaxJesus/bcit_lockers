@@ -121,7 +121,7 @@
 <form>
   
   <br>When did you choose your current locker?(Approximately)<br>
-  <input type="date" id="startDate"><br/>
+  <input type="date" id="startDate" min="2019-01-01" max="2100-01-01"><br/>
   <br>Please provide your BCIT ID<br>
    <input type="text" name="ID" id="stuID"><br/>
   <br>Please provide your my.BCIT email<br>
@@ -169,12 +169,18 @@ function dbUpdate() {
 
   Q4 = document.getElementById("startDate").value;
 
-  db.collection("change_request").doc("all").collection(Q3).doc(Q3).set({
-   Q3:{stuID: Q1 ,
+  
+  //Now, when the user goes to the changelocker.html page, the user can fill in a
+  //table. When the table is submitted, the page would send the form to the firestore.
+  //"change_request" is the collection node, and the Q1 variable is the studentID
+  //The function generates a list at document level, which has the same name as the ID. The info is put into the database as field key value pairs. This is for the customer service to get a report on the request.
+  db.collection("change_request").doc("all").collection("cases").doc(Q1).set({
+   stuID: Q1 ,
    stuEmail : Q2,
    reason :  Q3,
-   startDate :  Q4}
+   startDate :  Q4
   })
+  
   .then(function() {
     console.log("Document successfully written!");
   })

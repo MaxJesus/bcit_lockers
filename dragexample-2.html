@@ -37,6 +37,7 @@
  
     // There's the gallery and the trash
     var $gallery = $( "#gallery" ),
+      //#trash is a
       $trash = $( "#trash" );
  
     // Let the gallery items be draggable
@@ -50,6 +51,7 @@
  
     // Let the trash be droppable, accepting the gallery items
     $trash.droppable({
+      //list items in gallery are droppable
       accept: "#gallery > li",
       classes: {
         "ui-droppable-active": "ui-state-highlight"
@@ -89,9 +91,10 @@
     }
  
     // Image recycle function
-    var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Delete this image' class='ui-icon ui-icon-trash'>Delete image</a>";
+    var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Put this into inventory' class='ui-icon ui-icon-trash'>Put this into inventory</a>";
     function recycleImage( $item ) {
       $item.fadeOut(function() {
+        alert("the moved out item is " + this.id);
         $item
           .find( "a.ui-icon-refresh" )
             .remove()
@@ -128,10 +131,11 @@
     }
  
     // Resolve the icons behavior with event delegation
+    //probably the actions that the function make when you click on it.(rather than dragging)
     $( "ul.gallery > li" ).on( "click", function( event ) {
       var $item = $( this ),
         $target = $( event.target );
- 
+        alert(this.id);
       if ( $target.is( "a.ui-icon-trash" ) ) {
         deleteImage( $item );
       } else if ( $target.is( "a.ui-icon-zoomin" ) ) {
@@ -152,34 +156,34 @@
 <div class="ui-widget ui-helper-clearfix" id="widget">
  
 <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
-  <li class="ui-widget-content ui-corner-tr">
+  <li class="ui-widget-content ui-corner-tr" id='sandwich'>
     <h5 class="ui-widget-header">Sandwich</h5>
-    <img src="img/sandwich.png" alt="sandwich" width="96" height="auto">
+    <img src="img/sandwich.png" alt="sandwich" width="96" height="86">
     <a href="img/sandwich.png" title="sandwich" class="ui-icon ui-icon-zoomin">View larger</a>
-    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory" class="ui-icon ui-icon-trash">Put this into inventory</a>
   </li>
-  <li class="ui-widget-content ui-corner-tr">
+  <li class="ui-widget-content ui-corner-tr" id='textbook1'>
     <h5 class="ui-widget-header">TextBook1</h5>
-    <img src="img/textbook.jpg" alt="The chalet at the Green mountain lake" width="96" height="auto">
+    <img src="img/textbook.jpg" alt="textbook biz ana" width="96" height="85">
     <a href="img/textbook.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">TextBook1</a>
-    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory" class="ui-icon ui-icon-trash">Put this into inventory</a>
   </li>
-  <li class="ui-widget-content ui-corner-tr">
+  <li class="ui-widget-content ui-corner-tr" id='umbrella'>
     <h5 class="ui-widget-header">Unbrella</h5>
-    <img src="img/umbrella.jpg" alt="Unbrella" width="96" height="auto">
+    <img src="img/umbrella.jpg" alt="Unbrella" width="96" height="86">
     <a href="images/high_tatras3.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
-    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
+    <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory" class="ui-icon ui-icon-trash">Put this into inventory</a>
   </li>
  
 </ul>
- 
+<!-- id="trash" is the place that receives the draggable item.-->
 <div id="trash" class="ui-widget-content ui-state-default">
-  <h4 class="ui-widget-header"><span class="ui-icon ui-icon-trash"></span>Drag to here</h4>
+  <h4 class="ui-widget-header">Drag to here</h4>
 </div>
  
 </div>
  
- 
+<!-- all the widgets are draggable-->
  <script>$("*.widget").draggable();</script>
 </body>
 </html>

@@ -106,7 +106,7 @@
 
     </div>
 
-    <div class="4stuff" id="lockerChoice">
+    <div class="0stuff" id="lockerChoice">
       <form>
         <input type="text" id='searchByID'>
         <br />
@@ -152,8 +152,10 @@
       switch (step) {
         //case 1, the very first step is to choose a section(e.g. NE,SW)
         //goBackBtn is not shown, because it is not needed.
+        case 0:
+          $(".0stuff").show();
         case 1:
-
+          $(".0stuff").hide();
           $("#goBackBtn").hide();
           $(".1stuff").show();
           $(".2").hide();
@@ -183,6 +185,7 @@
 
         //In case 2, it allows you to press the goBackBtn
         case 3:
+
           $(backQuery_building).show();
           $("#sectionChoice").hide();
           $(".2").hide();
@@ -193,6 +196,7 @@
           break;
 
         case 4:
+
           $(".4stuff").show();
           $("#choosingScope").html("number");
           break;
@@ -215,7 +219,7 @@
       $("#sectionChoice").hide();
       step = 2;
       stepControl();
-
+      showVacancy(`${this.id}`);
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
     });
@@ -271,15 +275,18 @@
       
     */
 
+    //At the level of building choice, it does the following:
+    //When being clicked, it starts the chain reaction:
     $(buildingButton).click(function (e) {
-
-
+      var collectionSection = sections[i].getAttribute("id");
+      //#1-1 the variable "buildingNum" gets the attribute of "name"
       var buildingNum = $(e.target).attr("name");
 
+      //#1-2 the variable "backQuery_building" holds which building it is in.
       backQuery_building = buildingNum;
-
       console.log("Current Building is ", buildingNum);
 
+      //#1-3 "step=3" means the locker-picking function goes to the level of building.
       step = 3;
 
 
@@ -304,104 +311,97 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     var db = firebase.firestore();
-
+   
     //This function shows the number of locker vacancy information
-    function showVacancy() {
-      var sections = $(".1");
-      
+    function showVacancy(sections) {
+
+
       var buildingSW = $('[id^="SW"]');
-      
-      
+
+      //var collectionSection = sections[i].getAttribute("id");
+
+      /*if (buildingButton[j].getAttribute('id').startsWith(sections[i].getAttribute('id'))) {
+
+        var docBuilding = buildingButton[j].getAttribute('name');
+        //               alert(sections[i].getAttribute("id"));
+        //               alert('#'+ docBuilding + 'data');
+        console.log($('#' + docBuilding + 'data'));
+      }*/
+      db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection(sections).onSnapshot(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          console.log("Document data:", doc.data().vacant_lockers);
+          console.log(doc.id);
+          $("#"+doc.id+"data").html(doc.data().vacant_lockers);
+          //$('#' + docBuilding + 'data').html(doc.data().vacant_lockers);
+          /*let lockerVacancy = doc.data().vacant_lockers;
+          console.log($('#' + docBuilding + 'data'));
+          // console.log("docbuiding here" + docBuilding);
+          // console.log(snap.data().vacant_lockers);
+          $('#' + docBuilding + 'data').html(lockerVacancy);*/
+        });
+      });
+
+
       //these are the ways to test "start with" :
-//      alert(buildingSW[1].getAttribute('id').startsWith("SW"));
-//      alert(buildingButton[0].getAttribute('name').startsWith());
+      //      alert(buildingSW[1].getAttribute('id').startsWith("SW"));
+      //      alert(buildingButton[0].getAttribute('name').startsWith());
 
-//      var buildingNW = $('.btnbuildingNW');
-//      var floors = $()
-//      alert(sections[0].getAttribute("id"));
+      //      var buildingNW = $('.btnbuildingNW');
+      //      var floors = $()
+      //      alert(sections[0].getAttribute("id"));
 
 
-//      for(var i in sections){
-        
+      //      for(var i in sections){
+
       /*
-        if the building thingy belongs to a section, just trasverse the session, put the thingy in the doc under collection([section]), so we need to judge if they start with the same ID. If they start with the same ID, then it should be taken out, and trasversed from [0] to [length], also, it should be put into the n-th id of the Div.
+        if the building thingy belongs to a section, just trasverse the session,
+       put the thingy in the doc under collection([section]), so we need to judge if they start with the same ID. 
+       If they start with the same ID, then it should be taken out, and trasversed from [0] to [length], 
+       also, it should be put into the n-th id of the Div.
       */
-        
-          for(var i=0;i<sections.length;i++)
-            for(var j=0;j<buildingButton.length;j++){
-              
-              var collectionSection = sections[i].getAttribute("id");
-              
-              if( buildingButton[j].getAttribute('id').startsWith(sections[i].getAttribute('id'))){
-            
-                var docBuilding = buildingButton[j].getAttribute('name');
-//               alert(sections[i].getAttribute("id"));
-//               alert('#'+ docBuilding + 'data');
-          
-          
-                db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(collectionSection).doc(docBuilding).onSnapshot(function (snap) {
-                  console.log(snap.data());
-                  console.log("docbuiding here" + docBuilding);
-                  console.log(snap.data().vacant_lockers);
-                  $('#'+ docBuilding + 'data').html(snap.data().vacant_lockers);
-                })
-     
-              }
-           
-          }
 
-      
+
+
+
+
       //I wanna merge these code because they repeat:
-//        //original
-//      db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection('NW').doc('NW1').onSnapshot(function (snap) {
-//        $("#NW1").html(snap.data().vacant_lockers);
-//      })
-      
-      
+      //        //original
+      //      db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection('NW').doc('NW1').onSnapshot(function (snap) {
+      //        $("#NW1").html(snap.data().vacant_lockers);
+      //      })
+
+
       //Failed promise()
 
-//              if( buildingButton[j].getAttribute('id').startsWith(sections[i].getAttribute('id'))){
-//
-//
-//                var docBuilding = buildingButton[j].getAttribute('name');
-//
-//
-//                  promise.then(function(){ db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(collectionSection).doc(docBuilding).onSnapshot(function (snap) {
-//                  $('#'+ docBuilding + 'data').append(snap.data().vacant_lockers);
-//                })
-//             });
-//              }
-           
-      
-      
-              var docRef = db.collection("cities").doc("SF");
+      //              if( buildingButton[j].getAttribute('id').startsWith(sections[i].getAttribute('id'))){
+      //
+      //
+      //                var docBuilding = buildingButton[j].getAttribute('name');
+      //
+      //
+      //                  promise.then(function(){ db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(collectionSection).doc(docBuilding).onSnapshot(function (snap) {
+      //                  $('#'+ docBuilding + 'data').append(snap.data().vacant_lockers);
+      //                })
+      //             });
+      //              }
 
-              docRef.get().then(function(doc) {
-                  if (doc.exists) {
-                      console.log("Document data:", doc.data());
-                  } else {
-                      // doc.data() will be undefined in this case
-                      console.log("No such document!");
-                  }
-              }).catch(function(error) {
-                  console.log("Error getting document:", error);
-              });
 
-      
 
-      db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').onSnapshot(function (snap) {
+
+
+
+
+      /*db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').onSnapshot(function (snap) {
         $("#counterNE").html(snap.data().NE);
         $("#counterNW").html(snap.data().NW);
         $("#counterSW").html(snap.data().SW);
         $("#counterSE").html(snap.data().SE);
-      })
+      });*/
     }
 
 
-
-
     //shows the vacancies through accessing firebase
-    showVacancy();
+    //showVacancy();
 
     //When first executed, the step is 1.
     stepControl();

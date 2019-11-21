@@ -82,33 +82,30 @@
                 }
 
             });
+
             //the function reads the URL to the picture.
             function readURL(input) {
-                //        if (input.files && input.files[0]) {
+                
 
                 var reader = new FileReader();
 
                 reader.onload = function (e) {
                     pictureSrc = e.target.result;
                     $('#img-upload').attr('src', pictureSrc);
-                    console.log(pictureSrc);
-
+                 /*this line of code is crucial, if it is put outside
+                 of the the function(e){} callback, then the memory function  
+                 would not work*/
                     localStorage.setItem("picture", pictureSrc);
-                    console.log(pictureSrc);
+                   
                 }
-
                 // localStorage.setItem("picture", pictureSrc);
                 reader.readAsDataURL(input.files[0]);
-
-
-                //        }
             }
 
+            //After some picture is upload, the page reads the new URL
             $("#imgInp").change(function () {
 
                 readURL(this);
-
-
             });
         });
 

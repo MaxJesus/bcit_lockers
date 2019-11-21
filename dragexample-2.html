@@ -1,185 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>In hand -> Inventory</title>
-<!--  <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">-->
+  <!--  <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script
-  src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
-  integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
+    integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-   
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+
+  <!--Authentication Sign in with a pre-built UI-->
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+
+
+
+
+
+
+
+
+
   <style>
-  #gallery { float: left; width: 50%; min-height: 12em; }
-  .gallery.custom-state-active { background: transparent; }
-  .gallery li { float: left; width: 96px; height:auto; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
-  .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
-  .gallery li a { float: right; }
-  .gallery li a.ui-icon-zoomin { float: left; }
-  .gallery li img { width: 100%; cursor: move; }
- 
-  #trash { float: right; width: 42%; min-height: 18em; padding: 1%; background:transparent}
-  #trash h4 { line-height: 16px; margin: 0 0 0.4em; }
-  #trash h4 .ui-icon { float: left; }
-  #trash .gallery h5 { display: inherit; }
-  
-  .ui-widget-header{font-size: 0.8vh}
-    
+    #gallery {
+      float: left;
+      width: 50%;
+      min-height: 12em;
+    }
+
+    .gallery.custom-state-active {
+      background: transparent;
+    }
+
+    .gallery li {
+      float: left;
+      width: 96px;
+      height: auto;
+      padding: 0.4em;
+      margin: 0 0.4em 0.4em 0;
+      text-align: center;
+    }
+
+    .gallery li h5 {
+      margin: 0 0 0.4em;
+      cursor: move;
+    }
+
+    .gallery li a {
+      float: right;
+    }
+
+    .gallery li a.ui-icon-zoomin {
+      float: left;
+    }
+
+    .gallery li img {
+      width: 100%;
+      cursor: move;
+    }
+
+    #trash {
+      float: right;
+      width: 42%;
+      min-height: 18em;
+      padding: 1%;
+      background: transparent
+    }
+
+    #trash h4 {
+      line-height: 16px;
+      margin: 0 0 0.4em;
+    }
+
+    #trash h4 .ui-icon {
+      float: left;
+    }
+
+    #trash .gallery h5 {
+      display: inherit;
+    }
+
+    .ui-widget-header {
+      font-size: 0.8vh
+    }
   </style>
-  
- <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+
+  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script>
-  $( function() {
- 
-    // There's the gallery and the trash
-    var $gallery = $( "#gallery" ),
-      $trash = $( "#trash" );
- 
-    // Let the gallery items be draggable
-    $( "li", $gallery ).draggable({
-      cancel: "a.ui-icon", // clicking an icon won't initiate dragging
-      revert: "invalid", // when not dropped, the item will revert back to its initial position
-      containment: "document",
-      helper: "clone",
-      cursor: "move"
-    });
- 
-    // Let the trash be droppable, accepting the gallery items
-    $trash.droppable({
-      accept: "#gallery > li",
-      classes: {
-        "ui-droppable-active": "ui-state-highlight"
-      },
-      drop: function( event, ui ) {
-        deleteImage( ui.draggable );
-      }
-    });
- 
-    // Let the gallery be droppable as well, accepting items from the trash
-    $gallery.droppable({
-      accept: "#trash li",
-      classes: {
-        "ui-droppable-active": "custom-state-active"
-      },
-      drop: function( event, ui ) {
-        recycleImage( ui.draggable );
-      }
-    });
- 
-    // Image deletion function
-    var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Recycle this image' class='ui-icon ui-icon-refresh'>Recycle image</a>";
-    function deleteImage( $item ) {
-      $item.fadeOut(function() {
-        var $list = $( "ul", $trash ).length ?
-          $( "ul", $trash ) :
-          $( "<ul class='gallery ui-helper-reset'/>" ).appendTo( $trash );
- 
-        $item.find( "a.ui-icon-trash" ).remove();
-        $item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
-          $item
-            .animate({ width: "48px" })
-            .find( "img" )
-              .animate({ height: "36px" });
-        });
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
+      authDomain: "bcit-lockers.firebaseapp.com",
+      databaseURL: "https://bcit-lockers.firebaseio.com",
+      projectId: "bcit-lockers",
+      storageBucket: "bcit-lockers.appspot.com",
+      messagingSenderId: "380958555512",
+      appId: "1:380958555512:web:3a1928344614d15da51c8d",
+      measurementId: "G-R8V8WMCJRB"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    var db = firebase.firestore();
+    firebase.auth().onAuthStateChanged(function (user) {
+      db.collection('user').doc(user.uid).onSnapshot(function (snap) {
+        console.log("Current uid is ", user.uid);
+        $("#welcome").html("Welcome back " + snap.data().name);
+        $("#welcome").css("font-size", "2vh");
+        $("#welcome").css("float", "left");
+        $("#welcome").css("color", "white")
+      })
+    })
+
+
+
+
+
+
+
+    $(function () {
+
+      // There's the gallery and the trash
+      var $gallery = $("#gallery"),
+        //#trash is the "<div>" that receives the draggable item
+        $trash = $("#trash");
+
+      // Let the gallery items be draggable
+      $("li", $gallery).draggable({
+        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+        revert: "invalid", // when not dropped, the item will revert back to its initial position
+        containment: "document",
+        helper: "clone",
+        cursor: "move"
       });
-    }
- 
-    // Image recycle function
-    var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Delete this image' class='ui-icon ui-icon-trash'>Delete image</a>";
-    function recycleImage( $item ) {
-      $item.fadeOut(function() {
-        $item
-          .find( "a.ui-icon-refresh" )
-            .remove()
-          .end()
-          .css( "width", "96px")
-          .append( trash_icon )
-          .find( "img" )
-            .css( "height", "72px" )
-          .end()
-          .appendTo( $gallery )
-          .fadeIn();
+
+      // Let the trash be droppable, accepting the gallery items
+      $trash.droppable({
+        //list items in gallery are droppable
+        accept: "#gallery > li",
+        classes: {
+          "ui-droppable-active": "ui-state-highlight"
+        },
+        drop: function (event, ui) {
+          deleteImage(ui.draggable);
+        }
       });
-    }
- 
-    // Image preview function, demonstrating the ui.dialog used as a modal window
-    function viewLargerImage( $link ) {
-      var src = $link.attr( "href" ),
-        title = $link.siblings( "img" ).attr( "alt" ),
-        $modal = $( "img[src$='" + src + "']" );
- 
-      if ( $modal.length ) {
-        $modal.dialog( "open" );
-      } else {
-        var img = $( "<img alt='" + title + "' width='384' height='288' style='display: none; padding: 8px;' />" )
-          .attr( "src", src ).appendTo( "body" );
-        setTimeout(function() {
-          img.dialog({
-            title: title,
-            width: 400,
-            modal: true
+
+      // Let the gallery be droppable as well, accepting items from the trash
+      $gallery.droppable({
+        accept: "#trash li",
+        classes: {
+          "ui-droppable-active": "custom-state-active"
+        },
+        drop: function (event, ui) {
+          recycleImage(ui.draggable);
+        }
+      });
+
+      // Image deletion function
+      var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Recycle this image' class='ui-icon ui-icon-refresh'>Recycle image</a>";
+      //When stuff being dragged from the left to the right, all the stuff happens here:
+      function deleteImage($item) {
+        //#1-1, the widgets in the left will fadeOut from the "in-hand card".
+        $item.fadeOut(function () {
+          //#2-1, the itemID variable stores the widget's ID
+          alert("you put " + this.id + " into the locker");
+          let itemID = this.id;
+          //        var itemName = $(itemID).name;
+          //        alert("you put " + itemName +" into the locker");
+
+          /*
+          #2-2, the action will connect to the firebase, it writes the "id" to the 
+          document, which could be accessed later and show the user
+          */
+          firebase.auth().onAuthStateChanged(function (user) {
+            console.log(user);
+            //#2-2-1, the action would access user-(the user's uid)-items-locker
+            db.collection("user").doc(user.uid).collection("items").doc("locker").set(
+              {
+                //#2-2-2, the id is recorded, when the item is dragged to the locker item list
+                "id": itemID,
+                //#2-2-3, the name is recorded, when the item is dragged to the locker item list
+                //        "name":itemName,
+              });
           });
-        }, 1 );
+
+
+
+
+
+
+
+          var $list = $("ul", $trash).length ?
+            $("ul", $trash) :
+            $("<ul class='gallery ui-helper-reset'/>").appendTo($trash);
+
+          $item.find("a.ui-icon-trash").remove();
+          $item.append(recycle_icon).appendTo($list).fadeIn(function () {
+            $item
+              .animate({ width: "48px" })
+              .find("img")
+              .animate({ height: "36px" });
+          });
+        });
       }
-    }
- 
-    // Resolve the icons behavior with event delegation
-    $( "ul.gallery > li" ).on( "click", function( event ) {
-      var $item = $( this ),
-        $target = $( event.target );
- 
-      if ( $target.is( "a.ui-icon-trash" ) ) {
-        deleteImage( $item );
-      } else if ( $target.is( "a.ui-icon-zoomin" ) ) {
-        viewLargerImage( $target );
-      } else if ( $target.is( "a.ui-icon-refresh" ) ) {
-        recycleImage( $item );
+
+      // Image recycle function
+      var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Put this into inventory' class='ui-icon ui-icon-trash'>Put this into inventory</a>";
+      //When stuff being dragged from the right to the left, all the stuff happens here:
+      function recycleImage($item) {
+         //#1-1, the widgets in the left will fadeOut from "the locker card".
+        $item.fadeOut(function () {
+          //#2-1, the itemID variable stores the widget's ID
+          let itemID=this.id;
+          alert("the moved out item is " + itemID);
+          $item
+            .find("a.ui-icon-refresh")
+            .remove()
+            .end()
+            //resize
+            .css("width", "96px")
+            .append(trash_icon)
+            .find("img")
+            .css("height", "72px")
+            .end()
+            //"$gallery" is the "left card" 
+            .appendTo($gallery)
+            .fadeIn();
+        });
       }
- 
-      return false;
+
+      // Image preview function, demonstrating the ui.dialog used as a modal window
+      function viewLargerImage($link) {
+        var src = $link.attr("href"),
+          title = $link.siblings("img").attr("alt"),
+          $modal = $("img[src$='" + src + "']");
+
+        if ($modal.length) {
+          $modal.dialog("open");
+        } else {
+          var img = $("<img alt='" + title + "' width='384' height='288' style='display: none; padding: 8px;' />")
+            .attr("src", src).appendTo("body");
+          setTimeout(function () {
+            img.dialog({
+              title: title,
+              width: 400,
+              modal: true
+            });
+          }, 1);
+        }
+      }
+
+      // Resolve the icons behavior with event delegation
+      //probably the actions that the function make when you click on it.(rather than dragging)
+      $("ul.gallery > li").on("click", function (event) {
+        var $item = $(this),
+          $target = $(event.target);
+        alert("you clicked" + this.id);
+        if ($target.is("a.ui-icon-trash")) {
+          deleteImage($item);
+        } else if ($target.is("a.ui-icon-zoomin")) {
+          viewLargerImage($target);
+        } else if ($target.is("a.ui-icon-refresh")) {
+          recycleImage($item);
+        }
+
+        return false;
+      });
     });
-  } );
   </script>
 </head>
-  
-  
+
+
 <body>
- 
-<div class="ui-widget ui-helper-clearfix" id="widget">
- 
-<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
-  <li class="ui-widget-content ui-corner-tr">
-    <h5 class="ui-widget-header">Sandwich</h5>
-    <img src="img/sandwich.png" alt="sandwich" width="96" height="auto">
-    <a href="img/sandwich.png" title="sandwich" class="ui-icon ui-icon-zoomin">View larger</a>
-    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
-  </li>
-  <li class="ui-widget-content ui-corner-tr">
-    <h5 class="ui-widget-header">TextBook1</h5>
-    <img src="img/textbook.jpg" alt="The chalet at the Green mountain lake" width="96" height="auto">
-    <a href="img/textbook.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">TextBook1</a>
-    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
-  </li>
-  <li class="ui-widget-content ui-corner-tr">
-    <h5 class="ui-widget-header">Unbrella</h5>
-    <img src="img/umbrella.jpg" alt="Unbrella" width="96" height="auto">
-    <a href="images/high_tatras3.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
-    <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a>
-  </li>
- 
-</ul>
- 
-<div id="trash" class="ui-widget-content ui-state-default">
-  <h4 class="ui-widget-header"><span class="ui-icon ui-icon-trash"></span>Drag to here</h4>
-</div>
- 
-</div>
- 
- 
- <script>$("*.widget").draggable();</script>
+
+  <div class="ui-widget ui-helper-clearfix" id="widget">
+
+    <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+      <li class="ui-widget-content ui-corner-tr" id='sandwich' name="porkSandwich">
+        <h5 class="ui-widget-header">Sandwich</h5>
+        <img src="img/sandwich.png" alt="sandwich" width="96" height="86">
+        <a href="img/sandwich.png" title="sandwich" class="ui-icon ui-icon-zoomin">View larger</a>
+        <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory"
+          class="ui-icon ui-icon-trash">Put this into inventory</a>
+      </li>
+      <li class="ui-widget-content ui-corner-tr" id='textbook1' name="textbook1712">
+        <h5 class="ui-widget-header">TextBook1</h5>
+        <img src="img/textbook.jpg" alt="textbook biz ana" width="96" height="85">
+        <a href="img/textbook.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">TextBook1</a>
+        <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory"
+          class="ui-icon ui-icon-trash">Put this into inventory</a>
+      </li>
+      <li class="ui-widget-content ui-corner-tr" id='umbrella' name="blackUmbrella">
+        <h5 class="ui-widget-header">Unbrella</h5>
+        <img src="img/umbrella.jpg" alt="Unbrella" width="96" height="86">
+        <a href="images/high_tatras3.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
+        <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory"
+          class="ui-icon ui-icon-trash">Put this into inventory</a>
+      </li>
+
+    </ul>
+
+    <!-- id="trash" is the place that receives the draggable item.-->
+    <div id="trash" class="ui-widget-content ui-state-default">
+      <h4 class="ui-widget-header">Drag to here</h4>
+    </div>
+
+  </div>
+
+  <!-- all the widgets are draggable-->
+  <script>$("*.widget").draggable();</script>
+
+  <script>
+    function checkItemStatus() {
+      var docRef = db.collection("user").doc(user.uid).collection("items").doc("locker");
+      //I dont quite understand what "doc" means.
+      docRef.get().then(function (doc) {
+        if (doc.exists) {
+          alert("Document data:", doc.data().id);
+          for(var eachItem in docRef){
+        document.getElementById($(docRef).id).appendTo($trash);
+      }
+
+
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+
+    }
+
+  </script>
+
 </body>
+
 </html>

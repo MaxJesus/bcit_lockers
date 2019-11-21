@@ -10,7 +10,32 @@
   integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
   crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
-   
+  
+  
+  
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+      
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+
+    <!--Authentication Sign in with a pre-built UI-->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <style>
   #gallery { float: left; width: 50%; min-height: 12em; }
   .gallery.custom-state-active { background: transparent; }
@@ -33,6 +58,37 @@
 <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script>
+    
+     var firebaseConfig = {
+    apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
+    authDomain: "bcit-lockers.firebaseapp.com",
+    databaseURL: "https://bcit-lockers.firebaseio.com",
+    projectId: "bcit-lockers",
+    storageBucket: "bcit-lockers.appspot.com",
+    messagingSenderId: "380958555512",
+    appId: "1:380958555512:web:3a1928344614d15da51c8d",
+    measurementId: "G-R8V8WMCJRB"
+  };
+  
+    firebase.initializeApp(firebaseConfig);
+    
+  var db = firebase.firestore();
+    firebase.auth().onAuthStateChanged(function(user){
+      db.collection('user').doc(user.uid).onSnapshot(function(snap){
+       console.log("Current uid is ", user.uid);
+       $("#welcome").html("Welcome back " + snap.data().name);
+        $("#welcome").css("font-size","2vh");
+        $("#welcome").css("float","left");
+        $("#welcome").css("color","white")
+     })
+    })
+  
+    
+    
+    
+    
+    
+    
   $( function() {
  
     // There's the gallery and the trash
@@ -76,10 +132,30 @@
     var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Recycle this image' class='ui-icon ui-icon-refresh'>Recycle image</a>";
     function deleteImage( $item ) {
       $item.fadeOut(function() {
+        alert("you put " + this.id +" into the locker");
+        var itemID = this.id;
+//        var itemName = $(itemID).name;
+//        alert("you put " + itemName +" into the locker");
+        
+        firebase.auth().onAuthStateChanged(function(user){
+        console.log(user);
+        db.collection("user").doc(user.uid).collection("items").doc("locker").set(
+    	{
+        "id": itemID,
+//        "name":itemName,
+        });
+        });
+
+  
+        
+        
+        
+        
+        
         var $list = $( "ul", $trash ).length ?
           $( "ul", $trash ) :
           $( "<ul class='gallery ui-helper-reset'/>" ).appendTo( $trash );
- 
+        
         $item.find( "a.ui-icon-trash" ).remove();
         $item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
           $item
@@ -135,7 +211,7 @@
     $( "ul.gallery > li" ).on( "click", function( event ) {
       var $item = $( this ),
         $target = $( event.target );
-        alert(this.id);
+        alert("you clicked" + this.id);
       if ( $target.is( "a.ui-icon-trash" ) ) {
         deleteImage( $item );
       } else if ( $target.is( "a.ui-icon-zoomin" ) ) {
@@ -156,19 +232,19 @@
 <div class="ui-widget ui-helper-clearfix" id="widget">
  
 <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
-  <li class="ui-widget-content ui-corner-tr" id='sandwich'>
+  <li class="ui-widget-content ui-corner-tr" id='sandwich' name="porkSandwich">
     <h5 class="ui-widget-header">Sandwich</h5>
     <img src="img/sandwich.png" alt="sandwich" width="96" height="86">
     <a href="img/sandwich.png" title="sandwich" class="ui-icon ui-icon-zoomin">View larger</a>
     <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory" class="ui-icon ui-icon-trash">Put this into inventory</a>
   </li>
-  <li class="ui-widget-content ui-corner-tr" id='textbook1'>
+  <li class="ui-widget-content ui-corner-tr" id='textbook1' name="textbook1712">
     <h5 class="ui-widget-header">TextBook1</h5>
     <img src="img/textbook.jpg" alt="textbook biz ana" width="96" height="85">
     <a href="img/textbook.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">TextBook1</a>
     <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory" class="ui-icon ui-icon-trash">Put this into inventory</a>
   </li>
-  <li class="ui-widget-content ui-corner-tr" id='umbrella'>
+  <li class="ui-widget-content ui-corner-tr" id='umbrella' name="blackUmbrella">
     <h5 class="ui-widget-header">Unbrella</h5>
     <img src="img/umbrella.jpg" alt="Unbrella" width="96" height="86">
     <a href="images/high_tatras3.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
@@ -185,5 +261,26 @@
  
 <!-- all the widgets are draggable-->
  <script>$("*.widget").draggable();</script>
+  
+<script>
+  function checkItemStatus(){
+     var docRef = db.collection("user").doc(user.uid).collection("items").doc("locker");
+
+              docRef.get().then(function(doc) {
+                  if (doc.exists) {
+                      alert("Document data:", doc.data().id);
+                  } else {
+                      // doc.data() will be undefined in this case
+                      console.log("No such document!");
+                  }
+              }).catch(function(error) {
+                  console.log("Error getting document:", error);
+              });
+
+  }
+  
+</script>
+  
 </body>
+  
 </html>

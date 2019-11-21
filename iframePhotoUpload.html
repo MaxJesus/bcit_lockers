@@ -1,117 +1,123 @@
 <!doctype html>
 <html>
 
-    
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Soilder HUD</title>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <style>
-    .btn-file {
-    position: relative;
-    overflow: hidden;
-}
-.btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
-}
-
-#img-upload{
-    width: 100%;
-}
-    </style>
-  </head>
-  
-  
-
-  <body>
-    <div class="container">
-<div class="col-md-6">
-    <div class="form-group">
-        <label>Upload Image</label>
-        <div class="input-group">
-            <span class="input-group-btn">
-                <span class="btn btn-default btn-file">
-                    Browse… <input type="file" id="imgInp">
-                </span>
-            </span>
-            <input type="text" class="form-control" readonly>
-        </div>
-        <img id='img-upload'/>
-    </div>
-</div>
-</div>
-    
-    <script>$(document).ready( function() {
-        $('#img-upload').attr('src', pictureSrc);
-        var pictureSrc = window.localStorage.getItem("picture");
-         $('#img-upload').attr('src', pictureSrc);
-        
-    	$(document).on('change', '.btn-file :file', function() {
-    var input = $(this),
-      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-    input.trigger('fileselect', [label]);
-    });
-
-    $('.btn-file :file').on('fileselect', function(event, label) {
-        
-        var input = $(this).parents('.input-group').find(':text'),
-            log = label;
-        
-        if(input.length) {
-            input.val(log);
-        } else {
-            if(log) alert(log);
+        .btn-file {
+            position: relative;
+            overflow: hidden;
         }
-      
-    });
-        //the function reads the URL to the picture.
-    function readURL(input) {
-//        if (input.files && input.files[0]) {
-            
-            var reader = new FileReader();
-            
-            reader.onload = function (e) {
-              pictureSrc = e.target.result;
-              $('#img-upload').attr('src', pictureSrc);
-              console.log(pictureSrc);
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+        #img-upload {
+            width: 100%;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="container">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Upload Image</label>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                            Browse… <input type="file" id="imgInp">
+                        </span>
+                    </span>
+                    <input type="text" class="form-control" readonly>
+                </div>
+                <img id='img-upload' />
+            </div>
+        </div>
+    </div>
+
+    <script>$(document).ready(function () {
+            //local Storage reads the attribute "picture" to the document.
+            var pictureSrc = window.localStorage.getItem("picture");
+            $('#img-upload').attr('src', pictureSrc);
+
+            localStorage.clear();
+
+            $(document).on('change', '.btn-file :file', function () {
+                var input = $(this),
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [label]);
+            });
+
+            $('.btn-file :file').on('fileselect', function (event, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
+                }
+
+            });
+            //the function reads the URL to the picture.
+            function readURL(input) {
+                //        if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    pictureSrc = e.target.result;
+                    $('#img-upload').attr('src', pictureSrc);
+                    console.log(pictureSrc);
+
+                    localStorage.setItem("picture", pictureSrc);
+                    console.log(pictureSrc);
+                }
+
+                // localStorage.setItem("picture", pictureSrc);
+                reader.readAsDataURL(input.files[0]);
+
+
+                //        }
             }
-            
-            localStorage.setItem("picture",pictureSrc);
-            reader.readAsDataURL(input.files[0]);
-            localStorage.setItem("picture",pictureSrc);
-            console.log(pictureSrc);
-//        }
-    }
 
-    $("#imgInp").change(function(){
-      localStorage.clear();
-        readURL(this);
-        
-        
-    });
-  });
-        
-      
-      
-      
-      
+            $("#imgInp").change(function () {
+
+                readURL(this);
+
+
+            });
+        });
+
+
+
+
+
     </script>
-    
-</body>
-</html>
 
+</body>
+
+</html>

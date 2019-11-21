@@ -21,59 +21,16 @@
     <!--Authentication Sign in with a pre-built UI-->
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <link type="text/css" rel="stylesheet" href="./style/changelocker.css" />
       
 <style>
+ 
   
-  
-  #intro{position: sticky;
-    top: 0vh;
-    display: inline-block;
-    height: 5vh;
-  margin-bottom: 1vh;
-  }
-  
-  #Welcome{font-size: 3vh;
-  color: ghostwhite;
-  font: bold;}
-  
-  #notice{font-size: 1vh;
-    position: relative;
-    top: 5vh;
-    z-index: 14;
-    }
-  
-  body{
-/*    background-image: url(img/background.jpg);*/
-    background-size: 100vw 100vh;
-    background-repeat: no-repeat;
-    border: 5px solid black;
-    text-align: center;height: 100vh;
-    box-shadow: 10px 10px 5px #888888;
-  }
-
-  
-  #loginDiv{
-    transform: scale(1.6,1.6);
-    width: 70vw;
-    position: relative;
-    height: 25vh;
-    left: 13%;
-    top: 10vh;
-    margin-top: 1vh;}
-  
-   #continue{
-    position: relative;
-    top: 0vh;
-     z-index: 10;
-    background: green;
-     color: white;
-     height:4vh;
-     font: bold;
-    top: 1vh;}
-  
+ 
   
 </style>
-         <script>
+  
+  <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
@@ -94,8 +51,10 @@
   
   
 <body>
-  <div id="landing">
+  <div id="head">
   <div id="intro">
+    
+    
   <h1 id="Welcome">Change locker position</h1>
  
   </div>
@@ -109,32 +68,26 @@
       <img src=img/logo.png id="logo" alt="logo" />
 
     </div>
+  </div>
+  <div id="questions">
+      <h3>Provide information for changing locker solution</h3>
+      <span><strong>May take at most 48 hours to be processed</strong></span>
 
+    <form>
+      <br>When did you choose your current locker?(Approximately)<br>
+      <input type="date" id="startDate" min="2019-01-01" max="2100-01-01"><br/>
+      <br>Please provide your BCIT ID<br>
+       <input type="text" name="ID" id="stuID"><br/>
+      <br>Please provide your my.BCIT email<br>
+      <input type="email" id="stuEmail"><br/>
+      <br>Please state the reason to change.<br>
+      <input type="text" id="reason"><br/>
+      <br>
+      <button onclick="dbUpdate()" id="submit">submit</button>
+      <br/>
 
-
-  
-
+    </form>
     </div>
-  <h3>Provide information for changing locker solution</h3>
-  <span><strong>May take at most 48 hours to be processed</strong></span>
-  
-<form>
-  
-  <br>When did you choose your current locker?(Approximately)<br>
-  <input type="date" id="startDate" min="2019-01-01" max="2100-01-01"><br/>
-  <br>Please provide your BCIT ID<br>
-   <input type="text" name="ID" id="stuID"><br/>
-  <br>Please provide your my.BCIT email<br>
-  <input type="email" id="stuEmail"><br/>
-  <br>Please state the reason to change.<br>
-  <input type="text" id="reason"><br/>
-  <br>
-  <button onclick="dbUpdate()">submit</button>
-  
-  <br/>
-  
-</form>
-    
   
 <script>
 //createUser() deleted
@@ -187,9 +140,6 @@ function dbUpdate() {
   .catch(function(error) {
     console.error("Error writing document: ", error);
   });
-
-
-
 }
 
 </script>

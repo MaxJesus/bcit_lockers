@@ -181,6 +181,7 @@
         $item.fadeOut(function () {
           //#2-1, the itemID variable stores the widget's ID
           alert("you put " + this.id + " into the locker");
+          checkItemStatus();
           let itemID = this.id;
           //        var itemName = $(itemID).name;
           //        alert("you put " + itemName +" into the locker");
@@ -225,11 +226,12 @@
       var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Put this into inventory' class='ui-icon ui-icon-trash'>Put this into inventory</a>";
       //When stuff being dragged from the right to the left, all the stuff happens here:
       function recycleImage($item) {
-         //#1-1, the widgets in the left will fadeOut from "the locker card".
+        //#1-1, the widgets in the left will fadeOut from "the locker card".
         $item.fadeOut(function () {
           //#2-1, the itemID variable stores the widget's ID
-          let itemID=this.id;
+          let itemID = this.id;
           alert("the moved out item is " + itemID);
+          checkItemStatus();
           $item
             .find("a.ui-icon-refresh")
             .remove()
@@ -283,6 +285,37 @@
 
         return false;
       });
+
+      function checkItemStatus() {
+      firebase.auth().onAuthStateChanged(function(user){
+        db.collection("user").doc(user.uid).collection("items").doc("locker").onSnapshot(function(snap){
+        // var docRef = db.collection("user").doc(user.uid).collection("items");
+        // //I dont quite understand what "doc" means.
+        // docRef.get().then(function (doc) {
+        //   if (doc.exists) {
+        //     alert("Stuff inside the locker:", doc.data().stuff);
+            for (var eachItem in snap) {
+
+              ($trash).append(document.getElementById(snap.data().id));
+            }
+            
+        //   } else {
+        //     // doc.data() will be undefined in this case
+            
+        //     alert("No such document!");
+        //   }
+        // }).catch(function (error) {
+        //   console.log("Error getting document:", error);
+        // });
+
+
+        // alert(snap.data().id);
+      });
+    });
+    }
+
+    checkItemStatus();   
+
     });
   </script>
 </head>
@@ -328,26 +361,13 @@
   <script>$("*.widget").draggable();</script>
 
   <script>
-    function checkItemStatus() {
-      var docRef = db.collection("user").doc(user.uid).collection("items").doc("locker");
-      //I dont quite understand what "doc" means.
-      docRef.get().then(function (doc) {
-        if (doc.exists) {
-          alert("Document data:", doc.data().id);
-          for(var eachItem in docRef){
-        document.getElementById($(docRef).id).appendTo($trash);
-      }
-
-
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
-      }).catch(function (error) {
-        console.log("Error getting document:", error);
-      });
-
+    //The goal of this function is to read if the stuff is in the locker, and the 
+    //result will be shown in the cards.
+    
+    $(document).ready(function () {
+         
     }
+    );
 
   </script>
 

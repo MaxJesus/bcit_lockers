@@ -42,6 +42,14 @@
   display: inline-flex;
 }
 
+#NE-buildings{
+  display: inline-flex;
+}
+
+#SE-buildings{
+  display: inline-flex;
+}
+
 #NW-buildings{
   display: inline-flex;
 }

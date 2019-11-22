@@ -207,6 +207,7 @@
         case 2:
 
           $(`#${backQuery_section}` + "-buildings").show();
+          //from case 2, it allows you to press the goBackBtn
           $("#goBackBtn").show();
           $("#choosingScope").html("Building");
           $(".3stuff").hide();
@@ -215,7 +216,7 @@
           backQuery_building = null;
           break;
 
-        //In case 2, it allows you to press the goBackBtn
+        
         case 3:
 
           $(backQuery_building).show();
@@ -240,18 +241,23 @@
       backQuery_section = `${this.id}`;
 
       //      var sectionNum = $(e.target).attr("id");
-      console.log(`${this.id}`);
+      console.log("you picked section " + `${this.id}`);
       //      console.log("#" + sectionNum);
 
+
+      //When the specific section is pressed, the buttons in that section will show up.
       $(`#${this.id}` + "-buildings").show();
 
-      // $(`#${backQuery_section}`+"-buildings").show();
-
-      //      $('#'+ sectionNum).show();
+      //Hides whatever not related to the step
       $("#sectionChoice").hide();
+
       step = 2;
       stepControl();
+
+
+      //shows the vacancy in buildings of the section.
       showBuildingVacancy(`${this.id}`);
+
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
     });
@@ -321,6 +327,7 @@
     });
   </script>
 
+  <!--Integrated firebase settings-->
   <script src="./scripts/firebase_config.js"></script>
 
   <script>

@@ -53,3 +53,11 @@
 #NW-buildings{
   display: inline-flex;
 }
+
+#floor-choice{
+  display: inline-flex;
+}
+
+#locker-choice{
+  display: inline-flex;
+}

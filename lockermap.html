@@ -139,16 +139,16 @@
     </div>
 
     <div id="locker-choice" class="4stuff">
-      <div id="b1"><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="1111"
+      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="1111"
           name="b1">1011</button><span>1F</span> <span id="b1data"> </span> </div>
 
-      <div id="1f"><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="2222"
+      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="2222"
           name="1f">2022</button><span>1F</span> <span id="1Fdata"> </span> </div>
 
-      <div id="2f"><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="3333"
+      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="3333"
           name="2f">3033</button><span>1F</span> <span id="2Fdata"> </span> </div>
 
-      <div id="3f"><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="4444"
+      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="4444"
           name="3f">4044</button><span>1F</span> <span id="3Fdata"> </span> </div>
 
     </div>
@@ -246,7 +246,7 @@
         case 4:
        
           $(".3stuff").hide();
-          $(".4stuff").show();
+          $("#locker-choice").show();
           $("#choosingScope").html("number");
           break;
       }
@@ -341,16 +341,17 @@
       console.log(backQuery_section);
       stepControl();
     });
+    
 //Step 4
-    var floorButton = $(".btnFloor");
-    $(floorButton).click(function (e) {
+    var floorButton = $(".3");
+      $(floorButton).click(function (e) {
       // var collectionSection = sections[i].getAttribute("id");
       //#1-1 the variable "buildingNum" gets the attribute of "name"
       var floorNum = $(e.target).attr("id");
 
       //#1-2 the variable "backQuery_building" holds which building it is in.
       
-      console.log("Current Building is ", floorNum);
+      console.log("Current floor is ", floorNum);
 
       //#1-3 "step=3" means the locker-picking function goes to the level of building.
       step = 4;
@@ -358,7 +359,7 @@
 
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
-      $("#locationIndicator").html("You are currently in Building" + floorNum);
+      $("#locationIndicator").html("You are currently in floor" + floorNum);
       console.log("This is in building "+ backQuery_building);
       stepControl();
     });

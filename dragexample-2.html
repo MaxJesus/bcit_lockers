@@ -309,10 +309,12 @@
         // docRef.get().then(function (doc) {
         //   if (doc.exists) {
         //     alert("Stuff inside the locker:", doc.data().stuff);
-        querySnapshot.forEach(function(doc){
-          console.log(ID);
-            ($trash).append(document.getElementById(doc.data().ID));
-           })
+        var data = querySnapshot.data();
+        for(key in data)
+        {
+          console.log(key);
+            ($trash).append(document.getElementById(data[key]));
+        };  
              
               
             

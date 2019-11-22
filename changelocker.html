@@ -86,7 +86,7 @@
       <br>Please state the reason to change.<br>
       <input type="text" id="reason"><br />
       <br>
-      <div onclick="submission()" id="submit">submit</div>
+      <div onclick="submission()" id="next">submit</div>
       <br />
 
     </form>
@@ -106,8 +106,8 @@
         <br>Please state the reason to change.<br>
         <div type="text" id="reasonAnswer"></div><br />
         <br>
-        <div onclick="goBack()" id="submit">Go Back</div>
-        <br />
+        <div onclick="goBack()" id="goBack">Go Back</div>
+        <br/>
   
       </form>
     </div>
@@ -115,6 +115,40 @@
   <script>
     $(answers).hide();
 
+    function dbUpdate() {
+
+        //  document.getElementById("startDate").value;
+        // alert(document.getElementById("startDate").value);
+
+        Q1 = document.getElementById("stuID").value;
+
+        Q2 = document.getElementById("stuEmail").value;
+
+        Q3 = document.getElementById("reason").value;
+
+        Q4 = document.getElementById("startDate").value;
+
+        //Now, when the user goes to the changelocker.html page, the user can fill in a
+        //table. When the table is submitted, the page would send the form to the firestore.
+        //"change_request" is the collection node, and the Q1 variable is the studentID
+        //The function generates a list at document level, which has the same name as the ID.
+        // The info is put into the database as field key value pairs. 
+        //This is for the customer service to get a report on the request.
+        db.collection("change_request").doc("all").collection("cases").doc(Q1).set(
+          {
+            stuID: Q1,
+            stuEmail: Q2,
+            reason: Q3,
+            startDate: Q4
+          })
+
+          .then(function () {
+            console.log("Document successfully written!");
+          })
+          .catch(function (error) {
+            console.error("Error writing document: ", error);
+          });
+      }
 
     //createUser() deleted
     var db = firebase.firestore();
@@ -131,6 +165,11 @@
         }, { merge: true });
     });
 
+    function goBack() {
+        $("#questions").show();
+        $("#answers").hide();
+
+      }
     function submission() {
 
       function checkInfo(){
@@ -143,47 +182,9 @@
      
       }
 
-      function goBack() {
-        $("#questions").show();
-        $("#answers").hide();
-      }
+      
 
-      function dbUpdate() {
-
-        //  document.getElementById("startDate").value;
-        // alert(document.getElementById("startDate").value);
-
-        Q1 = document.getElementById("stuID").value;
-
-
-        Q2 = document.getElementById("stuEmail").value;
-
-
-        Q3 = document.getElementById("reason").value;
-
-
-        Q4 = document.getElementById("startDate").value;
-
-
-        //Now, when the user goes to the changelocker.html page, the user can fill in a
-        //table. When the table is submitted, the page would send the form to the firestore.
-        //"change_request" is the collection node, and the Q1 variable is the studentID
-        //The function generates a list at document level, which has the same name as the ID. The info is put into the database as field key value pairs. This is for the customer service to get a report on the request.
-        db.collection("change_request").doc("all").collection("cases").doc(Q1).set(
-          {
-            stuID: Q1,
-            stuEmail: Q2,
-            reason: Q3,
-            startDate: Q4
-          })
-
-          .then(function () {
-            console.log("Document successfully written!");
-          })
-          .catch(function (error) {
-            console.error("Error writing document: ", error);
-          });
-      }
+      
       checkInfo();  
       dbUpdate();
     }

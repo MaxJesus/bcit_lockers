@@ -6,6 +6,7 @@
 
 <head>
   <title>Login-BCIT_LOCKERs</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -85,13 +86,36 @@
       <br>Please state the reason to change.<br>
       <input type="text" id="reason"><br />
       <br>
-      <button onclick="dbUpdate()" id="submit">submit</button>
+      <div onclick="submission()" id="submit">submit</div>
       <br />
 
     </form>
   </div>
 
+  <div id="answers">
+      <h3>Provide information for changing locker solution</h3>
+      <span><strong>May take at most 48 hours to be processed</strong></span>
+  
+      <form>
+        <br>When did you choose your current locker?(Approximately)<br>
+        <div id="startDateAnswer" ></div><br />
+        <br>Please provide your BCIT ID<br>
+        <div type="text" name="ID" id="stuIDAnswer"></div><br />
+        <br>Please provide your my.BCIT email<br>
+        <div type="email" id="stuEmailAnswer"></div><br />
+        <br>Please state the reason to change.<br>
+        <div type="text" id="reasonAnswer"></div><br />
+        <br>
+        <div onclick="goBack()" id="submit">Go Back</div>
+        <br />
+  
+      </form>
+    </div>
+
   <script>
+    $(answers).hide();
+
+
     //createUser() deleted
     var db = firebase.firestore();
     // if the current user logged in user
@@ -107,44 +131,64 @@
         }, { merge: true });
     });
 
+    function submission() {
 
-    function dbUpdate() {
+      function checkInfo(){
+        $("#questions").hide();
+        $("#answers").show();
+       $("#startDateAnswer").html($("#startDate").val());
+       $("#stuIDAnswer").html($("#stuID").val());
+       $("#stuEmailAnswer").html($("#stuEmail").val());
+       $("#reasonAnswer").html($("#reason").val());
+     
+      }
 
-      //  document.getElementById("startDate").value;
-      // alert(document.getElementById("startDate").value);
+      function goBack() {
+        $("#questions").show();
+        $("#answers").hide();
+      }
 
-      Q1 = document.getElementById("stuID").value;
+      function dbUpdate() {
 
+        //  document.getElementById("startDate").value;
+        // alert(document.getElementById("startDate").value);
 
-      Q2 = document.getElementById("stuEmail").value;
-
-
-      Q3 = document.getElementById("reason").value;
-
-
-      Q4 = document.getElementById("startDate").value;
+        Q1 = document.getElementById("stuID").value;
 
 
-      //Now, when the user goes to the changelocker.html page, the user can fill in a
-      //table. When the table is submitted, the page would send the form to the firestore.
-      //"change_request" is the collection node, and the Q1 variable is the studentID
-      //The function generates a list at document level, which has the same name as the ID. The info is put into the database as field key value pairs. This is for the customer service to get a report on the request.
-      db.collection("change_request").doc("all").collection("cases").doc(Q1).set(
-        {
-          stuID: Q1,
-          stuEmail: Q2,
-          reason: Q3,
-          startDate: Q4
-        })
+        Q2 = document.getElementById("stuEmail").value;
 
-        .then(function () {
-          console.log("Document successfully written!");
-        })
-        .catch(function (error) {
-          console.error("Error writing document: ", error);
-        });
+
+        Q3 = document.getElementById("reason").value;
+
+
+        Q4 = document.getElementById("startDate").value;
+
+
+        //Now, when the user goes to the changelocker.html page, the user can fill in a
+        //table. When the table is submitted, the page would send the form to the firestore.
+        //"change_request" is the collection node, and the Q1 variable is the studentID
+        //The function generates a list at document level, which has the same name as the ID. The info is put into the database as field key value pairs. This is for the customer service to get a report on the request.
+        db.collection("change_request").doc("all").collection("cases").doc(Q1).set(
+          {
+            stuID: Q1,
+            stuEmail: Q2,
+            reason: Q3,
+            startDate: Q4
+          })
+
+          .then(function () {
+            console.log("Document successfully written!");
+          })
+          .catch(function (error) {
+            console.error("Error writing document: ", error);
+          });
+      }
+      checkInfo();  
+      dbUpdate();
     }
-
+   
+   
   </script>
 
 

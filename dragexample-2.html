@@ -130,7 +130,7 @@
 
 
 
-
+    var nth = 0;
 
 
 
@@ -183,6 +183,7 @@
           alert("you put " + this.id + " into the locker");
           checkItemStatus();
           let itemID = this.id;
+          let itemName = this.name;
           //        var itemName = $(itemID).name;
           //        alert("you put " + itemName +" into the locker");
 
@@ -190,16 +191,30 @@
           #2-2, the action will connect to the firebase, it writes the "id" to the 
           document, which could be accessed later and show the user
           */
+        
+          var ID="id" +nth;
+
+          var obj={
+            ID : null,
+          }
+          //JS assumes it to be a number
+          obj[ID]=itemID;
+          console.log(obj[ID]);
           firebase.auth().onAuthStateChanged(function (user) {
             console.log(user);
             //#2-2-1, the action would access user-(the user's uid)-items-locker
-            db.collection("user").doc(user.uid).collection("items").doc("locker").set(
-              {
-                //#2-2-2, the id is recorded, when the item is dragged to the locker item list
-                "id": itemID,
+            db.collection("user").doc(user.uid).collection("items").doc("locker").set(obj
+              // {
+              //   //#2-2-2, the id is recorded, when the item is dragged to the locker item list
+              //    : itemID,
+                
+              // }
+              ,{merge:true}
                 //#2-2-3, the name is recorded, when the item is dragged to the locker item list
                 //        "name":itemName,
-              });
+              );
+
+              nth++ ;
           });
 
 
@@ -288,16 +303,19 @@
 
       function checkItemStatus() {
       firebase.auth().onAuthStateChanged(function(user){
-        db.collection("user").doc(user.uid).collection("items").doc("locker").onSnapshot(function(snap){
+        db.collection("user").doc(user.uid).collection("items").doc("locker").onSnapshot(function(querySnapshot){
         // var docRef = db.collection("user").doc(user.uid).collection("items");
         // //I dont quite understand what "doc" means.
         // docRef.get().then(function (doc) {
         //   if (doc.exists) {
         //     alert("Stuff inside the locker:", doc.data().stuff);
-            for (var eachItem in snap) {
-
-              ($trash).append(document.getElementById(snap.data().id));
-            }
+        querySnapshot.forEach(function(doc){
+          console.log(ID);
+            ($trash).append(document.getElementById(doc.data().ID));
+           })
+             
+              
+            
             
         //   } else {
         //     // doc.data() will be undefined in this case

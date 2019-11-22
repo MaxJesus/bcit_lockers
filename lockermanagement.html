@@ -32,25 +32,11 @@
 
 
   <script src="./scripts/firebase_config.js">
-
-  // var firebaseConfig = {
-  // apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
-  // authDomain: "bcit-lockers.firebaseapp.com",
-  // databaseURL: "https://bcit-lockers.firebaseio.com",
-  // projectId: "bcit-lockers",
-  // storageBucket: "bcit-lockers.appspot.com",
-  // messagingSenderId: "380958555512",
-  // appId: "1:380958555512:web:3a1928344614d15da51c8d",
-  // measurementId: "G-R8V8WMCJRB"
-  // };
-
-  // // Initialize Firebase
-  // firebase.initializeApp(firebaseConfig);
   </script>
 
   <script>
     //When loged in, shows the welcome.
-    var db = firebase.firestore();
+
     firebase.auth().onAuthStateChanged(function (user) {
       db.collection('user').doc(user.uid).onSnapshot(function (snap) {
         console.log("Current uid is ", user.uid);
@@ -95,7 +81,8 @@
         <div class="card-body">
           <h4 class="card-title">Cheese</h4>
           <p class="card-text">
-            cheese
+            <!--We can add text here-->>
+            Text
           </p>
         </div>
       </div>
@@ -131,34 +118,18 @@
     <div><img src="img/unlockBtn.png" id="unlockBtn" alt="unlockBtn" class="bottomToolBarButtonDiv" /></div>
   </div>
 
-
-
-
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <!--import jquery-->
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-  </script>
-
-
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
   <script>
+
     $(function () {
       $("#sortable").sortable();
       $("#sortable").disableSelection();
     });
 
+    //When the profile picture is clicked, we need a function
+    //that would allow us to go to other pages(change a locker, personal info, quit)
 
     $("#profile").click(function () {
       $("body").append("<div></div>");
@@ -169,6 +140,7 @@
       $("#dragBoxDiv").fadeOut(1000);
     })
 
+    
     $("#checkContentBtn").click(function () {
       $("#dragBoxDiv").toggle(200);
     })
@@ -179,8 +151,9 @@
     })
 
 
-
-    $("#dragBoxDiv").show();
+    // function show_drag_box_div(){
+    // $("#dragBoxDiv").show();
+    // }
 
 
     function lockerEvent() {
@@ -195,73 +168,125 @@
       $("#promptBox").after(progressBar);
       progressBar.css("margin-top", "1vh");
 
-      
-  
 
+      //Shows unlock progress
+      function showUnlockProgress() {
+        setTimeout(() => {
+          for (i = 0; i < 10; i++) {
+            $(progress).css('width', i + "%");
+          }
 
+        }, 300);
 
+        setTimeout(() => {
+          for (i = 0; i < 35; i++) {
+            $(progress).css('width', i + "%");
+          }
 
+        }, 500);
+
+        setTimeout(() => {
+          for (i = 50; i < 65; i++) {
+            $(progress).css('width', i + "%");
+          }
+        }, 800);
+
+        setTimeout(() => {
+          for (i = 65; i < 85; i++) {
+            $(progress).css('width', i + "%");
+          }
+        }, 1000);
+
+        setTimeout(() => {
+          for (i = 85; i < 110; i++) {
+            $(progress).css('width', i + "%");
+          }
+        }, 1200);
+
+        setTimeout(() => {
+          $(promptBox).html("<strong>Sucessfully Unlocked</strong>")
+        }, 1400);
+
+      }
+      //Shows locking progress
+      function showLockingProgress() {
+        setTimeout(() => {
+          for (i = 100; i > 85; i--) {
+            $(progress).css('width', i + "%");
+          }
+
+        }, 300);
+
+        setTimeout(() => {
+          for (i = 85; i > 65; i--) {
+            $(progress).css('width', i + "%");
+          }
+
+        }, 500);
+
+        setTimeout(() => {
+          for (i = 65; i > 35; i--) {
+            $(progress).css('width', i + "%");
+          }
+        }, 800);
+
+        setTimeout(() => {
+          for (i = 35; i > 0; i--) {
+            $(progress).css('width', i + "%");
+          }
+        }, 1000);
+
+        setTimeout(() => {
+          for (i = 35; i > -1; i--) {
+            $(progress).css('width', i + "%");
+          }
+        }, 1200);
+
+        setTimeout(() => {
+
+          $(promptBox).html("<strong>locked</strong>")
+        }, 1400);
+
+      }
 
       function unlock() {
         $(promptBox).html("<strong>Unlocking...</strong>")
-
 
         //to prevent user from clicking twice or more and create weird display
         //We will check if the user has already clicked 
         clicked = true;
 
         // the function will show the unlocking progress
-        function showUnlockProgress() {
-          setTimeout(() => {
-            for (i = 0; i < 10; i++) {
-              $(progress).css('width', i + "%");
-            }
-
-          }, 300);
-
-          setTimeout(() => {
-            for (i = 0; i < 35; i++) {
-              $(progress).css('width', i + "%");
-            }
-
-          }, 500);
-
-          setTimeout(() => {
-            for (i = 50; i < 65; i++) {
-              $(progress).css('width', i + "%");
-            }
-          }, 800);
-
-          setTimeout(() => {
-            for (i = 65; i < 85; i++) {
-              $(progress).css('width', i + "%");
-            }
-          }, 1000);
-
-          setTimeout(() => {
-            for (i = 85; i < 110; i++) {
-              $(progress).css('width', i + "%");
-            }
-          }, 1200);
-
-          setTimeout(() => {
-            $(promptBox).html("<strong>Sucessfully Unlocked</strong>")
-          }, 1400);
-
-        } showUnlockProgress();
+        showUnlockProgress();
 
         setTimeout(() => {
           unlocked = true; clicked = false;
 
         }, 1400);
 
-
-
-
         //the dragbox fades out while the progress bar advances
         $("#dragBoxDiv").fadeOut(300);
 
         $("#unlockBtn").attr("src", "img/lockBtn.png");
+      }
+
+      function lock() {
+
+        $(promptBox).html("<strong>locking...</strong>")
+        clicked = true;
+
+        showLockingProgress();
+
+        setTimeout(() => {
+          unlocked = false;
+          clicked = false;
+        }, 1400);
+
+        //the dragbox fades out while the progress bar advances
+        $("#dragBoxDiv").fadeOut(300);
+
+        $("#unlockBtn").attr("src", "img/unlockBtn.png");
+
       }
 
       // When you click on the "picture view" button, it will show the upload photo page in an <iframe>
@@ -295,93 +320,32 @@
 
 
 
-      function lock() {
-
-        $(promptBox).html("<strong>locking...</strong>")
-        clicked = true;
-
-        function showProgress() {
-          setTimeout(() => {
-            for (i = 100; i > 85; i--) {
-              $(progress).css('width', i + "%");
-            }
-
-          }, 300);
-
-          setTimeout(() => {
-            for (i = 85; i > 65; i--) {
-              $(progress).css('width', i + "%");
-            }
-
-          }, 500);
-
-          setTimeout(() => {
-            for (i = 65; i > 35; i--) {
-              $(progress).css('width', i + "%");
-            }
-          }, 800);
-
-          setTimeout(() => {
-            for (i = 35; i > 0; i--) {
-              $(progress).css('width', i + "%");
-            }
-          }, 1000);
-
-          setTimeout(() => {
-            for (i = 35; i > -1; i--) {
-              $(progress).css('width', i + "%");
-            }
-          }, 1200);
-
-          setTimeout(() => {
-
-            $(promptBox).html("<strong>locked</strong>")
-          }, 1400);
-
-        }
-        showProgress();
-
-        setTimeout(() => {
-          unlocked = false;
-          clicked = false;
-        }, 1400);
 
 
 
 
-        //the dragbox fades out while the progress bar advances
-        $("#dragBoxDiv").fadeOut(300);
-
-        $("#unlockBtn").attr("src", "img/unlockBtn.png");
-
-      }
 
       //If locked, unlock. If unlocked, lock.
       //to prevent user from clicking twice or more and create weird display
-      $("#unlockBtn").click(function () {
-        if (clicked == false && unlocked == false) {
+      function define_unlockBtn_clicked() {
+        $("#unlockBtn").click(function () {
+          if (clicked == false && unlocked == false) {
 
-          unlock();
-        }
+            unlock();
+          }
 
-        else if (clicked == false && unlocked == true) {
+          else if (clicked == false && unlocked == true) {
 
-          lock();
-        }
-        else return;
-      });
+            lock();
+          }
+          else return;
+        });
+      }
 
+      define_unlockBtn_clicked();
 
-
-    } lockerEvent();
-
-
-
-
-
-
-
-
+    }
+    lockerEvent();
 
   </script>
 </body>

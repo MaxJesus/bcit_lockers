@@ -15,3 +15,4 @@
     firebase.initializeApp(firebaseConfig);
 //  Do not know how it works yet.
 //  firebase.analytics();
+var db = firebase.firestore();

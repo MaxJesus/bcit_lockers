@@ -69,12 +69,12 @@
           name="NW6">NW6</button><span>NW6:</span> <span id="NW6data"> </span> <span>available lockers left</span></div>
 
     </div>
-      
-      <div id="NE-buildings" class="2">
+
+    <div id="NE-buildings" class="2">
 
       <div id="NE1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NE1Btn"
           name="NE1">NE1</button><span>NE1:</span> <span id="NE1data"> </span> <span>available lockers left</span></div>
-          
+
       <div id="NE2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NE2Btn"
           name="NE2">NE2</button><span>NE2</span> <span id="NE2data"> </span> <span>available lockers left</span></div>
 
@@ -85,12 +85,12 @@
           name="NE4">NE4</button><span>NE4:</span> <span id="NE4data"> </span> <span>available lockers left</span></div>
 
     </div>
-      
-      <div id="SE-buildings" class="2">
+
+    <div id="SE-buildings" class="2">
 
       <div id="SE1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SE1Btn"
           name="SE1">SE1</button><span>SE1:</span> <span id="SE1data"> </span> <span>available lockers left</span></div>
-          
+
       <div id="SE2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SE2Btn"
           name="SE2">SE2</button><span>SE2</span> <span id="SE2data"> </span> <span>available lockers left</span></div>
 
@@ -251,7 +251,7 @@
       $("#sectionChoice").hide();
       step = 2;
       stepControl();
-      showVacancy(`${this.id}`);
+      showBuildingVacancy(`${this.id}`);
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
     });
@@ -285,15 +285,6 @@
     });
 
 
-
-
-
-
-
-
-
-
-
     //while in step 2, the user chooses a building
     //during this step, buttons representing different buildings are shown to the user
     var buildingButton = $(".btnbuilding");
@@ -310,7 +301,7 @@
     //At the level of building choice, it does the following:
     //When being clicked, it starts the chain reaction:
     $(buildingButton).click(function (e) {
-      var collectionSection = sections[i].getAttribute("id");
+      // var collectionSection = sections[i].getAttribute("id");
       //#1-1 the variable "buildingNum" gets the attribute of "name"
       var buildingNum = $(e.target).attr("name");
 
@@ -327,49 +318,39 @@
       $("#locationIndicator").html("You are currently in Building" + buildingNum);
       console.log(backQuery_section);
       stepControl();
-
     });
+  </script>
 
-    var firebaseConfig = {
-      apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
-      authDomain: "bcit-lockers.firebaseapp.com",
-      databaseURL: "https://bcit-lockers.firebaseio.com",
-      projectId: "bcit-lockers",
-      storageBucket: "bcit-lockers.appspot.com",
-      messagingSenderId: "380958555512",
-      appId: "1:380958555512:web:3a1928344614d15da51c8d",
-      measurementId: "G-R8V8WMCJRB"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    var db = firebase.firestore();
-   
+  <script src="./scripts/firebase_config.js"></script>
+
+  <script>
+
+    function showSectionVacancy() {
+
+
+      db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').onSnapshot(function (snap) {
+        $("#counterNE").html(snap.data().NE);
+        $("#counterNW").html(snap.data().NW);
+        $("#counterSW").html(snap.data().SW);
+        $("#counterSE").html(snap.data().SE);
+      });
+
+
+    }
     //This function shows the number of locker vacancy information
-    function showVacancy(sections) {
+    //It is invoked by clicking on the section divs.
+    function showBuildingVacancy(sections) {
 
-
-      var buildingSW = $('[id^="SW"]');
-
-      //var collectionSection = sections[i].getAttribute("id");
-
-      /*if (buildingButton[j].getAttribute('id').startsWith(sections[i].getAttribute('id'))) {
-
-        var docBuilding = buildingButton[j].getAttribute('name');
-        //               alert(sections[i].getAttribute("id"));
-        //               alert('#'+ docBuilding + 'data');
-        console.log($('#' + docBuilding + 'data'));
-      }*/
+       /*
+        if the building thingy belongs to a section, just trasverse the session,
+      for each of the button span in the section, it get access the database once.
+      */
       db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection(sections).onSnapshot(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           console.log("Document data:", doc.data().vacant_lockers);
           console.log(doc.id);
-          $("#"+doc.id+"data").html(doc.data().vacant_lockers);
-          //$('#' + docBuilding + 'data').html(doc.data().vacant_lockers);
-          /*let lockerVacancy = doc.data().vacant_lockers;
-          console.log($('#' + docBuilding + 'data'));
-          // console.log("docbuiding here" + docBuilding);
-          // console.log(snap.data().vacant_lockers);
-          $('#' + docBuilding + 'data').html(lockerVacancy);*/
+          $("#" + doc.id + "data").html(doc.data().vacant_lockers);
+
         });
       });
 
@@ -385,58 +366,20 @@
 
       //      for(var i in sections){
 
-      /*
-        if the building thingy belongs to a section, just trasverse the session,
-       put the thingy in the doc under collection([section]), so we need to judge if they start with the same ID. 
-       If they start with the same ID, then it should be taken out, and trasversed from [0] to [length], 
-       also, it should be put into the n-th id of the Div.
-      */
+     
 
 
 
 
 
-      //I wanna merge these code because they repeat:
-      //        //original
-      //      db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection('NW').doc('NW1').onSnapshot(function (snap) {
-      //        $("#NW1").html(snap.data().vacant_lockers);
-      //      })
-
-
-      //Failed promise()
-
-      //              if( buildingButton[j].getAttribute('id').startsWith(sections[i].getAttribute('id'))){
-      //
-      //
-      //                var docBuilding = buildingButton[j].getAttribute('name');
-      //
-      //
-      //                  promise.then(function(){ db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(collectionSection).doc(docBuilding).onSnapshot(function (snap) {
-      //                  $('#'+ docBuilding + 'data').append(snap.data().vacant_lockers);
-      //                })
-      //             });
-      //              }
-
-
-
-
-
-
-
-      /*db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').onSnapshot(function (snap) {
-        $("#counterNE").html(snap.data().NE);
-        $("#counterNW").html(snap.data().NW);
-        $("#counterSW").html(snap.data().SW);
-        $("#counterSE").html(snap.data().SE);
-      });*/
+    
     }
-
-
-    //shows the vacancies through accessing firebase
-    //showVacancy();
 
     //When first executed, the step is 1.
     stepControl();
+
+    //Section vacancy is shown, upon loading the page.
+    showSectionVacancy();
 
 
 

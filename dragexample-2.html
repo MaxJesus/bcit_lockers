@@ -181,40 +181,52 @@
         $item.fadeOut(function () {
           //#2-1, the itemID variable stores the widget's ID
           alert("you put " + this.id + " into the locker");
-          checkItemStatus();
-          let itemID = this.id;
-          let itemName = this.name;
+
+
+
           //        var itemName = $(itemID).name;
           //        alert("you put " + itemName +" into the locker");
 
           /*
-          #2-2, the action will connect to the firebase, it writes the "id" to the 
+          #2-2, the action will connect to the firebase, it writes the "id" to the
           document, which could be accessed later and show the user
           */
-        
-          var ID="id" +nth;
-
-          var obj={
-            ID : null,
+          let itemID = this.id;
+          var ID = "id" + nth;
+          var obj = {
+            //            ID : null,
           }
+
           //JS assumes it to be a number
-          obj[ID]=itemID;
+          obj[ID] = itemID;
           console.log(obj[ID]);
-          firebase.auth().onAuthStateChanged(function (user) {
-            console.log(user);
+
+
+
+
+
+
+          firebase.auth().onAuthStateChanged(function (user) { 
+            
+
+          
+
+
+
+
             //#2-2-1, the action would access user-(the user's uid)-items-locker
             db.collection("user").doc(user.uid).collection("items").doc("locker").set(obj
               // {
               //   //#2-2-2, the id is recorded, when the item is dragged to the locker item list
               //    : itemID,
-                
-              // }
-              ,{merge:true}
-                //#2-2-3, the name is recorded, when the item is dragged to the locker item list
-                //        "name":itemName,
-              );
 
-              nth++ ;
+              // }
+              , { merge: true }
+              //#2-2-3, the name is recorded, when the item is dragged to the locker item list
+              //        "name":itemName,
+            );
+
+            nth++;
           });
 
 
@@ -235,16 +247,20 @@
               .animate({ height: "36px" });
           });
         });
+        checkItemStatus();
       }
 
       // Image recycle function
       var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Put this into inventory' class='ui-icon ui-icon-trash'>Put this into inventory</a>";
       //When stuff being dragged from the right to the left, all the stuff happens here:
       function recycleImage($item) {
+
         //#1-1, the widgets in the left will fadeOut from "the locker card".
         $item.fadeOut(function () {
           //#2-1, the itemID variable stores the widget's ID
           let itemID = this.id;
+          console.log(itemID);
+
           alert("the moved out item is " + itemID);
           checkItemStatus();
           $item
@@ -257,10 +273,68 @@
             .find("img")
             .css("height", "72px")
             .end()
-            //"$gallery" is the "left card" 
+            //"$gallery" is the "left card"
             .appendTo($gallery)
             .fadeIn();
+
+
+
+          var ID = "id" + nth;
+
+          // var obj = {
+          //   nth: ID,
+          // }
+          // obj[nth] = null;
+
+          var data;
+          var getIDlist = [];
+          firebase.auth().onAuthStateChanged(function (user) {
+            
+          let getIDbeforeDeleting =  db.collection("user").doc(user.uid).collection("items").doc("locker").onSnapshot(function (querySnapshot) {
+              //don't make the 
+               data = querySnapshot.data();
+              for(key in data){
+
+                if(data[key]==itemID){
+                  ID=key;
+                  console.log("id of this one is " + ID);
+                }
+
+              }
+
+            })
+            //            console.log(itemID);
+            //            //#2-2-1, the action would access user-(the user's uid)-items-locker
+            //            db.collection("user").doc(user.uid).collection("items").doc("hand").set(obj
+            //              // {
+            //              //   //#2-2-2, the id is recorded, when the item is dragged to the locker item list
+            //              //    : itemID,
+            //
+            //              // }
+            //              ,{merge:true}
+            //                //#2-2-3, the name is recorded, when the item is dragged to the locker item list
+            //                //        "name":itemName,
+            //              );
+
+
+            console.log("itemID" + itemID);
+            console.log("id of this one is " + ID);
+            let handRef = db.collection("user").doc(user.uid).collection("items").doc("locker");
+           
+           
+            let removeByID = handRef.update({
+              [ID]: firebase.firestore.FieldValue.delete()
+            });
+
+            // nth++;
+            // if(nth >= getIDlist.length)
+            //   nth = getIDlist.length-1;
+          });
+          
         });
+
+
+
       }
 
       // Image preview function, demonstrating the ui.dialog used as a modal window
@@ -302,39 +376,26 @@
       });
 
       function checkItemStatus() {
-      firebase.auth().onAuthStateChanged(function(user){
-        db.collection("user").doc(user.uid).collection("items").doc("locker").onSnapshot(function(querySnapshot){
-        // var docRef = db.collection("user").doc(user.uid).collection("items");
-        // //I dont quite understand what "doc" means.
-        // docRef.get().then(function (doc) {
-        //   if (doc.exists) {
-        //     alert("Stuff inside the locker:", doc.data().stuff);
-        var data = querySnapshot.data();
-        for(key in data)
-        {
-          console.log(key);
-            ($trash).append(document.getElementById(data[key]));
-        };  
-             
-              
-            
-            
-        //   } else {
-        //     // doc.data() will be undefined in this case
-            
-        //     alert("No such document!");
-        //   }
-        // }).catch(function (error) {
-        //   console.log("Error getting document:", error);
-        // });
+        firebase.auth().onAuthStateChanged(function (user) {
+          db.collection("user").doc(user.uid).collection("items").doc("locker").onSnapshot(function (querySnapshot) {
+            // var docRef = db.collection("user").doc(user.uid).collection("items");
+
+            // docRef.get().then(function (doc) {
+            //   if (doc.exists) {
+            //     alert("Stuff inside the locker:", doc.data().stuff);
+
+            var data = querySnapshot.data();
+            for (key in data) {
+              console.log(key);
+              ($trash).append(document.getElementById(data[key]));
+            };
 
 
-        // alert(snap.data().id);
-      });
-    });
-    }
+          });
+        });
+      }
 
-    checkItemStatus();   
+      checkItemStatus();
 
     });
   </script>
@@ -381,11 +442,11 @@
   <script>$("*.widget").draggable();</script>
 
   <script>
-    //The goal of this function is to read if the stuff is in the locker, and the 
+    //The goal of this function is to read if the stuff is in the locker, and the
     //result will be shown in the cards.
-    
+
     $(document).ready(function () {
-         
+
     }
     );
 

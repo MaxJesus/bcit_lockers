@@ -161,7 +161,11 @@
       </form>
 
     </div>
-
+    <div id="cfmPage">
+    <iframe src="ConfirmationPage.html" height="200" width="300">
+      <p>Your browser does not support iframes.</p>
+    </iframe>
+  </div>
     <!-- the id of the <div> is not necessarily used -->
     <div id="goBackBtnDiv">
       <button id="goBackBtn">goBack</button>
@@ -213,6 +217,7 @@
           if not so, when going back to step 2, it becomes a rat.*/
           backQuery_section = null;
           $("#locationIndicator").html("");
+          $("#cfmPage").hide();
           break;
 
 
@@ -227,6 +232,7 @@
           $("#choosingScope").html("Building");
           $(".3stuff").hide();
           $(".4stuff").hide();
+          $("#cfmPage").hide();
           $("#locationIndicator").html("You are currently in Section " + backQuery_section);
           backQuery_building = null;
           break;
@@ -239,7 +245,7 @@
           $(".2").hide();
           $(".3stuff").show();
           $(".4stuff").hide();
-
+          $("#cfmPage").hide();
           $("#choosingScope").html("Floor");
           break;
 
@@ -248,6 +254,15 @@
           $(".3stuff").hide();
           $("#locker-choice").show();
           $("#choosingScope").html("number");
+          $("#cfmPage").hide();
+          break;
+
+        case 5:
+        $(".3stuff").hide();
+        $(".4stuff").hide();
+          $("#locker-choice").show();
+          $("#choosingScope").html("number");
+          $("#cfmPage").show();
           break;
       }
     }
@@ -360,6 +375,28 @@
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
       $("#locationIndicator").html("You are currently in floor" + floorNum);
+      console.log("This is in building "+ backQuery_building);
+      stepControl();
+    });
+
+    //Step 5
+    var lockerButton = $(".4");
+      $(lockerButton).click(function (e) {
+      // var collectionSection = sections[i].getAttribute("id");
+      //#1-1 the variable "buildingNum" gets the attribute of "name"
+      var lockerNum = $(e.target).attr("id");
+
+      //#1-2 the variable "backQuery_building" holds which building it is in.
+      
+      console.log("Current floor is ", lockerNum);
+
+      //#1-3 "step=3" means the locker-picking function goes to the level of building.
+      step = 5;
+
+
+      $("#locationIndicator").css("color", "red");
+      $("#locationIndicator").css("font-size", "5vw");
+      $("#locationIndicator").html("You currently choosed" + lockerNum);
       console.log("This is in building "+ backQuery_building);
       stepControl();
     });

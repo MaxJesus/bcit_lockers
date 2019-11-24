@@ -16,6 +16,8 @@
   <link type="text/css" rel="stylesheet" href="style/lockermap.css">
 
 
+
+
 </head>
 
 <body>
@@ -26,7 +28,7 @@
         <span class="sr-only">Loading...</span>
       </div>
 
-      <img src=img/logo.png id="logo" alt="logo" />
+      <img src=img/_Logo.png id="logo" alt="logo" />
 
       <img src="img/profile.png" id="profile" alt="profilePic" />
 
@@ -42,13 +44,15 @@
 
   <!--A div that allows the user to choose a section to view avaiable lockers-->
   <div id="sectionChoice" class="1stuff">
-    <div id="NW" name='NW' class="1"><span>NW:</span> <span id="counterNW"> </span> <span>available lockers left</span>
+    <div id="NW" name='NW' class="1">
+        <span id='NWsectionTitle'>NW:</span> <span id="counterNW"> </span> <p>available lockers left</p>
     </div>
-    <div id="NE" name='NE' class="1"><span>NE:</span> <span id="counterNE"> </span> <span>available lockers left</span>
+    <div id="NE" name='NE' class="1">
+      <span id='sectionTitle'>NE:</span> <span id="counterNE"> </span> <span>available lockers left</span>
     </div>
-    <div id="SW" name='SW' class="1"><span>SW:</span> <span id="counterSW"> </span> <span>available lockers left</span>
+    <div id="SW" name='SW' class="1"><span id='sectionTitle'>SW:</span> <span id="counterSW"> </span> <span>available lockers left</span>
     </div>
-    <div id="SE" name='SW' class="1"><span>SE:</span> <span id="counterSE"> </span> <span>available lockers left</span>
+    <div id="SE" name='SW' class="1"><span id='sectionTitle'>SE:</span> <span id="counterSE"> </span> <span>available lockers left</span>
     </div>
   </div>
 
@@ -231,7 +235,7 @@
           backQuery_building = null;
           break;
 
-        
+
         case 3:
 
           $(backQuery_building).show();
@@ -244,7 +248,7 @@
           break;
 
         case 4:
-       
+
           $(".3stuff").hide();
           $("#locker-choice").show();
           $("#choosingScope").html("number");
@@ -285,7 +289,7 @@
     //    The Following is a sample block of code, which was replaced by the above funciton
 
     /*
-      
+
     $("#NW").click(function(){
       $("#NW-buildings").show();
       $("#sectionChoice").hide();
@@ -317,7 +321,7 @@
       2.enters the next step
       3.returns the buildingNum, and the return is to be used to access the database
       to get data.
-      
+
     */
 
     //At the level of building choice, it does the following:
@@ -341,7 +345,7 @@
       console.log(backQuery_section);
       stepControl();
     });
-    
+
 //Step 4
     var floorButton = $(".3");
       $(floorButton).click(function (e) {
@@ -350,7 +354,7 @@
       var floorNum = $(e.target).attr("id");
 
       //#1-2 the variable "backQuery_building" holds which building it is in.
-      
+
       console.log("Current floor is ", floorNum);
 
       //#1-3 "step=3" means the locker-picking function goes to the level of building.
@@ -411,13 +415,13 @@
 
       //      for(var i in sections){
 
-     
 
 
 
 
 
-    
+
+
     }
 
     //When first executed, the step is 1.

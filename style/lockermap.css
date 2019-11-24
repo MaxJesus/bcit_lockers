@@ -1,41 +1,58 @@
+body {
+  background-color: aqua;
+}
+
 #sectionChoice{
   margin-top: 5vh;
   display: grid;
   width: 100vw;
-  height: 40vh;
+  height: 60vh;
   grid-template-areas:
             "NE NE SE SE"
-            "NE NE SE SE"
             "NW NW SW SW";
+
   color: aliceblue;
-  font-size: 12pt;
-           
+  font-size: 10pt;
+  text-align: center;
+  overflow: hidden
 }
 
 #NW{
   grid-area: NW;
   background: blue;
-  
+  border: 2px solid black;
+  margin: 1vw;
+  border-radius: 5vw;
 }
 
 #NE{
   grid-area: NE;
   background: green;
+  border: 2px solid black;
+  margin: 1vw;
+  border-radius: 5vw;
 }
 
 #SW{
   grid-area: SW;
   background: orange;
+  border: 2px solid black;
+  margin: 1vw;
+  border-radius: 5vw;
 }
 
 #SE{
   grid-area: SE;
   background: red;
+  border: 2px solid black;
+  margin: 1vw;
+  border-radius: 5vw;
 }
 
 #buildings{
   color: aliceblue;
   font-size: 12pt;
+
 }
 
 #SW-buildings{
@@ -49,10 +66,18 @@
 #SE-buildings{
   display: inline-flex;
 }
-
-#NW-buildings{
-  display: inline-flex;
+#NWsectionTitle  {
+  font-size: 20pt;
+  line-height: 20px;
+  top: 12vh;
+  left: 3vw;
 }
+#sectionTitle  {
+  font-size: 20pt;
+  line-height: 20px;
+  top: 12vh;
+}
+
 
 #floor-choice{
   display: inline-flex;

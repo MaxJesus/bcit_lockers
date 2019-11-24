@@ -13,7 +13,7 @@
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
-      
+
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
@@ -21,57 +21,60 @@
     <!--Authentication Sign in with a pre-built UI-->
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-      
+
 <style>
-  
-  
+
+
   #intro{position: sticky;
     top: 0vh;
     display: inline-block;
     height: 5vh;
-  margin-bottom: 1vh;
+    margin-bottom: 1vh;
   }
-  
-  #Welcome{font-size: 3vh;
+
+  #Welcome{font-size: 5vh;
   color: ghostwhite;
-  font: bold;}
-  
+  font: bold;
+  background-color: #FFC300;
+  border: 5px black solid;
+  border-radius: 10%;
+  }
+
   #notice{font-size: 1vh;
     position: relative;
     top: 5vh;
     z-index: 14;
     }
-  
+
   body{
-    background-image: url(img/background.jpg);
+    background-color:darkblue;
     background-size: 100vw 100vh;
-    background-repeat: no-repeat;
-    border: 5px solid black;
+    background-repeat: repeat;
     text-align: center;height: 100vh;
-    box-shadow: 10px 10px 5px #888888;
   }
 
-  
   #loginDiv{
     transform: scale(1.6,1.6);
     width: 70vw;
     position: relative;
+    text-align: center;
     height: 25vh;
-    left: 13%;
-    top: 10vh;
+    left: 15%;
+    top: 20vh;
     margin-top: 1vh;}
-  
+
    #continue{
     position: relative;
     top: 0vh;
      z-index: 10;
-    background: green;
+    background: #FFC300;
      color: white;
      height:4vh;
      font: bold;
     top: 1vh;}
-  
-  
+
+
+
 </style>
          <script>
   // Your web app's Firebase configuration
@@ -90,37 +93,37 @@
   firebase.analytics();
 </script>
 </head>
-  
-  
-<body>
-  <div id="landing">
-  <div id="intro">
-  <h1 id="Welcome">Welcome to BCIT LOCKERS</h1>
- 
-  </div>
-  
 
-  
+
+<body>
+
   <div id="headerContainer">
     <div id="header">
       </div>
 
-      <img src=img/logo.png id="logo" alt="logo" />
+      <img src=img/_Logo.png id="logo" alt="logo" />
 
     </div>
 
+  <div id="landing">
+  <div id="intro">
+  <h1 id="Welcome">Welcome to BCIT LOCKERS</h1>
+
+  </div>
 
 
-  
+
+
+
  <div id="loginDiv">
- <div id="firebaseui-auth-container"><p id="notice"><strong>Please login with your my.bcit.ca email</strong></p></div>
+ <div id="firebaseui-auth-container"></div>
     <div id="loader">Loading...</div>
-   
+
     <button id="continue">Continue without login</button>
-     
+
  </div>
     </div>
-  
+
     <script>
         // Initialize the FirebaseUI Widget using Firebase.
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -159,9 +162,9 @@
         // The start method will wait until the DOM is loaded.
         ui.start('#firebaseui-auth-container', uiConfig);
     </script>
-  
-    
-  
+
+
+
 <script>
 function createUser() {
 var db = firebase.firestore();
@@ -171,7 +174,7 @@ var db = firebase.firestore();
     firebase.auth().onAuthStateChanged(function(user){
         console.log(user);
         db.collection("user").doc(user.uid).set(
-    	{
+      {
         "name":user.displayName,
          "email":user.email,
         },{ merge: true });

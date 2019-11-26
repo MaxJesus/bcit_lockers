@@ -206,7 +206,7 @@
 
 
 
-          firebase.auth().onAuthStateChanged(function (user) { 
+          firebase.auth().onAuthStateChanged(function (user) {
             
 
           
@@ -262,7 +262,7 @@
           console.log(itemID);
 
           alert("the moved out item is " + itemID);
-          checkItemStatus();
+         
           $item
             .find("a.ui-icon-refresh")
             .remove()
@@ -277,7 +277,7 @@
             .appendTo($gallery)
             .fadeIn();
 
-
+ 
 
           var ID = "id" + nth;
 
@@ -290,19 +290,22 @@
           var getIDlist = [];
           firebase.auth().onAuthStateChanged(function (user) {
             
-          let getIDbeforeDeleting =  db.collection("user").doc(user.uid).collection("items").doc("locker").onSnapshot(function (querySnapshot) {
-              //don't make the 
+          let getIDbeforeDeleting =  db.collection("user").doc(user.uid).collection("items").doc("locker");
+          getIDbeforeDeleting.get().then(function(querySnapshot) {
+              //don't make the
+            
                data = querySnapshot.data();
               for(key in data){
-
+                
                 if(data[key]==itemID){
                   ID=key;
                   console.log("id of this one is " + ID);
+                 
                 }
 
               }
 
-            })
+           
             //            console.log(itemID);
             //            //#2-2-1, the action would access user-(the user's uid)-items-locker
             //            db.collection("user").doc(user.uid).collection("items").doc("hand").set(obj
@@ -330,11 +333,12 @@
             // if(nth >= getIDlist.length)
             //   nth = getIDlist.length-1;
           });
-          
+         
         });
 
 
-
+ });
+        checkItemStatus();
       }
 
       // Image preview function, demonstrating the ui.dialog used as a modal window
@@ -446,7 +450,9 @@
     //result will be shown in the cards.
 
     $(document).ready(function () {
-
+      //this actually works, why?
+      
+      checkItemStatus();
     }
     );
 

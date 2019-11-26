@@ -253,7 +253,7 @@
         $(promptBox).html("<strong>Unlocking...</strong>")
 
         //to prevent user from clicking twice or more and create weird display
-        //We will check if the user has already clicked 
+        //We will check if the user has already clicked
         clicked = true;
 
         // the function will show the unlocking progress
@@ -288,10 +288,17 @@
         $("#unlockBtn").attr("src", "img/unlockBtn.png");
 
       }
-
+      
+      var draggableView = $("<button>draggable view</button>");
+     var uploadPic = $("<div> </div>")
       // When you click on the "picture view" button, it will show the upload photo page in an <iframe>
       $("#picView").click(function () {
-        var upload = $("<iframe></iframe>");
+        
+        $("body").append(uploadPic);
+        
+         var upload = $("<iframe></iframe>");
+        $(uploadPic).append(upload);
+        $(uploadPic).append(draggableView);
         $(upload).attr("src", "iframePhotoUpload.html");
         $(upload).css("position", "absolute");
         $(upload).css("left", "0px");
@@ -300,11 +307,24 @@
         $(upload).css("width", "100vw");
         $(upload).attr("frameborder", "0");
         $(upload).attr("seamless");
-        $(progressBar).append(upload);
+        
+        
+        
+     
+        $(draggableView).css("position","relative");
+        $(draggableView).css("z-index","100");
+        $(draggableView).css("top","40vh")
+        
+        $(uploadPic).show();
         $(dragBoxDiv).hide();
 
 
       })
+      
+      $(draggableView).click(function(){
+                          $(dragBoxDiv).show();
+                          $(uploadPic).hide();
+                           })
 
       var drag = $("<iframe></iframe> ");
       $(drag).attr("src", "dragexample-2.html");

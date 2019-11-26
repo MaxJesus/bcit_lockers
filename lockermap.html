@@ -270,6 +270,9 @@
           $("#locker-choice").show();
           $("#choosingScope").html("number");
           $("#cfmPage").show();
+          $("#goBackBtn").css("position","relative");
+          $("#goBackBtn").css("left","49vw");
+          $("#goBackBtn").css("top","20vh");
           break;
       }
     }
@@ -325,6 +328,7 @@
       console.log(step);
       step--;
       stepControl();
+      console.log("at step " + step)
 
     });
 

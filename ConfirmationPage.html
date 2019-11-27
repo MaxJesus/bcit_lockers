@@ -13,6 +13,12 @@
         margin-right: - 50%;
         transform: translate(-50%, -50%) 
     }
+    .head{
+      position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+    
     </style>
 </head>
 <body>
@@ -28,11 +34,23 @@
               <p>Do you want to reserve this locker?</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Confirm</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Go back</button>
+              <button type="button" class="btn btn-primary" id="cfm">Confirm</button>
+             
             </div>
           </div>
         </div>
       </div>
+
+      <h1 class="head" style="display: none">Success!</h1>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  
+$("#cfm").click(function(event){
+$(".modal").hide();
+$(".head").show();
+});
+
+
+</script>
 </html>

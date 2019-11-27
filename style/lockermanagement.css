@@ -42,7 +42,9 @@
     }
 
     #logo {
-      position: relative;
+      
+      position: fixed;
+      left:42vw;
       width: calc(10vh - 2vh);
       top: 1vh;
       padding: 0vh;

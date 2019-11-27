@@ -180,7 +180,8 @@
         //#1-1, the widgets in the left will fadeOut from the "in-hand card".
         $item.fadeOut(function () {
           //#2-1, the itemID variable stores the widget's ID
-          alert("you put " + this.id + " into the locker");
+          
+//          alert("you put " + this.id + " into the locker");
 
 
 
@@ -261,8 +262,8 @@
           let itemID = this.id;
           console.log(itemID);
 
-          alert("the moved out item is " + itemID);
-         
+//          alert("the moved out item is " + itemID);
+          
           $item
             .find("a.ui-icon-refresh")
             .remove()
@@ -367,7 +368,7 @@
       $("ul.gallery > li").on("click", function (event) {
         var $item = $(this),
           $target = $(event.target);
-        alert("you clicked" + this.id);
+//        alert("you clicked" + this.id);
         if ($target.is("a.ui-icon-trash")) {
           deleteImage($item);
         } else if ($target.is("a.ui-icon-zoomin")) {

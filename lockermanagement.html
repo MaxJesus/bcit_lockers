@@ -40,7 +40,7 @@
     firebase.auth().onAuthStateChanged(function (user) {
       db.collection('user').doc(user.uid).onSnapshot(function (snap) {
         console.log("Current uid is ", user.uid);
-        $("#welcome").html("Welcome back " + snap.data().name);
+        $("#welcome").html("Welcome back " + "<br/>" + snap.data().name);
         $("#welcome").css("font-size", "2vh");
         $("#welcome").css("float", "left");
         $("#welcome").css("color", "white")
@@ -59,9 +59,20 @@
       </div>
       <div id="welcome"></div>
 
-      <img src=img/logo.png id="logo" alt="logo" />
+      <img src=img/_Logo.png id="logo" alt="logo" />
+      <div class="dropdown open">
+  <input type=image src="img/profile.png" class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="profile" alt="profilePic">
+    
+<!--  </button>-->
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#!">Separated link</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#!">Action</a>
+    <a class="dropdown-item" href="#!">logout</a>
+  </div>
+</div>
 
-      <img src="img/profile.png" id="profile" alt="profilePic" />
+<!--      <img src="img/profile.png"  />-->
 
     </div>
 

@@ -15,7 +15,10 @@
   <!--This file works as the overall stylesheet for lockermap-->
   <link type="text/css" rel="stylesheet" href="style/lockermap.css">
 
-
+  <style>
+    .card{color: black}
+  
+  </style>
 
 
 </head>
@@ -169,9 +172,16 @@
     </div>
 <!--      confirm/go back button is not working-->
     <div id="cfmPage">
-    <iframe src="ConfirmationPage.html" height="200" width="300">
-      <p>Your browser does not support iframes.</p>
-    </iframe>
+   <div class="card">
+  <img class="card-img-top" src="./img/lockermanagement_background.jpg" alt="Card image cap">
+  <div class="card-body">
+    <h4 class="card-title" style="color: brown">Confirmation</h4>
+    <p class="card-text" id="showConfirmationLockerPosition">
+      you are currently at
+    </p>
+    <a href="#!" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
   </div>
     <!-- the id of the <div> is not necessarily used -->
     <div id="goBackBtnDiv">
@@ -348,10 +358,12 @@
 
     //At the level of building choice, it does the following:
     //When being clicked, it starts the chain reaction:
+    var building_Num;
     $(buildingButton).click(function (e) {
       // var collectionSection = sections[i].getAttribute("id");
       //#1-1 the variable "buildingNum" gets the attribute of "name"
-      var buildingNum = $(e.target).attr("name");
+      let buildingNum = $(e.target).attr("name");
+      building_Num=buildingNum;
 
       //#1-2 the variable "backQuery_building" holds which building it is in.
       backQuery_building = buildingNum;
@@ -369,11 +381,13 @@
     });
 
 //Step 4
+    var floor_Num;
     var floorButton = $(".3");
       $(floorButton).click(function (e) {
       // var collectionSection = sections[i].getAttribute("id");
       //#1-1 the variable "buildingNum" gets the attribute of "name"
-      var floorNum = $(e.target).attr("id");
+      let floorNum = $(e.target).attr("id");
+        floor_Num=floorNum;
 
       //#1-2 the variable "backQuery_building" holds which building it is in.
 
@@ -408,6 +422,7 @@
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
       $("#locationIndicator").html("You currently choosed" + lockerNum);
+      $("#showConfirmationLockerPosition").html("You currently choosed" + lockerNum + " on " + floor_Num + "loor, of building" +building_Num);
       console.log("This is in building "+ backQuery_building);
       stepControl();
     });

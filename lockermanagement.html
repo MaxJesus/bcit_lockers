@@ -38,6 +38,13 @@
     //When loged in, shows the welcome.
 
     firebase.auth().onAuthStateChanged(function (user) {
+      alert("functioning");
+
+      if (user == null)
+        {
+          
+          window.location.href = './login.html';
+        }
       db.collection('user').doc(user.uid).onSnapshot(function (snap) {
         console.log("Current uid is ", user.uid);
         $("#welcome").html("Welcome back " + "<br/>" + snap.data().name);
@@ -61,18 +68,19 @@
 
       <img src=img/_Logo.png id="logo" alt="logo" />
       <div class="dropdown open">
-  <input type=image src="img/profile.png" class="btn btn-secondary dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="profile" alt="profilePic">
-    
-<!--  </button>-->
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#!">Separated link</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#!">Action</a>
-    <a class="dropdown-item" href="#!">logout</a>
-  </div>
-</div>
+        <input type=image src="img/profile.png" class="btn btn-secondary dropdown-toggle" type="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="profile" alt="profilePic">
 
-<!--      <img src="img/profile.png"  />-->
+        <!--  </button>-->
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#!">Separated link</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#!">Action</a>
+          <a class="dropdown-item" id="logout">logout</a>
+        </div>
+      </div>
+
+      <!--      <img src="img/profile.png"  />-->
 
     </div>
 
@@ -90,10 +98,10 @@
       <div class="card text-white bg-primary mb-3 d-inline-block" style="max-width: 40rem;" id="leftCard">
         <div class="card-header">In hand</div>
         <div class="card-body">
-          <h4 class="card-title">Cheese</h4>
+          <h4 class="card-title">You can create stuff in this area</h4>
           <p class="card-text">
             <!--We can add text here-->>
-            Text
+            <!--            Text-->
           </p>
         </div>
       </div>
@@ -102,7 +110,7 @@
 
         <div class="card-header">Inventory</div>
         <div class="card-body">
-          <h4 class="card-title">Record what are put in the locker</h4>
+          <h4 class="card-title">Record what you put in the locker</h4>
         </div>
       </div>
     </div>
@@ -133,6 +141,11 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
   <script>
+    // $(document).ready(function () {
+    //   firebase.auth().onAuthStateChanged(function (user) {
+        
+    //   })
+    // })
 
     $(function () {
       $("#sortable").sortable();
@@ -151,7 +164,7 @@
       $("#dragBoxDiv").fadeOut(1000);
     })
 
-    
+
     $("#checkContentBtn").click(function () {
       $("#dragBoxDiv").toggle(200);
     })
@@ -299,15 +312,15 @@
         $("#unlockBtn").attr("src", "img/unlockBtn.png");
 
       }
-      
+
       var draggableView = $("<button>draggable view</button>");
-     var uploadPic = $("<div> </div>")
+      var uploadPic = $("<div> </div>")
       // When you click on the "picture view" button, it will show the upload photo page in an <iframe>
       $("#picView").click(function () {
-        
+
         $("body").append(uploadPic);
-        
-         var upload = $("<iframe></iframe>");
+
+        var upload = $("<iframe></iframe>");
         $(uploadPic).append(upload);
         $(uploadPic).append(draggableView);
         $(upload).attr("src", "iframePhotoUpload.html");
@@ -318,24 +331,24 @@
         $(upload).css("width", "100vw");
         $(upload).attr("frameborder", "0");
         $(upload).attr("seamless");
-        
-        
-        
-     
-        $(draggableView).css("position","relative");
-        $(draggableView).css("z-index","100");
-        $(draggableView).css("top","40vh")
-        
+
+
+
+
+        $(draggableView).css("position", "relative");
+        $(draggableView).css("z-index", "100");
+        $(draggableView).css("top", "40vh")
+
         $(uploadPic).show();
         $(dragBoxDiv).hide();
 
 
       })
-      
-      $(draggableView).click(function(){
-                          $(dragBoxDiv).show();
-                          $(uploadPic).hide();
-                           })
+
+      $(draggableView).click(function () {
+        $(dragBoxDiv).show();
+        $(uploadPic).hide();
+      })
 
       var drag = $("<iframe></iframe> ");
       $(drag).attr("src", "dragexample-2.html");
@@ -348,7 +361,10 @@
       $(drag).attr("seamless");
       $("#dragBox").append(drag);
 
-
+      $("#logout").click(function () {
+        firebase.auth().signOut();
+        window.location.href = './login.html';
+      })
 
 
 

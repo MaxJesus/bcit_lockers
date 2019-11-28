@@ -1,13 +1,12 @@
-
-// Fucntion that creates a new document in the users collection
 function createUser() {
-
+var db = firebase.firestore();
     // if the current user logged in user
     // is authenticated, then grab "uid" "displayName" and "email"
     // use "set()" with merge (if document did not exist it will be created)
     firebase.auth().onAuthStateChanged(function(user){
+        console.log(user);
         db.collection("user").doc(user.uid).set(
-    	{
+      {
         "name":user.displayName,
          "email":user.email,
         },{ merge: true });

@@ -95,7 +95,7 @@
     }
 
     .ui-widget-header {
-      font-size: 0.8vh
+      font-size: 4vh
     }
   </style>
 
@@ -243,9 +243,9 @@
           $item.find("a.ui-icon-trash").remove();
           $item.append(recycle_icon).appendTo($list).fadeIn(function () {
             $item
-              .animate({ width: "48px" })
+              .animate({ width: "96px" })
               .find("img")
-              .animate({ height: "36px" });
+              .animate({ height: "72px" });
           });
         });
         checkItemStatus();
@@ -326,10 +326,12 @@
             let handRef = db.collection("user").doc(user.uid).collection("items").doc("locker");
            
            
-            let removeByID = handRef.update({
+            handRef.update({
               [ID]: firebase.firestore.FieldValue.delete()
             });
-
+            
+//            removeByID.then(function....)
+            
             // nth++;
             // if(nth >= getIDlist.length)
             //   nth = getIDlist.length-1;

@@ -43,8 +43,8 @@
 
     #logo {
       
-      position: fixed;
-      left:42vw;
+      position: absolute;
+      left:-10vw;
       width: calc(10vh - 2vh);
       top: 1vh;
       padding: 0vh;

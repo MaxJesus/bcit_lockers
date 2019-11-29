@@ -32,8 +32,20 @@
       </div>
 
       <img src=img/_Logo.png id="logo" alt="logo" />
+      
+       <div class="dropdown open">
+        <input type=image src="img/profile.png" class="btn btn-secondary dropdown-toggle" type="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="profile" alt="profilePic">
 
-      <img src="img/profile.png" id="profile" alt="profilePic" />
+        <!--  </button>-->
+        <div class="dropdown-menu">
+          <button class="dropdown-item" onclick="showCurrent()">Locker Info</button>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="lockermanagement.html">Locker Management</a>
+          <a class="dropdown-item" id="logout">Logout</a>
+        </div>
+      </div>
+
 
     </div>
 
@@ -407,7 +419,7 @@
     });
 
     //Step 5
-    var locker_Num
+    var locker_Num;
     var lockerButton = $(".4");
       $(lockerButton).click(function (e) {
       // var collectionSection = sections[i].getAttribute("id");
@@ -517,18 +529,17 @@
     
     
     
-$("#cfm").click(function(event){
-  firebase.auth().onAuthStateChanged(function (user) {
+$("#confirm").click(function(event){
+  firebase.auth().onAuthStateChanged(function (user){
     
     
- db.collection("user").doc(user.uid).collection("position").set(
+ db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").set(
           {
-            locker: locker_Num
-            
+            locker: [locker_Num]
           })
-
+          
           .then(function () {
-            console.log("Document successfully written!");
+            console.log(locker_Num);
           })
           .catch(function (error) {
             console.error("Error writing document: ", error);

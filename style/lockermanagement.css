@@ -51,7 +51,15 @@
       margin: 0vh;
     }
 
-
+#showCurrent{
+  width: 60vw;
+  z-index: 100;
+  position: fixed;
+  left: 30vw;
+  top: 0vh;
+  background-color: beige;
+  
+}
 
 
 

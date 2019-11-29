@@ -38,7 +38,7 @@
     //When loged in, shows the welcome.
 
     firebase.auth().onAuthStateChanged(function (user) {
-      alert("functioning");
+//      alert("functioning");
 
       if (user == null)
         {
@@ -73,9 +73,9 @@
 
         <!--  </button>-->
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#!">Separated link</a>
+          <button class="dropdown-item" onclick="showCurrent()">Locker Info</button>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#!">Action</a>
+          <a class="dropdown-item" href="changelocker.html">Change Locker</a>
           <a class="dropdown-item" id="logout">logout</a>
         </div>
       </div>
@@ -94,6 +94,13 @@
   </div>
   <!-- Tip: use bg-* and text-* utilities to style the card -->
   <div id="dragBoxDiv">
+<!--
+    <section id="showCurrent">
+      <div >
+        <span id="showCrt"></span>
+      </div>
+    </section>
+-->
     <div id="dragBox">
       <div class="card text-white bg-primary mb-3 d-inline-block" style="max-width: 40rem;" id="leftCard">
         <div class="card-header">In hand</div>
@@ -366,9 +373,7 @@
         window.location.href = './login.html';
       })
 
-
-
-
+      
 
 
       //If locked, unlock. If unlocked, lock.
@@ -392,7 +397,23 @@
 
     }
     lockerEvent();
-
+    
+    
+$("#showCurrent").hide();
+      function showCurrent(){
+//          $("#showCurrent").css("position","fixed");
+//          $("#showCurrent").css("left","35vw");
+//          $("#showCurrent").show();
+          firebase.auth().onAuthStateChanged(function (user) {
+            
+           db.collection('user').doc(user.uid).collection('position').doc('lockerInfo').onSnapshot(function (querySnapshot) {
+        alert("Your locker is "+querySnapshot.data().locker);
+        
+        
+                               
+        })
+      })
+      }
   </script>
 </body>
 

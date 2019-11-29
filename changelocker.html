@@ -132,7 +132,7 @@
         //table. When the table is submitted, the page would send the form to the firestore.
         //"change_request" is the collection node, and the Q1 variable is the studentID
         //The function generates a list at document level, which has the same name as the ID.
-        // The info is put into the database as field key value pairs. 
+        // The info is put into the database as field key value pairs.
         //This is for the customer service to get a report on the request.
         db.collection("change_request").doc("all").collection("cases").doc(Q1).set(
           {
@@ -185,10 +185,28 @@
       
 
       
-      checkInfo();  
+      checkInfo();
       dbUpdate();
     }
-   
+    
+   $("#cfm").click(function(event){
+  firebase.auth().onAuthStateChanged(function (user) {
+ db.collection("user").doc(user.uid).collection("position").doc(Q1).set(
+          {
+            locker: Q1,
+            stuEmail: Q2,
+            reason: Q3,
+            startDate: Q4
+          })
+
+          .then(function () {
+            console.log("Document successfully written!");
+          })
+          .catch(function (error) {
+            console.error("Error writing document: ", error);
+          });
+      })
+});
    
   </script>
 

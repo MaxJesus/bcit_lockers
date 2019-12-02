@@ -34,7 +34,7 @@
       <img src=img/_Logo.png id="logo" alt="logo" />
       
        <div class="dropdown open">
-        <input type=image src="img/profile.png" class="btn btn-secondary dropdown-toggle" type="button"
+        <input type=image src="img/profile.png" class="btn btn-secondary dropdown-toggle"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="profile" alt="profilePic">
 
         <!--  </button>-->
@@ -59,17 +59,17 @@
 
   <!--A div that allows the user to choose a section to view avaiable lockers-->
   <div id="sectionChoice" class="1stuff">
-    <div id="NW" name='NW' class="1">
+    <div id="NW" class="1">
       <div>
         <span id='NWsectionTitle'>NW:</span> <span id="counterNW"> </span> <p>available lockers left</p>
       </div>
     </div>
-    <div id="NE" name='NE' class="1">
-      <span id='sectionTitle'>NE:</span> <span id="counterNE"> </span> <span>available lockers left</span>
+    <div id="NE" class="1">
+      <span>NE:</span> <span id="counterNE"> </span> <span>available lockers left</span>
     </div>
-    <div id="SW" name='SW' class="1"><span id='sectionTitle'>SW:</span> <span id="counterSW"> </span> <span>available lockers left</span>
+    <div id="SW" class="1"><span>SW:</span> <span id="counterSW"> </span> <span>available lockers left</span>
     </div>
-    <div id="SE" name='SW' class="1"><span id='sectionTitle'>SE:</span> <span id="counterSE"> </span> <span>available lockers left</span>
+    <div id="SE" class="1"><span>SE:</span> <span id="counterSE"> </span> <span>available lockers left</span>
     </div>
   </div>
 
@@ -145,16 +145,16 @@
     </div>
 
     <div id="floor-choice" class="3stuff">
-      <div id="b1"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="b1"
+      <div id="b1Div"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="b1"
           name="b1">b1</button><span>1F</span> <span id="b1data"> </span> <span>available lockers left</span></div>
 
-      <div id="1f"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="1f"
+      <div id="1fDiv"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="1f"
           name="1f">1f</button><span>1F</span> <span id="1Fdata"> </span> <span>available lockers left</span></div>
 
-      <div id="2f"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="2f"
+      <div id="2fDiv"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="2f"
           name="2f">2f</button><span>1F</span> <span id="2Fdata"> </span> <span>available lockers left</span></div>
 
-      <div id="3f"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="3f"
+      <div id="3fDiv"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="3f"
           name="3f">3f</button><span>1F</span> <span id="3Fdata"> </span> <span>available lockers left</span></div>
 
     </div>
@@ -203,7 +203,7 @@
   </div>
 
   <!-- Bootstrap for Mobile-first -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" itemprop="" property="">-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -522,7 +522,10 @@
     
     
     
-    
+     $("#logout").click(function () {
+        firebase.auth().signOut();
+        window.location.href = './login.html';
+      })
    
     
     

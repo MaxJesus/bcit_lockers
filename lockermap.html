@@ -161,16 +161,16 @@
 
     <div id="locker-choice" class="4stuff">
       <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="1111"
-          name="b1">1011</button><span>1F</span> <span id="b1data"> </span> </div>
+          name="b1">1011</button><span>1F</span>  </div>
 
       <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="2222"
-          name="1f">2022</button><span>1F</span> <span id="1Fdata"> </span> </div>
+          name="1f">2022</button><span>1F</span>  </div>
 
       <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="3333"
-          name="2f">3033</button><span>1F</span> <span id="2Fdata"> </span> </div>
+          name="2f">3033</button><span>1F</span> </div>
 
       <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="4444"
-          name="3f">4044</button><span>1F</span> <span id="3Fdata"> </span> </div>
+          name="3f">4044</button><span>1F</span>  </div>
 
     </div>
 
@@ -451,8 +451,8 @@
         
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
-      $("#locationIndicator").html("You currently choosed" + lockerNum);
-      $("#showConfirmationLockerPosition").html("You currently choosed" + lockerNum + " on " + floor_Num + "loor, of building" +building_Num);
+      $("#locationIndicator").html("You currently chosen " + lockerNum);
+      $("#showConfirmationLockerPosition").html("You have currently chosen" + lockerNum + " on " + floor_Num + "loor, of building" +building_Num);
       console.log("This is in building "+ backQuery_building);
       stepControl();
     });

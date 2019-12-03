@@ -68,7 +68,7 @@
       <div id="header">
       </div>
 
-      <img src=img/logo.png id="logo" alt="logo" />
+      <img src=img/_Logo.png id="logo" alt="logo" />
 
     </div>
   </div>
@@ -95,7 +95,7 @@
   <div id="answers">
       <h3>Provide information for changing locker solution</h3>
       <span><strong>May take at most 48 hours to be processed</strong></span>
-  
+
       <form>
         <br>When did you choose your current locker?(Approximately)<br>
         <div id="startDateAnswer" ></div><br />
@@ -108,7 +108,7 @@
         <br>
         <div onclick="goBack()" id="goBack">Go Back</div>
         <br/>
-  
+
       </form>
     </div>
 
@@ -179,16 +179,16 @@
        $("#stuIDAnswer").html($("#stuID").val());
        $("#stuEmailAnswer").html($("#stuEmail").val());
        $("#reasonAnswer").html($("#reason").val());
-     
+
       }
 
-      
 
-      
+
+
       checkInfo();
       dbUpdate();
     }
-    
+
    $("#cfm").click(function(event){
   firebase.auth().onAuthStateChanged(function (user) {
  db.collection("user").doc(user.uid).collection("position").doc(Q1).set(
@@ -207,7 +207,7 @@
           });
       })
 });
-   
+
   </script>
 
 

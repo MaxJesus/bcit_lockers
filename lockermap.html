@@ -10,20 +10,29 @@
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
   <!--This file works as the overall stylesheet for the project-->
-  <link type="text/css" rel="stylesheet" href="style/lockermanagement.css">
+  
+<!--  <link type="text/css" rel="stylesheet" href="style/lockermanagement.css">-->
 
   <!--This file works as the overall stylesheet for lockermap-->
 
   <style>
+    
+/*    .buildings{font-size: 15pt;}*/
+    
     .card{color: black}
 
-    body {
-  background-color: aqua;
-}
+ body {
+      background:linear-gradient(to bottom,#bfceff,#f8bfff,#fffcbf);
+      background-size: 100vw 120vh;
+/*      background-repeat: repeat;*/
+      text-align: center;
+    }
+/*
     body {
       height: 100vmax;
-      background-image: url(../img/lockermanagement_background2.jpg);
+      background-image: url(./img/lockermanagement_background2.jpg);
     }
+*/
 
     /*header includes logo and */
     .spinner-grow {
@@ -217,6 +226,10 @@
       display: flex;
       width: 20vw;
     }
+    
+    #buildings{
+      font-size: 50pt;
+    }
 
 #sectionChoice{
   margin-top: 5vh;
@@ -281,7 +294,7 @@
 #SE-buildings{
   display: inline-flex;
 }
-#NWsectionTitle  {
+.sectionTitle  {
   font-size: 40pt;
   line-height: 200px;
   top: 12vh;
@@ -306,7 +319,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-right: - 50%;
+  margin-right: -50%;
   transform: translate(-50%, -50%)
 
 }
@@ -327,6 +340,12 @@
   text-decoration: underline;
   font-size: 30pt
 }
+    
+    #goBackBtn{position:fixed;
+         width:15vw;
+        left:3vw;
+        top:1vh;
+    }
   </style>
 
 
@@ -336,10 +355,12 @@
   <div id="headerContainer">
     <div id="header">
 
+<!--
       <div class="spinner-grow" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-
+-->
+      <img src=img/Circled%20Left.svg id="goBackBtn" alt="goback" />
       <img src=img/_Logo.png id="logo" alt="logo" />
 
        <div class="dropdown open">
@@ -370,15 +391,15 @@
   <div id="sectionChoice" class="1stuff">
     <div id="NW" class="1">
       <div>
-        <span id='NWsectionTitle'>NW</span> <p> <span id="counterNW"> </span> available lockers left</p>
+        <span class='sectionTitle'>NW</span> <p> <span id="counterNW"> </span> available lockers left</p>
       </div>
     </div>
     <div id="NE" class="1">
-      <span id='NWsectionTitle'>NE:</span> <p> <span id="counterNE"> </span> <span>available lockers left</span> </p>
+      <span class='sectionTitle'>NE:</span> <p> <span id="counterNE"> </span> <span>available lockers left</span> </p>
     </div>
-    <div id="SW" class="1"><span id='NWsectionTitle'>SW:</span> <p> <span id="counterSW"> </span> <span>available lockers left</span> </p>
+    <div id="SW" class="1"><span class='sectionTitle'>SW:</span> <p> <span id="counterSW"> </span> <span>available lockers left</span> </p>
     </div>
-    <div id="SE" class="1"><span id='NWsectionTitle'>SE:</span> <p> <span id="counterSE"> </span> <span>available lockers left</span> </p>
+    <div id="SE" class="1"><span class='sectionTitle'>SE:</span> <p> <span id="counterSE"> </span> <span>available lockers left</span> </p>
     </div>
   </div>
 
@@ -495,18 +516,18 @@
     <div id="cfmPage">
    <div class="card">
   <img class="card-img-top" src="./img/lockermanagement_background.jpg" alt="Card image cap">
-  <div class="card-body">
+  <div class="card-body" id="confirmationDiv">
     <h4 class="card-title" style="color: brown">Confirmation</h4>
     <p class="card-text" id="showConfirmationLockerPosition">
       you are currently at
     </p>
-    <a href="#!" class="btn btn-primary" id="confirm">confirm</a>
+    <a href="#!" class="btn btn-primary" id="confirm" >confirm</a>
   </div>
 </div>
   </div>
     <!-- the id of the <div> is not necessarily used -->
     <div id="goBackBtnDiv">
-      <button id="goBackBtn">goBack</button>
+<!--      <button id="goBackBtn">goBack</button>-->
     </div>
 
   </div>
@@ -568,6 +589,9 @@
           //from case 2, it allows you to press the goBackBtn
           $("#goBackBtn").show();
           $("#choosingScope").html("Building");
+          
+          $("button").css("font-size","50pt");
+          
           $(".3stuff").hide();
           $(".4stuff").hide();
           $("#cfmPage").hide();
@@ -603,9 +627,7 @@
           $("#locker-choice").show();
           $("#choosingScope").html("number");
           $("#cfmPage").show();
-          $("#goBackBtn").css("position","relative");
-          $("#goBackBtn").css("left","49vw");
-          $("#goBackBtn").css("top","21.5vh");
+         
           break;
       }
     }
@@ -753,7 +775,13 @@
       $("#confirm").hide();
 
       var loginBtn = $("<button id='loginBtn'><a href='./login.html'>Login</a></button>");
-      $("#confirm").after(loginBtn);
+//      $("#confirm ").after(loginBtn);
+        //let abc123 = $("#confirmationDiv").html();
+        //$("#confirmationDiv").html(abc123);
+        //$("#confirmationDiv").append()
+      $("#confirmationDiv").append(loginBtn);
+        
+      
       }
      })
 
@@ -819,7 +847,6 @@
 
 
 
-
     }
 
     //When first executed, the step is 1.
@@ -852,6 +879,7 @@ $("#confirm").click(function(event){
 
           .then(function () {
             console.log(locker_Num);
+            window.location.href="./lockermanagement.html";
           })
           .catch(function (error) {
             console.error("Error writing document: ", error);

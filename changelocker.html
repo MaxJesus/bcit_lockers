@@ -26,9 +26,21 @@
   <link type="text/css" rel="stylesheet" href="./style/changelocker.css" />
 
   <style>
-
-
-
+    
+#goBackBtn{position:fixed;
+         width:15vw;
+        left:3vw;
+        top:1vh;
+    }
+    #logo{
+          width: 15vw;
+    }
+    body {
+      background:linear-gradient(to bottom,#bfceff,#f8bfff,#fffcbf);
+      background-size: 100vw 120vh;
+/*      background-repeat: repeat;*/
+      text-align: center;
+    }
 
   </style>
 
@@ -67,7 +79,8 @@
     <div id="headerContainer">
       <div id="header">
       </div>
-
+      
+      <img src=img/Circled%20Left.svg id="goBackBtn" alt="goback" />
       <img src=img/_Logo.png id="logo" alt="logo" />
 
     </div>
@@ -207,6 +220,10 @@
           });
       })
 });
+    
+    $("#goBackBtn").click(function(){
+      window.location.href ='./lockermanagement.html'
+    });
 
   </script>
 

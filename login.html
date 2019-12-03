@@ -49,11 +49,10 @@
     }
 
     body {
-      background-color: darkblue;
-      background-size: 100vw 100vh;
-      background-repeat: repeat;
+      background:linear-gradient(to bottom,#bfceff,#f8bfff,#fffcbf);
+      background-size: 100vw 120vh;
+/*      background-repeat: repeat;*/
       text-align: center;
-      height: 100vh;
     }
 
     #loginDiv {
@@ -151,7 +150,7 @@
                 console.log("Error happened" + error)
               });
           }
-          else 
+          else
           {
             return true;
           }
@@ -164,6 +163,7 @@
         }
       },
       // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+      credentialHelper:firebaseui.auth.CredentialHelper.NONE,
       signInFlow: 'popup',
       signInSuccessUrl: 'lockermanagement.html',
       signInOptions: [
@@ -201,7 +201,7 @@
             "email": user.email,
           }, { merge: true });
       });
-    } 
+    }
     // createUser();
   </script>
 

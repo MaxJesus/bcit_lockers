@@ -1,5 +1,6 @@
 
     body {
+      background-position:0 10vh;
       height: 100vmax;
       background-image: url(../img/lockermanagement_background2.jpg);
     }
@@ -98,7 +99,7 @@
 
     #leftCard {
       width: 48vw;
-      height: 45vh;
+      height: 40vh;
       float: left;
       margin-right: 0.5vw;
       margin-bottom: 0vh;
@@ -106,7 +107,7 @@
 
     #rightCard {
       width: 48vw;
-      height: 45vh;
+      height: 40vh;
       float: right;
       margin-bottom: 0vh;
       margin-left: 1vw;
@@ -145,9 +146,11 @@
     }
 
     #bottomToolBar {
+      
+/*      background-image: url(../img/lockermanagement_background2.jpg);*/
       position: absolute;
       width: 100vw;
-      top: 90vh;
+      top: 85vh;
       left: 0vw;
       display: flex;
       margin: 0px;

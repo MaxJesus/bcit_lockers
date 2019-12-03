@@ -39,7 +39,8 @@
     #gallery {
       float: left;
       width: 50%;
-      min-height: 12em;
+      min-height: 25em;
+      height: 5em;
     }
 
     .gallery.custom-state-active {
@@ -78,7 +79,8 @@
       width: 42%;
       min-height: 18em;
       padding: 1%;
-      background: transparent
+      background: transparent;
+      height: 420px;
     }
 
     #trash h4 {
@@ -95,7 +97,9 @@
     }
 
     .ui-widget-header {
-      font-size: 4vh
+      margin: 0;
+      padding: 0;
+      font-size: 4vh;
     }
   </style>
 
@@ -353,12 +357,13 @@
         if ($modal.length) {
           $modal.dialog("open");
         } else {
-          var img = $("<img alt='" + title + "' width='384' height='288' style='display: none; padding: 8px;' />")
+          var img = $("<img alt='" + title + "' width='380' height='288' style='display: none; padding: 8px;' />")
             .attr("src", src).appendTo("body");
           setTimeout(function () {
             img.dialog({
               title: title,
               width: 400,
+//              height: 400,
               modal: true
             });
           }, 1);

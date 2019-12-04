@@ -7,8 +7,9 @@
     <title>upload your locker picture</title>
     <!--The page allows uploading a quick snapshot of the locker as a memo for the user-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
 
     <!--The "<style>" is from bootstrap cheat sheet-->
     <style>
@@ -64,7 +65,7 @@
             var pictureSrc = window.localStorage.getItem("picture");
             $('#img-upload').attr('src', pictureSrc);
 
-            localStorage.clear();
+//            localStorage.clear();
 
             $(document).on('change', '.btn-file :file', function () {
                 var input = $(this),
@@ -95,7 +96,7 @@
                     pictureSrc = e.target.result;
                     $('#img-upload').attr('src', pictureSrc);
                  /*this line of code is crucial, if it is put outside
-                 of the the function(e){} callback, then the memory function  
+                 of the the function(e){} callback, then the memory function
                  would not work*/
                     localStorage.setItem("picture", pictureSrc);
                    
@@ -109,6 +110,7 @@
 
                 readURL(this);
             });
+//       reader.readAsDataURL(input.files[0]);
         });
 
 

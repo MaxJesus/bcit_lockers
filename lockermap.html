@@ -10,29 +10,39 @@
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
   <!--This file works as the overall stylesheet for the project-->
-  
-<!--  <link type="text/css" rel="stylesheet" href="style/lockermanagement.css">-->
+
+  <!--  <link type="text/css" rel="stylesheet" href="style/lockermanagement.css">-->
 
   <!--This file works as the overall stylesheet for lockermap-->
 
   <style>
-    
-/*    .buildings{font-size: 15pt;}*/
-    
-    .card{color: black}
+    /*    .buildings{font-size: 15pt;}*/
 
- body {
-      background:linear-gradient(to bottom,#bfceff,#f8bfff,#fffcbf);
+    .card {
+      color: black
+    }
+
+    #confirm {
+      font-size: 40pt;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #bfceff, #f8bfff, #fffcbf);
       background-size: 100vw 120vh;
-/*      background-repeat: repeat;*/
+      /*      background-repeat: repeat;*/
       text-align: center;
     }
-/*
+
+    /*
     body {
       height: 100vmax;
       background-image: url(./img/lockermanagement_background2.jpg);
     }
 */
+
+    .dropdown-item {
+      font-size: 40pt;
+    }
 
     /*header includes logo and */
     .spinner-grow {
@@ -51,6 +61,12 @@
 
     }
 
+    #pickRandom {
+      font-size: 40pt;
+      position: relative;
+      top: 4vh;
+    }
+
     #header {
 
       position: relative;
@@ -64,7 +80,7 @@
       top: 1vh;
       margin-top: 0vh;
       position: relative;
-      font-size: 3.5vh;
+      font-size: 4vh;
       height: 21vh;
       margin-bottom: 0vh;
       padding-bottom: 0vh;
@@ -74,22 +90,22 @@
     #logo {
 
       position: absolute;
-      left:-10vw;
+      left: -10vw;
       width: calc(10vh - 2vh);
       top: 1vh;
       padding: 0vh;
       margin: 0vh;
     }
 
-#showCurrent{
-  width: 60vw;
-  z-index: 100;
-  position: fixed;
-  left: 30vw;
-  top: 0vh;
-  background-color: beige;
+    #showCurrent {
+      width: 60vw;
+      z-index: 100;
+      position: fixed;
+      left: 30vw;
+      top: 0vh;
+      background-color: beige;
 
-}
+    }
 
 
 
@@ -97,7 +113,7 @@
       position: relative;
       width: calc(10vh - 1vh);
       float: right;
-      clip-path:circle(48%);
+      clip-path: circle(48%);
     }
 
     /*the promptbox tells the user what to do*/
@@ -134,6 +150,8 @@
       margin-bottom: 0vh;
     }
 
+    /*
+
     #rightCard {
       width: 48vw;
       height: 45vh;
@@ -141,13 +159,17 @@
       margin-bottom: 0vh;
       margin-left: 1vw;
     }
+*/
 
+    /*
     #dragBoxButtons {
       height: 6vh;
       width: 100vw;
       margin-top: 0vh;
       padding: 0vh;
     }
+*/
+    /*
 
     #dragBoxButtons {
       display: block;
@@ -158,6 +180,7 @@
       height: 20vh;
       margin-bottom: 0vh;
     }
+*/
 
     #picView {
       float: left;
@@ -167,12 +190,7 @@
       margin: 0vh;
     }
 
-    #skip {
-      float: right;
-      width: 25vw;
-      height: 6vh;
-      font-size: 3vh;
-    }
+
 
     #bottomToolBar {
       position: absolute;
@@ -212,11 +230,11 @@
       width: 20.5vw;
     }
 
-    #checkContentBtn{
+    #checkContentBtn {
       width: 20vw;
     }
 
-    #checkContentBtn:hover{
+    #checkContentBtn:hover {
       filter: saturate(5.5);
       width: 20.5vw;
     }
@@ -226,125 +244,146 @@
       display: flex;
       width: 20vw;
     }
-    
-    #buildings{
+
+    #buildings {
       font-size: 50pt;
     }
 
-#sectionChoice{
-  margin-top: 5vh;
-  display: grid;
-  width: 100vw;
-  height: 60vh;
-  grid-template-areas:
-            "NE NE SE SE"
-            "NW NW SW SW";
+    #sectionChoice {
+      margin-top: 5vh;
+      display: grid;
+      width: 100vw;
+      height: 60vh;
+      grid-template-areas:
+        "NE NE SE SE"
+        "NW NW SW SW";
 
-  color: aliceblue;
-  font-size: 10pt;
-  text-align: center;
-}
+      color: aliceblue;
+      font-size: 35pt;
+      text-align: center;
+    }
 
-#NW{
-  grid-area: NW;
-  background: blue;
-  border: 2px solid black;
-  margin: 1vw;
-  border-radius: 5vw;
-}
 
-#NE{
-  grid-area: NE;
-  background: green;
-  border: 2px solid black;
-  margin: 1vw;
-  border-radius: 5vw;
-}
 
-#SW{
-  grid-area: SW;
-  background: orange;
-  border: 2px solid black;
-  margin: 1vw;
-  border-radius: 5vw;
-}
+    #NW {
+      grid-area: NW;
+      background: linear-gradient(to bottom right, cornflowerblue, dodgerblue, floralwhite);
+      background-color: ;
+      border: 2px solid black;
+      margin: 1vw;
+      border-radius: 5vw;
+    }
 
-#SE{
-  grid-area: SE;
-  background: red;
-  border: 2px solid black;
-  margin: 1vw;
-  border-radius: 5vw;
-}
+    #NE {
+      grid-area: NE;
+      background: linear-gradient(to bottom right, darkgreen, green, ALICEBLUE);
+      border: 2px solid black;
+      margin: 1vw;
+      border-radius: 5vw;
+    }
 
-#buildings{
-  color: aliceblue;
-  font-size: 12pt;
+    #SW {
+      grid-area: SW;
+      background: linear-gradient(to bottom right, orange, bisque, floralwhite);
+      color: black;
+      border: 2px solid black;
+      margin: 1vw;
+      border-radius: 5vw;
+    }
 
-}
+    #SE {
+      grid-area: SE;
+      background: linear-gradient(to bottom left, crimson, red, floralwhite);
+      background-color:
+        border: 2px solid black;
+      margin: 1vw;
+      border-radius: 5vw;
+    }
 
+    #buildings {
+      color: black;
+      font-size: 52pt;
+
+    }
+
+    /*
 #SW-buildings{
   display: inline-flex;
 }
+*/
 
+    /*
 #NE-buildings{
   display: inline-flex;
 }
+*/
 
+    /*
 #SE-buildings{
   display: inline-flex;
 }
-.sectionTitle  {
-  font-size: 40pt;
-  line-height: 200px;
-  top: 12vh;
-  left: 3vw;
-}
+*/
+
+
+    .sectionTitle {
+      font-size: 40pt;
+      line-height: 200px;
+      top: 12vh;
+      left: 3vw;
+    }
+
+    /*
 #sectionTitle  {
-  font-size: 30pt;
-  line-height: 20px;
+  font-size: 50pt;
+  line-height: 0px;
   top: 12vh;
 }
+*/
 
 
+    /*
 #floor-choice{
   display: inline-flex;
 }
+*/
 
-#locker-choice{
-  display: inline-flex;
-}
+    #locker-choice {
+      display: inline-flex;
+    }
 
-#cfmPage{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%)
+    #cfmPage {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%)
+    }
 
-}
+    #counterNW {
+      text-decoration: underline;
+      font-size: 30pt;
+    }
 
-#counterNW {
-  text-decoration: underline;
-  font-size: 30pt;
-}
-#counterSW {
-  text-decoration: underline;
-  font-size: 30pt
-}
-#counterNE {
-  text-decoration: underline;
-  font-size: 30pt
-}
-#counterSE {
-  text-decoration: underline;
-  font-size: 30pt
-}
-    
-    #goBackBtn{position:fixed;
-         width:15vw;
-        left:3vw;
-        top:1vh;
+    #counterSW {
+      text-decoration: underline;
+      font-size: 30pt
+    }
+
+    #counterNE {
+      text-decoration: underline;
+      font-size: 30pt
+    }
+
+    #counterSE {
+      text-decoration: underline;
+      font-size: 40pt
+    }
+
+    #goBackBtn {
+      position: fixed;
+      width: 15vw;
+      left: 3vw;
+      top: 1vh;
     }
   </style>
 
@@ -355,7 +394,7 @@
   <div id="headerContainer">
     <div id="header">
 
-<!--
+      <!--
       <div class="spinner-grow" role="status">
         <span class="sr-only">Loading...</span>
       </div>
@@ -363,9 +402,9 @@
       <img src=img/Circled%20Left.svg id="goBackBtn" alt="goback" />
       <img src=img/_Logo.png id="logo" alt="logo" />
 
-       <div class="dropdown open">
-        <input type=image src="img/profile.png" class="btn btn-secondary dropdown-toggle"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="profile" alt="profilePic">
+      <div class="dropdown open">
+        <input type=image src="img/profile.png" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" id="profile" alt="profilePic">
 
         <!--  </button>-->
         <div class="dropdown-menu">
@@ -386,20 +425,26 @@
     <span id="locationIndicator"></span>
     <span>Please Choose a <span id="choosingScope">section</span> to view the available lockers</span>
   </div>
-
+  <div>
+    <button id="pickRandom">Pick a locker for me</button>
+  </div>
   <!--A div that allows the user to choose a section to view avaiable lockers-->
   <div id="sectionChoice" class="1stuff">
     <div id="NW" class="1">
       <div>
-        <span class='sectionTitle'>NW</span> <p> <span id="counterNW"> </span> available lockers left</p>
+        <span class='sectionTitle'>NW</span>
+        <p> <span id="counterNW"> </span> available lockers left</p>
       </div>
     </div>
     <div id="NE" class="1">
-      <span class='sectionTitle'>NE:</span> <p> <span id="counterNE"> </span> <span>available lockers left</span> </p>
+      <span class='sectionTitle'>NE:</span>
+      <p> <span id="counterNE"> </span> <span>available lockers left</span> </p>
     </div>
-    <div id="SW" class="1"><span class='sectionTitle'>SW:</span> <p> <span id="counterSW"> </span> <span>available lockers left</span> </p>
+    <div id="SW" class="1"><span class='sectionTitle'>SW:</span>
+      <p> <span id="counterSW"> </span> <span>available lockers left</span> </p>
     </div>
-    <div id="SE" class="1"><span class='sectionTitle'>SE:</span> <p> <span id="counterSE"> </span> <span>available lockers left</span> </p>
+    <div id="SE" class="1"><span class='sectionTitle'>SE:</span>
+      <p> <span id="counterSE"> </span> <span>available lockers left</span> </p>
     </div>
   </div>
 
@@ -408,99 +453,95 @@
   <div id="buildings">
     <div id="NW-buildings" class="2">
       <div id="NW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW3Btn"
-          name="NW3">NW3</button><span>NW3</span> <span id="NW3data"> </span> <span>available lockers left</span></div>
+          name="NW3">NW3</button> <span id="NW3data"> </span> <span>available lockers left</span></div>
 
       <div id="NW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW1Btn"
-          name="NW1">NW1</button><span>NW1:</span> <span id="NW1data"> </span> <span>available lockers left</span></div>
+          name="NW1">NW1</button> <span id="NW1data"> </span> <span>available lockers left</span></div>
 
       <div id="NW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW5Btn"
-          name="NW5">NW5</button><span>NW5</span> <span id="NW5data"> </span> <span>available lockers left</span></div>
+          name="NW5">NW5</button> <span id="NW5data"> </span> <span>available lockers left</span></div>
 
       <div id="NW6"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NW6Btn"
-          name="NW6">NW6</button><span>NW6:</span> <span id="NW6data"> </span> <span>available lockers left</span></div>
+          name="NW6">NW6</button> <span id="NW6data"> </span> <span>available lockers left</span></div>
 
     </div>
 
     <div id="NE-buildings" class="2">
 
       <div id="NE1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NE1Btn"
-          name="NE1">NE1</button><span>NE1:</span> <span id="NE1data"> </span> <span>available lockers left</span></div>
+          name="NE1">NE1</button> <span id="NE1data"> </span> <span>available lockers left</span></div>
 
       <div id="NE2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NE2Btn"
-          name="NE2">NE2</button><span>NE2</span> <span id="NE2data"> </span> <span>available lockers left</span></div>
+          name="NE2">NE2</button> <span id="NE2data"> </span> <span>available lockers left</span></div>
 
       <div id="NE3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NE3Btn"
-          name="NE3">NE3</button><span>NE3</span> <span id="NE3data"> </span> <span>available lockers left</span></div>
+          name="NE3">NE3</button> <span id="NE3data"> </span> <span>available lockers left</span></div>
 
       <div id="NE4"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="NE4Btn"
-          name="NE4">NE4</button><span>NE4:</span> <span id="NE4data"> </span> <span>available lockers left</span></div>
+          name="NE4">NE4</button> <span id="NE4data"> </span> <span>available lockers left</span></div>
 
     </div>
 
     <div id="SE-buildings" class="2">
 
       <div id="SE1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SE1Btn"
-          name="SE1">SE1</button><span>SE1:</span> <span id="SE1data"> </span> <span>available lockers left</span></div>
+          name="SE1">SE1</button> <span id="SE1data"> </span> <span>available lockers left</span></div>
 
       <div id="SE2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SE2Btn"
-          name="SE2">SE2</button><span>SE2</span> <span id="SE2data"> </span> <span>available lockers left</span></div>
+          name="SE2">SE2</button> <span id="SE2data"> </span> <span>available lockers left</span></div>
 
       <div id="SE3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SE3Btn"
-          name="SE3">SE3</button><span>SE3</span> <span id="SE3data"> </span> <span>available lockers left</span></div>
+          name="SE3">SE3</button> <span id="SE3data"> </span> <span>available lockers left</span></div>
 
       <div id="SE4"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SE4Btn"
-          name="SE4">SE4</button><span>SE4:</span> <span id="SE4data"> </span> <span>available lockers left</span></div>
+          name="SE4">SE4</button> <span id="SE4data"> </span> <span>available lockers left</span></div>
 
     </div>
 
     <div id="SW-buildings" class="2">
       <div id="SW1"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW1Btn"
-          name="SW1">SW1</button><span>SW1</span> <span id="SW1data"> </span> <span>available lockers left</span></div>
+          name="SW1">SW1</button> <span id="SW1data"> </span> <span>available lockers left</span></div>
 
       <div id="SW2"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW2Btn"
-          name="SW2">SW2</button> <span>SW2: </span> <span id="SW2data"> </span> <span>available lockers left</span>
+          name="SW2">SW2</button> <span id="SW2data"> </span> <span>available lockers left</span>
       </div>
 
       <div id="SW3"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW3Btn"
-          name="SW3">SW3</button><span>SW3: </span> <span id="SW3data"> </span> <span>available lockers left</span>
+          name="SW3">SW3</button> <span id="SW3data"> </span> <span>available lockers left</span>
       </div>
 
       <div id="SW5"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW5Btn"
-          name="SW5">SW5</button><span>SW5: </span> <span id="SW5data"> </span> <span>available lockers left</span>
+          name="SW5">SW5</button> <span id="SW5data"> </span> <span>available lockers left</span>
       </div>
 
       <div id="SW9"><button type="button" class="btn btn-secondary btn-lg, btnbuilding" id="SW9Btn"
-          name="SW9">SW9</button><span>SW9: </span> <span id="SW9data"> </span> <span>available lockers left</span>
+          name="SW9">SW9</button><span id="SW9data"> </span> <span>available lockers left</span>
       </div>
     </div>
 
     <div id="floor-choice" class="3stuff">
-      <div id="b1Div"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="b1"
-          name="b1">b1</button><span>1F</span> <span id="b1data"> </span> <span>available lockers left</span></div>
+      <div id="b1Div"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="b1" name="b1">b1</button>
+        <span id="b1data"> </span> <span>available lockers left</span></div>
 
-      <div id="1fDiv"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="1f"
-          name="1f">1f</button><span>1F</span> <span id="1Fdata"> </span> <span>available lockers left</span></div>
+      <div id="1fDiv"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="1f" name="1f">1f</button>
+        <span id="1fdata"> </span> <span>available lockers left</span></div>
 
-      <div id="2fDiv"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="2f"
-          name="2f">2f</button><span>1F</span> <span id="2Fdata"> </span> <span>available lockers left</span></div>
+      <div id="2fDiv"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="2f" name="2f">2f</button>
+        <span id="2fdata"> </span> <span>available lockers left</span></div>
 
-      <div id="3fDiv"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="3f"
-          name="3f">3f</button><span>1F</span> <span id="3Fdata"> </span> <span>available lockers left</span></div>
+      <div id="3fDiv"><button type="button" class="btn btn-secondary btn-lg, btnFloor, 3" id="3f" name="3f">3f</button>
+        <span id="3fdata"> </span> <span>available lockers left</span></div>
 
     </div>
 
     <div id="locker-choice" class="4stuff">
-      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="1111"
-          name="b1">1011</button><span>1F</span>  </div>
+      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="1111" name="b1">1011</button> </div>
 
-      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="2222"
-          name="1f">2022</button><span>1F</span>  </div>
+      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="2222" name="1f">2022</button> </div>
 
-      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="3333"
-          name="2f">3033</button><span>1F</span> </div>
+      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="3333" name="2f">3033</button></div>
 
-      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="4444"
-          name="3f">4044</button><span>1F</span>  </div>
+      <div><button type="button" class="btn btn-secondary btn-lg, btnLocker, 4" id="4444" name="3f">4044</button> </div>
 
     </div>
 
@@ -512,28 +553,28 @@
       </form>
 
     </div>
-<!--      confirm/go back button is not working-->
+    <!--      confirm/go back button is not working-->
     <div id="cfmPage">
-   <div class="card">
-  <img class="card-img-top" src="./img/lockermanagement_background.jpg" alt="Card image cap">
-  <div class="card-body" id="confirmationDiv">
-    <h4 class="card-title" style="color: brown">Confirmation</h4>
-    <p class="card-text" id="showConfirmationLockerPosition">
-      you are currently at
-    </p>
-    <a href="#!" class="btn btn-primary" id="confirm" >confirm</a>
-  </div>
-</div>
-  </div>
+      <div class="card">
+        <img class="card-img-top" src="./img/lockermanagement_background.jpg" alt="Card image cap">
+        <div class="card-body" id="confirmationDiv">
+          <h4 class="card-title" style="color: brown">Confirmation</h4>
+          <p class="card-text" id="showConfirmationLockerPosition">
+            you are currently at
+          </p>
+          <a href="#!" class="btn btn-primary" id="confirm">confirm</a>
+        </div>
+      </div>
+    </div>
     <!-- the id of the <div> is not necessarily used -->
     <div id="goBackBtnDiv">
-<!--      <button id="goBackBtn">goBack</button>-->
+      <!--      <button id="goBackBtn">goBack</button>-->
     </div>
 
   </div>
 
   <!-- Bootstrap for Mobile-first -->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" itemprop="" property="">-->
+  <!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" itemprop="" property="">-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -563,8 +604,10 @@
         //case 1, the very first step is to choose a section(e.g. NE,SW)
         //goBackBtn is not shown, because it is not needed.
         case 0:
+          // $("#pickRandom").show();
           $(".0stuff").show();
         case 1:
+          $("#pickRandom").show();
           $(".0stuff").hide();
           $("#goBackBtn").hide();
           $(".1stuff").show();
@@ -584,14 +627,14 @@
           If you come back from case 3, it also knows what blocks of building you chose.
         */
         case 2:
-
+          $("#pickRandom").hide();
           $(`#${backQuery_section}` + "-buildings").show();
           //from case 2, it allows you to press the goBackBtn
           $("#goBackBtn").show();
           $("#choosingScope").html("Building");
-          
-          $("button").css("font-size","50pt");
-          
+
+          $("button").css("font-size", "50pt");
+
           $(".3stuff").hide();
           $(".4stuff").hide();
           $("#cfmPage").hide();
@@ -622,12 +665,12 @@
           break;
 
         case 5:
-        $(".3stuff").hide();
-        $(".4stuff").hide();
+          $(".3stuff").hide();
+          $(".4stuff").hide();
           $("#locker-choice").show();
           $("#choosingScope").html("number");
           $("#cfmPage").show();
-         
+
           break;
       }
     }
@@ -708,8 +751,8 @@
       // var collectionSection = sections[i].getAttribute("id");
       //#1-1 the variable "buildingNum" gets the attribute of "name"
       let buildingNum = $(e.target).attr("name");
-      building_Num=buildingNum;
-
+      building_Num = buildingNum;
+      showFloorVacancy(buildingNum);
       //#1-2 the variable "backQuery_building" holds which building it is in.
       backQuery_building = buildingNum;
       console.log("Current Building is ", buildingNum);
@@ -725,14 +768,14 @@
       stepControl();
     });
 
-//Step 4
+    //Step 4
     var floor_Num;
     var floorButton = $(".3");
-      $(floorButton).click(function (e) {
+    $(floorButton).click(function (e) {
       // var collectionSection = sections[i].getAttribute("id");
       //#1-1 the variable "buildingNum" gets the attribute of "name"
       let floorNum = $(e.target).attr("id");
-        floor_Num=floorNum;
+      floor_Num = floorNum;
 
       //#1-2 the variable "backQuery_building" holds which building it is in.
 
@@ -745,18 +788,18 @@
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
       $("#locationIndicator").html("You are currently in floor" + floorNum);
-      console.log("This is in building "+ backQuery_building);
+      console.log("This is in building " + backQuery_building);
       stepControl();
     });
 
     //Step 5
     var locker_Num;
     var lockerButton = $(".4");
-      $(lockerButton).click(function (e) {
+    $(lockerButton).click(function (e) {
       // var collectionSection = sections[i].getAttribute("id");
       //#1-1 the variable "buildingNum" gets the attribute of "name"
       let lockerNum = $(e.target).attr("id");
-        locker_Num=lockerNum;
+      locker_Num = lockerNum;
 
       //#1-2 the variable "backQuery_building" holds which building it is in.
 
@@ -766,31 +809,31 @@
       step = 5;
 
 
-          firebase.auth().onAuthStateChanged(function (user) {
+      firebase.auth().onAuthStateChanged(function (user) {
 
 
-    if(user == null){
+        if (user == null) {
 
-      $("#showConfirmationLockerPosition").html("please login before reserving for a locker")
-      $("#confirm").hide();
+          $("#showConfirmationLockerPosition").html("please login before reserving for a locker")
+          $("#confirm").hide();
 
-      var loginBtn = $("<button id='loginBtn'><a href='./login.html'>Login</a></button>");
-//      $("#confirm ").after(loginBtn);
-        //let abc123 = $("#confirmationDiv").html();
-        //$("#confirmationDiv").html(abc123);
-        //$("#confirmationDiv").append()
-      $("#confirmationDiv").append(loginBtn);
-        
-      
-      }
-     })
+          var loginBtn = $("<button id='loginBtn'><a href='./login.html'>Login</a></button>");
+          //      $("#confirm ").after(loginBtn);
+          //let abc123 = $("#confirmationDiv").html();
+          //$("#confirmationDiv").html(abc123);
+          //$("#confirmationDiv").append()
+          $("#confirmationDiv").append(loginBtn);
+          $("#confirmationDiv").parentNode.removeChild(loginBtn);
+
+        }
+      })
 
 
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
       $("#locationIndicator").html("You currently chosen " + lockerNum);
-      $("#showConfirmationLockerPosition").html("You have currently chosen" + lockerNum + " on " + floor_Num + "loor, of building" +building_Num);
-      console.log("This is in building "+ backQuery_building);
+      $("#showConfirmationLockerPosition").html("You have currently chosen" + lockerNum + " on " + floor_Num + "loor, of building" + building_Num);
+      console.log("This is in building " + backQuery_building);
       stepControl();
     });
   </script>
@@ -816,10 +859,10 @@
     //It is invoked by clicking on the section divs.
     function showBuildingVacancy(sections) {
 
-       /*
-        if the building thingy belongs to a section, just trasverse the session,
-      for each of the button span in the section, it get access the database once.
-      */
+      /*
+       if the building thingy belongs to a section, just trasverse the session,
+     for each of the button span in the section, it get access the database once.
+     */
       db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection(sections).onSnapshot(function (snap) {
         snap.forEach(function (doc) {
           console.log("Document data:", doc.data().vacant_lockers);
@@ -829,23 +872,28 @@
         });
       });
 
+    }
 
-      //these are the ways to test "start with" :
-      //      alert(buildingSW[1].getAttribute('id').startsWith("SW"));
-      //      alert(buildingButton[0].getAttribute('name').startsWith());
+    var buil;
+    function showFloorVacancy(buildings) {
+      buil = buildings;
+      /*
+       if the building thingy belongs to a section, just trasverse the session,
+     for each of the button span in the section, it get access the database once.
+     */
+      console.log("Thisisbuilding" + buildings);
+      let floorinfo = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection(backQuery_section).doc(buildings).collection(buildings + "_floors");
+      //       alert(buildings+'_floors');
+      //      let floorQuery=floorinfo.where(firebase.firestore.FieldPath.collectionId(),'==',floor)
+      //      alert("floorQuery"+Object.toString(floorQuery))
+      floorinfo.onSnapshot(function (snap) {
+        snap.forEach(function (doc) {
+          //          alert("Document data:"+doc.data().vacancy);
+          //          alert("docID"+doc.id);
+          $("#" + doc.id + "data").html(doc.data().vacancy);
 
-      //      var buildingNW = $('.btnbuildingNW');
-      //      var floors = $()
-      //      alert(sections[0].getAttribute("id"));
-
-
-      //      for(var i in sections){
-
-
-
-
-
-
+        });
+      });
 
     }
 
@@ -858,49 +906,126 @@
 
 
 
-     $("#logout").click(function () {
-        firebase.auth().signOut();
-        window.location.href = './login.html';
-      })
+    $("#logout").click(function () {
+      firebase.auth().signOut();
+      window.location.href = './login.html';
+    })
 
 
 
 
 
+    var calcVacancy_floor = 0;
+    $("#confirm").click(function (event) {
+      firebase.auth().onAuthStateChanged(function (user) {
+        let getVacancy = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building).collection(backQuery_building + "_floors").doc(floor_Num);
 
-$("#confirm").click(function(event){
-  firebase.auth().onAuthStateChanged(function (user){
+        getVacancy.onSnapshot(function (snap) {
+
+          calcVacancy_floor = snap.data().vacancy;
+          //    alert("calcVacancy_floor "+calcVacancy_floor);
+
+          calcVacancy_floor--;
+          //    alert("calcVacancy_floor "+calcVacancy_floor);
+          //    else{
+          //        alert("Not Possible");
+          //           }
+        })
 
 
- db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").set(
+
+        db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").set(
           {
-            locker: [locker_Num]
+            locker: locker_Num
           })
 
           .then(function () {
-            console.log(locker_Num);
-            window.location.href="./lockermanagement.html";
+            //            alert(locker_Num);
+            calculate();
+            //            window.location.href="./lockermanagement.html";
           })
           .catch(function (error) {
             console.error("Error writing document: ", error);
           });
-})
-})
+      })
+    })
+
+    function calculate() {
+
+      let getdataFloor = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building).collection(backQuery_building + "_floors").doc(floor_Num);
+
+      getdataFloor.get().then(
+        getdataFloor.set(
+          {
+            vacancy: calcVacancy_floor,
+          })
 
 
+      )
+
+      let getdataBuil = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building);
+
+      //  getdataBuil.collection(backQuery_building+"_floors").onSnapshot(function (snap) {
+      //        snap.forEach(function (doc) {
+      //          buildingVacancies+=doc.data().vacancy;
+      //
+      //        }
+      //     )})
+      calculateBuil();
+      calculateSec();
+    }
+
+    var buildingVacancies = 0;
+    function calculateBuil() {
 
 
+      let getdataBuil = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building);
+      getdataBuil.collection(backQuery_building + "_floors").onSnapshot(function (snap) {
+        snap.forEach(function (doc) {
+          buildingVacancies = doc.data().vacancy + buildingVacancies;
+          alert("doc.data().vacancy " + doc.data().vacancy);
+        })
+        alert("buildingVacancies" + buildingVacancies)
+        callback();
+      })
+
+    }
+
+    function callback() {
+      let getdataBuil = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building);
+      getdataBuil.get().then(
+        getdataBuil.set({
+
+          vacant_lockers: buildingVacancies
+        })
+      )
+    }
+
+    var sectionVacancies = 0;
+    function calculateSec() {
 
 
+      let getdataSec = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building);
+      getdataSec.collection(backQuery_building + "_floors").onSnapshot(function (snap) {
+        snap.forEach(function (doc) {
+          sectionVacancies = doc.data().vacant_lockers + sectionVacancies;
+          alert("doc.data().vacancy " + doc.data().vacancy);
+        })
+        alert("sectionVacancies" + sectionVacancies)
+        callbackSec();
+      })
 
-//    $(".SW-buildings").click(function(){
-//         var SW = $("button[name^='SW']");
-//      var SWlist = [1];
-//      SWlist.push(SW.forEach());
-//      let buildingNum = -1;
-//      SWlist[]
-//
-//    })
+    }
+
+    function callbackSec() {
+      getdataSec = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G');
+      getdataSec.get().then(
+        getdataSec.set({
+          [backQuery_section]: sectionVacancies,
+          //      backQuery_section: sectionVacancies
+        })
+      )
+    }
 
   </script>
 </body>

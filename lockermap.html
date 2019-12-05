@@ -426,7 +426,7 @@
     <span>Please Choose a <span id="choosingScope">section</span> to view the available lockers</span>
   </div>
   <div>
-    <button id="pickRandom">Pick a locker for me</button>
+    <button id="pickRandom" onclick="pickRandom()">Pick a locker for me</button>
   </div>
   <!--A div that allows the user to choose a section to view avaiable lockers-->
   <div id="sectionChoice" class="1stuff">
@@ -562,7 +562,8 @@
           <p class="card-text" id="showConfirmationLockerPosition">
             you are currently at
           </p>
-          <a href="#!" class="btn btn-primary" id="confirm">confirm</a>
+          <a class="btn btn-info" href="changelocker.html" id="changeALocker">Change Locker</a>
+          <a class="btn btn-primary" id="confirm">confirm</a>
         </div>
       </div>
     </div>
@@ -607,7 +608,7 @@
           // $("#pickRandom").show();
           $(".0stuff").show();
         case 1:
-          $("#pickRandom").show();
+        $("#pickRandom").hide();
           $(".0stuff").hide();
           $("#goBackBtn").hide();
           $(".1stuff").show();
@@ -627,7 +628,8 @@
           If you come back from case 3, it also knows what blocks of building you chose.
         */
         case 2:
-          $("#pickRandom").hide();
+        $("#pickRandom").show();
+          
           $(`#${backQuery_section}` + "-buildings").show();
           //from case 2, it allows you to press the goBackBtn
           $("#goBackBtn").show();
@@ -811,21 +813,43 @@
 
       firebase.auth().onAuthStateChanged(function (user) {
 
-
         if (user == null) {
 
-          $("#showConfirmationLockerPosition").html("please login before reserving for a locker")
-          $("#confirm").hide();
+$("#showConfirmationLockerPosition").html("please login before reserving for a locker")
 
-          var loginBtn = $("<button id='loginBtn'><a href='./login.html'>Login</a></button>");
-          //      $("#confirm ").after(loginBtn);
-          //let abc123 = $("#confirmationDiv").html();
-          //$("#confirmationDiv").html(abc123);
-          //$("#confirmationDiv").append()
-          $("#confirmationDiv").append(loginBtn);
-          $("#confirmationDiv").parentNode.removeChild(loginBtn);
 
+var loginBtn = $("<button id='loginBtn'><a href='./login.html'>Login</a></button>");
+//      $("#confirm ").after(loginBtn);
+//let abc123 = $("#confirmationDiv").html();
+//$("#confirmationDiv").html(abc123);
+//$("#confirmationDiv").append()
+$("#confirmationDiv").append(loginBtn);
+// $("#confirmationDiv").parentNode.removeChild(loginBtn);
+$("#confirm").hide();
+$("#changeALocker").hide();
+console.log("1");
+
+}
+        db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get().then(function(){
+
+        console.log(JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get())+"Debugging is so tiring");
+
+        if (JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) == "{}"){
+          $("#changeALocker").hide();
+          $("#confirm").show();
+         
+          alert("Do you wanna use this locker? If yes, press the blue confirm!");
+          console.log("2");
         }
+
+        else if(JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) != "{}"){
+          console.log("3");
+          $("#showConfirmationLockerPosition").html("Wanna change a locker? Plz fill in a form to tell us the reason of a change")
+          $("#confirm").hide();
+          $("#changeALocker").show();}
+          // $("#confirmationDiv").parentNode.removeChild(loginBtn);
+      })
+        
       })
 
 
@@ -942,7 +966,7 @@
           .then(function () {
             //            alert(locker_Num);
             calculate();
-            //            window.location.href="./lockermanagement.html";
+                       window.location.href="./lockermanagement.html";
           })
           .catch(function (error) {
             console.error("Error writing document: ", error);
@@ -1027,6 +1051,22 @@
       )
     }
 
+
+    function pickRandom() {
+      
+      // var queryRandom = backQuery_section + Math.ceil(Math.random()*3+1);
+      var queryRandom="SW1";
+      alert(queryRandom);
+      var floor=queryRandom +"_floors";
+      alert(floor);
+      db.collectionGroup(floor)
+        .where("vacancy", '>=',  0)
+        .onSnapshot(function (snap) {
+        snap.forEach(function (doc) {
+            alert("vacancy" +doc.data().vacancy);
+          });
+        });
+    }
   </script>
 </body>
 

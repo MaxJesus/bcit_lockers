@@ -15,9 +15,16 @@
             var NEObj = { //define all the buildings an list of vacant ones
                 NE1: [11, 12, 13, 14, 15, 16, 17, 18, 19],
                 NE2: [11, 12, 13, 14, 15, 16, 17, 18, 19],
-                NE3: [11, 12, 13, 14, 15, 16, 17, 18, 19],
+                NE3: [11, 12, 13, 14, 15, 16, 17, 18, 19]
                 }
-            }
+            
+//            var NEFloorObj = {//define all the floors an list of vacant ones
+//                f1: [11, 12, 13, 14, 15, 16, 17, 18, 19],
+//                f2: [11, 12, 13, 14, 15, 16, 17, 18, 19],
+//                f3: [11, 12, 13, 14, 15, 16, 17, 18, 19]
+//            }
+            
+            
             console.log("in populate vacant lockers" + NEObj);
             db.collection("lockerinfo").doc("NE")
                 .set(NEObj)
@@ -27,8 +34,22 @@
                 .catch(function (error) {
                     console.error("Error writing document: ", error);
                 });
+         
+//            db.collection("lockerinfo").doc("NE").collection("floor")
+//                .set(NEFloorObj)
+//                .then(function () {
+//                    console.log("Document successfully written!");
+//                })
+//                .catch(function (error) {
+//                    console.error("Error writing document: ", error);
+//                });
         };
         populateNE_VL();
+
+
+
+
+--------------------------------//OTHER BUILDINGS---------------------------------------
          
 //         function populateNW_VL() {
 //            var NWObj = { //define all the buildings an list of vacant ones

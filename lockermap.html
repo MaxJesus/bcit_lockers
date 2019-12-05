@@ -622,7 +622,7 @@
     var backQuery_section;
 
     function stepControl() {
-      switch (step) {
+        switch (step) {
         //case 1, the very first step is to choose a section(e.g. NE,SW)
         //goBackBtn is not shown, because it is not needed.
         case 0:
@@ -675,6 +675,7 @@
           $(".4stuff").hide();
           $("#cfmPage").hide();
           $("#choosingScope").html("Floor");
+          $("#pickRandom").hide();
           break;
 
         case 4:
@@ -684,15 +685,17 @@
           $("#choosingScope").html("number");
           $("#cfmPage").hide();
           $("#loginBtn").hide();
-
+          $("#locker-choice").show();
           break;
 
         case 5:
+         
           $(".3stuff").hide();
           $(".4stuff").hide();
           $("#locker-choice").show();
           $("#choosingScope").html("number");
           $("#cfmPage").show();
+          $("#pickRandom").hide();
           
         case 6:
           $(".3stuff").hide();
@@ -817,12 +820,13 @@
 
       //#1-3 "step=3" means the locker-picking function goes to the level of building.
       step = 4;
-
-
+      
+      
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
       $("#locationIndicator").html("You are currently in floor" + floorNum);
       console.log("This is in building " + backQuery_building);
+      randomPick==false;
       stepControl();
     });
 
@@ -841,7 +845,7 @@
 
       //#1-3 "step=3" means the locker-picking function goes to the level of building.
       step = 5;
-
+       
 
       firebase.auth().onAuthStateChanged(function (user) {
 
@@ -899,35 +903,62 @@ console.log("1");
       $("#locationIndicator").html("You currently chosen " + lockerNum);
       $("#showConfirmationLockerPosition").html("You have currently chosen" + lockerNum + " on " + floor_Num + "loor, of building" + building_Num);
       console.log("This is in building " + backQuery_building);
+      checkRandom();
       stepControl();
     });
     
     
     
   //Step 6
-   
+    var randomPick = false;
+    var query_Random;
+    var floor_Random;
+    var locker_Random;
     function pickRandom() {
-      
+      randomPick=true;
        var queryRandom = backQuery_section + Math.ceil(Math.random()*3+1);
+       
       //Query Random is the automatically generated building choice in this area.
       var queryRandom="SW1";
+      
+      query_Random = queryRandom;
+      
       console.log("checking this building " + queryRandom);
       var floor=queryRandom +"_floors";
       console.log("checking" + floor);
       db.collectionGroup(floor)
         .where("vacancy", '>=',  0)
         .onSnapshot(function (snap) {
+        
         snap.forEach(function (doc) {
+          floor_Random=doc.id;
+          alert("floor_Num" + floor_Random);
+          
             console.log("vacancy" +doc.data().vacancy);
           });
-       locker_Num
+       locker_Num=locker_Random;
+//        alert("building_Num" + locker_Random);
        step=6;
+        
+       
        stepControl();
         
         });
     }
     
-    
+    function checkRandom(){
+      if(randomPick==true)
+        {
+          building_Num=query_Random;
+          floor_Num=floor_Random;
+        }
+      else
+         {
+           console.log("Did not press random")
+         }
+      alert("floor_Num" + floor_Num);
+          alert("building_Num" + building_Num);
+    }
     
    
       // var collectionSection = sections[i].getAttribute("id");

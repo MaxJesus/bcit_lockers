@@ -60,7 +60,9 @@
         </div>
     </div>
 
-    <script>$(document).ready(function () {
+    <script>
+      
+      $(document).ready(function () {
             //local Storage reads the attribute "picture" to the document.
             var pictureSrc = window.localStorage.getItem("picture");
             $('#img-upload').attr('src', pictureSrc);

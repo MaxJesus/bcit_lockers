@@ -65,6 +65,7 @@
       font-size: 40pt;
       position: relative;
       top: 4vh;
+      left: 5vw;
     }
 
     #header {
@@ -294,7 +295,6 @@
     #SE {
       grid-area: SE;
       background: linear-gradient(to bottom left, crimson, red, floralwhite);
-      background-color:
         border: 2px solid black;
       margin: 1vw;
       border-radius: 5vw;
@@ -385,6 +385,19 @@
       left: 3vw;
       top: 1vh;
     }
+    #NW3Btn, #NW1Btn, #NW5Btn, #NW6Btn {
+      background: linear-gradient(to bottom right, cornflowerblue, dodgerblue, floralwhite);
+    }
+    #SW1Btn, #SW2Btn, #SW3Btn, #SW5Btn, #SW9Btn {
+      background: linear-gradient(to bottom right, orange, bisque, floralwhite);
+    }
+    #SE1Btn, #SE2Btn, #SE3Btn, #SE4Btn {
+      background: linear-gradient(to bottom left, crimson, red, floralwhite);
+    }
+    #NE1Btn, #NE2Btn, #NE3Btn, #NE4Btn {
+      background: linear-gradient(to bottom right, darkgreen, green, ALICEBLUE);
+    }
+
   </style>
 
 
@@ -425,8 +438,13 @@
     <span id="locationIndicator"></span>
     <span>Please Choose a <span id="choosingScope">section</span> to view the available lockers</span>
   </div>
+  <!--We can delete the div above this?>
   <div>
+<<<<<<< HEAD
     <button id="pickRandom" onclick="pickRandom()">Pick a locker for me</button>
+=======
+    <button id="pickRandom">Pick a campus section for me</button>
+>>>>>>> 586fcee54de99ec3355e7e386f94b19ce0a17945
   </div>
   <!--A div that allows the user to choose a section to view avaiable lockers-->
   <div id="sectionChoice" class="1stuff">

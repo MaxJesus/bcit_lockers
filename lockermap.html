@@ -64,7 +64,7 @@
     #pickRandom {
       font-size: 40pt;
       position: relative;
-      top: 4vh;
+      margin-top: 1vh;
       left: 5vw;
     }
 
@@ -438,10 +438,11 @@
     <span id="locationIndicator"></span>
     <span>Please Choose a <span id="choosingScope">section</span> to view the available lockers</span>
   </div>
+  
   <!--We can delete the div above this?>
   <div>
 <<<<<<< HEAD
-    <button id="pickRandom" onclick="pickRandom()">Pick a locker for me</button>
+    
 =======
     <button id="pickRandom">Pick a campus section for me</button>
 >>>>>>> 586fcee54de99ec3355e7e386f94b19ce0a17945
@@ -465,7 +466,7 @@
       <p> <span id="counterSE"> </span> <span>available lockers left</span> </p>
     </div>
   </div>
-
+  
 
   <!--A div that allows the user to choose a building to view avaiable lockers-->
   <div id="buildings">
@@ -591,6 +592,8 @@
     </div>
 
   </div>
+  
+  <button id="pickRandom" onclick="pickRandom()">Pick a locker for me</button>
 
   <!-- Bootstrap for Mobile-first -->
   <!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" itemprop="" property="">-->
@@ -690,6 +693,15 @@
           $("#locker-choice").show();
           $("#choosingScope").html("number");
           $("#cfmPage").show();
+          
+        case 6:
+          $(".3stuff").hide();
+          $(".4stuff").hide();
+          $("#locker-choice").show();
+          $("#choosingScope").html("number");
+          $("#cfmPage").show();
+           $("#pickRandom").hide();
+          
 
           break;
       }
@@ -744,10 +756,12 @@
 
     $("#goBackBtn").click(function () {
       console.log(step);
+      if(step==6)
+        {step=3}
       step--;
       stepControl();
       console.log("at step " + step)
-
+      
     });
 
 
@@ -860,11 +874,20 @@ console.log("1");
           console.log("2");
         }
 
-        else if(JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) != "{}"){
+           db.collection('user').doc(user.uid).collection('position').doc('lockerInfo').onSnapshot(function (querySnapshot) {if(querySnapshot != null){
           console.log("3");
           $("#showConfirmationLockerPosition").html("Wanna change a locker? Plz fill in a form to tell us the reason of a change")
           $("#confirm").hide();
           $("#changeALocker").show();}
+        
+        
+                               
+        })
+          
+          
+          
+          
+        
           // $("#confirmationDiv").parentNode.removeChild(loginBtn);
       })
         
@@ -878,6 +901,98 @@ console.log("1");
       console.log("This is in building " + backQuery_building);
       stepControl();
     });
+    
+    
+    
+  //Step 6
+   
+    function pickRandom() {
+      
+       var queryRandom = backQuery_section + Math.ceil(Math.random()*3+1);
+      //Query Random is the automatically generated building choice in this area.
+      var queryRandom="SW1";
+      console.log("checking this building " + queryRandom);
+      var floor=queryRandom +"_floors";
+      console.log("checking" + floor);
+      db.collectionGroup(floor)
+        .where("vacancy", '>=',  0)
+        .onSnapshot(function (snap) {
+        snap.forEach(function (doc) {
+            console.log("vacancy" +doc.data().vacancy);
+          });
+       locker_Num
+       step=6;
+       stepControl();
+        
+        });
+    }
+    
+    
+    
+   
+      // var collectionSection = sections[i].getAttribute("id");
+      //#1-1 the variable "buildingNum" gets the attribute of "name"
+//      let lockerNum = $(e.target).attr("id");
+//      locker_Num = lockerNum;
+
+//      console.log("Current floor is ", lockerNum);
+//
+//
+//
+//      firebase.auth().onAuthStateChanged(function (user) {
+//
+//        if (user == null) {
+//
+//$("#showConfirmationLockerPosition").html("please login before reserving for a locker")
+//
+//
+//var loginBtn = $("<button id='loginBtn'><a href='./login.html'>Login</a></button>");
+////      $("#confirm ").after(loginBtn);
+////let abc123 = $("#confirmationDiv").html();
+////$("#confirmationDiv").html(abc123);
+////$("#confirmationDiv").append()
+//$("#confirmationDiv").append(loginBtn);
+//// $("#confirmationDiv").parentNode.removeChild(loginBtn);
+//$("#confirm").hide();
+//$("#changeALocker").hide();
+//console.log("1");
+//
+//}
+//        db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get().then(function(){
+//
+//        console.log(JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get())+"Debugging is so tiring");
+//
+//        if (JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) == "{}"){
+//          $("#changeALocker").hide();
+//          $("#confirm").show();
+//
+//          alert("Do you wanna use this locker? If yes, press the blue confirm!");
+//          console.log("2");
+//        }
+//
+//        else if(JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) != "{}"){
+//          console.log("3");
+//          $("#showConfirmationLockerPosition").html("Wanna change a locker? Plz fill in a form to tell us the reason of a change")
+//          $("#confirm").hide();
+//          $("#changeALocker").show();}
+//          // $("#confirmationDiv").parentNode.removeChild(loginBtn);
+//      })
+//
+//      })
+//
+//
+//      $("#locationIndicator").css("color", "red");
+//      $("#locationIndicator").css("font-size", "5vw");
+//      $("#locationIndicator").html("You currently chosen " + lockerNum);
+//      $("#showConfirmationLockerPosition").html("You have currently chosen" + lockerNum + " on " + floor_Num + "loor, of building" + building_Num);
+//      console.log("This is in building " + backQuery_building);
+//      stepControl();
+//
+    
+  
+    
+    
+    
   </script>
 
   <!--Integrated firebase settings-->
@@ -1025,15 +1140,19 @@ console.log("1");
       getdataBuil.collection(backQuery_building + "_floors").onSnapshot(function (snap) {
         snap.forEach(function (doc) {
           buildingVacancies = doc.data().vacancy + buildingVacancies;
-          alert("doc.data().vacancy " + doc.data().vacancy);
+          
+//          alert("doc.data().vacancy " + doc.data().vacancy);
+          
         })
+        
         alert("buildingVacancies" + buildingVacancies)
-        callback();
+        builCallback();
+        
       })
 
     }
 
-    function callback() {
+    function builCallback() {
       let getdataBuil = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building);
       getdataBuil.get().then(
         getdataBuil.set({
@@ -1070,21 +1189,7 @@ console.log("1");
     }
 
 
-    function pickRandom() {
-      
-      // var queryRandom = backQuery_section + Math.ceil(Math.random()*3+1);
-      var queryRandom="SW1";
-      alert(queryRandom);
-      var floor=queryRandom +"_floors";
-      alert(floor);
-      db.collectionGroup(floor)
-        .where("vacancy", '>=',  0)
-        .onSnapshot(function (snap) {
-        snap.forEach(function (doc) {
-            alert("vacancy" +doc.data().vacancy);
-          });
-        });
-    }
+    
   </script>
 </body>
 

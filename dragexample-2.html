@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>In hand -> Inventory</title>
   <!--  <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
     integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
@@ -25,6 +25,45 @@
   <!--Authentication Sign in with a pre-built UI-->
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+  <!--style for upload-->
+  <style>
+    #container{
+      font-size: 10pt;
+    }
+    #browse{
+      background-color: azure;
+    }
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 50px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+        #img-upload {
+            width: 100%;
+        }
+    </style>
 
 
 
@@ -32,9 +71,7 @@
 
 
 
-
-
-
+<!--draggable style-->
   <style>
     #createName{
       height: 3vh;
@@ -55,8 +92,8 @@
       position: fixed;
       left: 25vw;
       top:5vh;
-      height: 15vh;
-      font-size:40pt;
+      height: 55vh;
+      font-size:20pt;
     }
     #gallery {
       float: left;
@@ -438,12 +475,29 @@
 
 <body>
   <div id="createNewInstruction">
-    <legend>
+    <fieldset>
+    <legend>create new stuff</legend>
       
         <input id="createName" type="text" placeholder="Enter Item Name Here"/>
         <button id="submitCreate" >submitCreate</button>
+       <div class="container" id="uploadImg">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Upload Image</label>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file" id="browse">
+                            Browse… <input type="file" id="imgInp">
+                        </span>
+                    </span>
+                    <input type="text" class="form-control" readonly>
+                </div>
+                <img id='img-upload' />
+            </div>
+        </div>
+    </div>
       
-    </legend>
+    </fieldset>
 <!--    <input type="text" placeholder="Enter Item Name Here"/>-->
   </div>
   <div class="ui-widget ui-helper-clearfix" id="widget">
@@ -488,9 +542,99 @@
     
   </div>
 
+  
+  
+  
+  
+  
+    <script>
+      var pictureSrc;
+      $(document).ready(function () {
+            //local Storage reads the attribute "picture" to the document.
+            pictureSrc = window.localStorage.getItem("picture");
+            $('#img-upload').attr('src', pictureSrc);
+
+//            localStorage.clear();
+
+            $(document).on('change', '.btn-file :file', function () {
+                var input = $(this),
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [label]);
+            });
+
+            $('.btn-file :file').on('fileselect', function (event, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
+                }
+
+            });
+
+            //the function reads the URL to the picture.
+            function readURL(input) {
+                
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    pictureSrc = e.target.result;
+                    $('#img-upload').attr('src', pictureSrc);
+                 /*this line of code is crucial, if it is put outside
+                 of the the function(e){} callback, then the memory function
+                 would not work*/
+                    localStorage.setItem("picture", pictureSrc);
+                   
+                }
+                // localStorage.setItem("picture", pictureSrc);
+                reader.readAsDataURL(input.files[0]);
+            }
+
+            //After some picture is upload, the page reads the new URL
+            $("#imgInp").change(function () {
+
+                readURL(this);
+            });
+//       reader.readAsDataURL(input.files[0]);
+        });
+
+
+
+
+
+    </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <!-- all the widgets are draggable-->
   <script>$("*.widget").draggable();</script>
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <script>
 //    <li class="ui-widget-content ui-corner-tr" id='sandwich' name="porkSandwich">
 //        <h5 class="ui-widget-header">Sandwich</h5>
@@ -517,6 +661,11 @@
       newItem.appendChild(newItemHeader);
       newItemHeader.setAttribute("class","ui-widget-header");
       newItemHeader.innerHTML=itemName;
+      
+      let newItemImage = document.createElement("img");
+      newItemImage.setAttribute("src",pictureSrc);
+      newItem.appendChild(newItemImage);
+      
       
       $("#gallery").append(newItem);
       $(newItem).draggable();
@@ -563,6 +712,11 @@
     );
 
   </script>
+  
+
+  
+  
+  
 
 </body>
 

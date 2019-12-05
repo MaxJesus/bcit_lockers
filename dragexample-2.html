@@ -538,7 +538,7 @@
       <h4 class="ui-widget-header">Drag to here</h4>
     </div>
     
-  <button id="createNewBtn" onclick="createNew()"> create new object</button>
+  <button id="createNewBtn"> create new object</button>
     
   </div>
 
@@ -643,7 +643,8 @@
 //        <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory"
 //          class="ui-icon ui-icon-trash">Put this into inventory</a>
 //      </li>
-    $("#createNewBtn").click(function(){
+    $("#createNewBtn").click(function(e){
+      e.preventDefault();
              $("#createNewInstruction").show();
     })
     
@@ -680,15 +681,7 @@
       });
     })
     
-    function createNew(){
-     
-      
-//      switch
-//        case 1:
-//        case 2:
-//        break;
-      
-    }
+  
     
     
     

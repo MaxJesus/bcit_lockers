@@ -31,50 +31,22 @@
   <!-- the above code should be converted into script version later-->
 
 
-  <script src="./scripts/firebase_config.js">
-  </script>
+  <script src="./scripts/firebase_config.js"></script>
 
-  <script>
-    //When loged in, shows the welcome.
-
-    firebase.auth().onAuthStateChanged(function (user) {
-//      alert("functioning");
-
-      if (user == null)
-        {
-
-          window.location.href = './login.html';
-        }
-      db.collection('user').doc(user.uid).onSnapshot(function (snap) {
-        console.log("Current uid is ", user.uid);
-//        $("#welcome").html("Welcome back " + "<br/>" + snap.data().name);
-        $("#welcome").html("Welcome back " + "<br/>" + snap.data().name);
-        $("#welcome").css("font-size", "15pt");
-        $("#welcome").css("float", "left");
-        $("#welcome").css("color", "black")
-      })
-    })
-  </script>
 
   <style>
-   body {
-/*
-      background:linear-gradient(to bottom,#bfceff,#f8bfff,#fffcbf);
-      background-size: 100vw 120vh;
-      background-repeat: repeat;
-      text-align: center;
+    body {
 
-*/
-     background-image: url(img/background.jpg);
-     background-repeat: no-repeat;
-     background-position-y: 12vh;
-     background-size: 100vw 75vh;
+      background-image: url(img/background.jpg);
+      background-repeat: no-repeat;
+      background-position-y: 12vh;
+      background-size: 100vw 75vh;
     }
-
   </style>
 </head>
 
 <body>
+  <!--The header contains the welcome message, the logo, and a dropdown menu-->
   <div id="headerContainer">
     <div id="header">
 
@@ -97,8 +69,6 @@
         </div>
       </div>
 
-      <!--      <img src="img/profile.png"  />-->
-
     </div>
 
 
@@ -111,13 +81,7 @@
   </div>
   <!-- Tip: use bg-* and text-* utilities to style the card -->
   <div id="dragBoxDiv">
-<!--
-    <section id="showCurrent">
-      <div >
-        <span id="showCrt"></span>
-      </div>
-    </section>
--->
+
     <div id="dragBox">
       <div class="card text-white bg-primary mb-3 d-inline-block" style="max-width: 40rem;" id="leftCard">
         <div class="card-header">In hand</div>
@@ -165,12 +129,28 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
   <script>
-    // $(document).ready(function () {
-    //   firebase.auth().onAuthStateChanged(function (user) {
 
-    //   })
-    // })
 
+    //When loged in, shows the welcome.
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      //      alert("functioning");
+
+      if (user == null) {
+
+        window.location.href = './login.html';
+      }
+      db.collection('user').doc(user.uid).onSnapshot(function (snap) {
+        console.log("Current uid is ", user.uid);
+        //        $("#welcome").html("Welcome back " + "<br/>" + snap.data().name);
+        $("#welcome").html("Welcome back " + "<br/>" + snap.data().name);
+        $("#welcome").css("font-size", "15pt");
+        $("#welcome").css("float", "left");
+        $("#welcome").css("color", "black")
+      })
+    })
+
+    //this is needed to support the draggable stuff.
     $(function () {
       $("#sortable").sortable();
       $("#sortable").disableSelection();
@@ -188,7 +168,7 @@
       $("#dragBoxDiv").fadeOut(1000);
     })
 
-
+    //When checkContenBtn is clicked, the check content view will fade in.
     $("#checkContentBtn").click(function () {
       $("#dragBoxDiv").toggle(200);
     })
@@ -199,17 +179,13 @@
     })
 
 
-    // function show_drag_box_div(){
-    // $("#dragBoxDiv").show();
-    // }
-
-
     function lockerEvent() {
       //the 'clicked' variable stores the information whether the button is clicked or not.
       //the 'unlocked' variable tells the program whether to unlock or lock the locker.
       let clicked = false;
       let unlocked = false;
 
+      //
       var progressBar = $("<div class='progress'> </div>");
       var progress = $("<div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100' ></div>");
       $(progressBar).append(progress);
@@ -217,7 +193,7 @@
       progressBar.css("margin-top", "1vh");
 
 
-      //Shows unlock progress
+      //Shows unlock progress, this is async
       function showUnlockProgress() {
         setTimeout(() => {
           for (i = 0; i < 10; i++) {
@@ -344,6 +320,7 @@
 
         $("body").append(uploadPic);
 
+        //This appends html elements <iframe> to the body, which is invoked by clicking
         var upload = $("<iframe></iframe>");
         $(uploadPic).append(upload);
         $(uploadPic).append(draggableView);
@@ -385,6 +362,8 @@
       $(drag).attr("seamless");
       $("#dragBox").append(drag);
 
+
+      //Change your status to "signed out", and allows you to log in again.
       $("#logout").click(function () {
         firebase.auth().signOut();
         window.location.href = './login.html';
@@ -416,21 +395,19 @@
     lockerEvent();
 
 
-$("#showCurrent").hide();
-      function showCurrent(){
-//          $("#showCurrent").css("position","fixed");
-//          $("#showCurrent").css("left","35vw");
-//          $("#showCurrent").show();
-          firebase.auth().onAuthStateChanged(function (user) {
+    $("#showCurrent").hide();
+    //ShowCurrent() would allow the user 
+    function showCurrent() {
+      firebase.auth().onAuthStateChanged(function (user) {
 
-           db.collection('user').doc(user.uid).collection('position').doc('lockerInfo').onSnapshot(function (querySnapshot) {
-        alert("Your locker number is "+querySnapshot.data().locker);
+        db.collection('user').doc(user.uid).collection('position').doc('lockerInfo').onSnapshot(function (querySnapshot) {
+          alert("Your locker number is " + querySnapshot.data().locker);
 
 
 
         })
       })
-      }
+    }
   </script>
 </body>
 

@@ -1,1 +1,1 @@
-Instructions
+Instructions are in "Why We degesign page"

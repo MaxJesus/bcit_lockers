@@ -44,7 +44,7 @@
       font-size: 40pt;
     }
 
-    #changeALocker{
+    #changeALocker {
       font-size: 40pt;
     }
 
@@ -269,11 +269,9 @@
     }
 
 
-
     #NW {
       grid-area: NW;
       background: linear-gradient(to bottom right, cornflowerblue, dodgerblue, floralwhite);
-      background-color: ;
       border: 2px solid black;
       margin: 1vw;
       border-radius: 5vw;
@@ -299,7 +297,7 @@
     #SE {
       grid-area: SE;
       background: linear-gradient(to bottom left, crimson, red, floralwhite);
-        border: 2px solid black;
+      border: 2px solid black;
       margin: 1vw;
       border-radius: 5vw;
     }
@@ -389,19 +387,35 @@
       left: 3vw;
       top: 1vh;
     }
-    #NW3Btn, #NW1Btn, #NW5Btn, #NW6Btn {
+
+    #NW3Btn,
+    #NW1Btn,
+    #NW5Btn,
+    #NW6Btn {
       background: linear-gradient(to bottom right, cornflowerblue, dodgerblue, floralwhite);
     }
-    #SW1Btn, #SW2Btn, #SW3Btn, #SW5Btn, #SW9Btn {
+
+    #SW1Btn,
+    #SW2Btn,
+    #SW3Btn,
+    #SW5Btn,
+    #SW9Btn {
       background: linear-gradient(to bottom right, orange, bisque, floralwhite);
     }
-    #SE1Btn, #SE2Btn, #SE3Btn, #SE4Btn {
+
+    #SE1Btn,
+    #SE2Btn,
+    #SE3Btn,
+    #SE4Btn {
       background: linear-gradient(to bottom left, crimson, red, floralwhite);
     }
-    #NE1Btn, #NE2Btn, #NE3Btn, #NE4Btn {
+
+    #NE1Btn,
+    #NE2Btn,
+    #NE3Btn,
+    #NE4Btn {
       background: linear-gradient(to bottom right, darkgreen, green, ALICEBLUE);
     }
-
   </style>
 
 
@@ -442,8 +456,8 @@
     <span id="locationIndicator"></span>
     <span>Please Choose a <span id="choosingScope">section</span> to view the available lockers</span>
   </div>
-  
-  
+
+
   <!--A div that allows the user to choose a section to view avaiable lockers-->
   <div id="sectionChoice" class="1stuff">
     <div id="NW" class="1">
@@ -463,7 +477,7 @@
       <p> <span id="counterSE"> </span> <span>available lockers left</span> </p>
     </div>
   </div>
-  
+
 
   <!--A div that allows the user to choose a building to view avaiable lockers-->
   <div id="buildings">
@@ -589,7 +603,7 @@
     </div>
 
   </div>
-  
+
   <button id="pickRandom" onclick="pickRandom()">Pick a locker for me</button>
 
   <!-- Bootstrap for Mobile-first -->
@@ -619,14 +633,14 @@
     var backQuery_section;
 
     function stepControl() {
-        switch (step) {
+      switch (step) {
         //case 1, the very first step is to choose a section(e.g. NE,SW)
         //goBackBtn is not shown, because it is not needed.
         case 0:
           // $("#pickRandom").show();
           $(".0stuff").show();
         case 1:
-        $("#pickRandom").hide();
+          $("#pickRandom").hide();
           $(".0stuff").hide();
           $("#goBackBtn").hide();
           $(".1stuff").show();
@@ -646,8 +660,8 @@
           If you come back from case 3, it also knows what blocks of building you chose.
         */
         case 2:
-        $("#pickRandom").show();
-          
+          $("#pickRandom").show();
+
           $(`#${backQuery_section}` + "-buildings").show();
           //from case 2, it allows you to press the goBackBtn
           $("#goBackBtn").show();
@@ -686,14 +700,14 @@
           break;
 
         case 5:
-         
+
           $(".3stuff").hide();
           $(".4stuff").hide();
           $("#locker-choice").show();
           $("#choosingScope").html("number");
           $("#cfmPage").show();
           $("#pickRandom").hide();
-          
+
         case 6:
           $(".3stuff").hide();
           $(".4stuff").hide();
@@ -756,12 +770,11 @@
 
     $("#goBackBtn").click(function () {
       console.log(step);
-      if(step==6)
-        {step=3}
+      if (step == 6) { step = 3 }
       step--;
       stepControl();
       console.log("at step " + step)
-      
+
     });
 
 
@@ -817,13 +830,13 @@
 
       //#1-3 "step=3" means the locker-picking function goes to the level of building.
       step = 4;
-      
-      
+
+
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
       $("#locationIndicator").html("You are currently in floor" + floorNum);
       console.log("This is in building " + backQuery_building);
-      randomPick==false;
+      randomPick == false;
       stepControl();
     });
 
@@ -842,63 +855,61 @@
 
       //#1-3 "step=3" means the locker-picking function goes to the level of building.
       step = 5;
-       
+
 
       firebase.auth().onAuthStateChanged(function (user) {
 
+        //If the user has not logged in, the prompt box will show the user to log in!
         if (user == null) {
 
-$("#showConfirmationLockerPosition").html("please login before reserving for a locker")
+          $("#showConfirmationLockerPosition").html("please login before reserving for a locker")
 
 
-var loginBtn = $("<button id='loginBtn'><a href='./login.html'>Login</a></button>");
-//      $("#confirm ").after(loginBtn);
-//let abc123 = $("#confirmationDiv").html();
-//$("#confirmationDiv").html(abc123);
-//$("#confirmationDiv").append()
-$("#confirmationDiv").append(loginBtn);
-// $("#confirmationDiv").parentNode.removeChild(loginBtn);
-$("#confirm").hide();
-$("#changeALocker").hide();
-console.log("1");
-
-}
-        db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get().then(function(){
-
-        console.log(JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get())+"Debugging is so tiring");
-
-        if (JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) == "undefined"){
-          alert("Do you wanna use this locker? If yes, press the blue confirm!");
+          //loginBtn is a JQuery button that will be appended to the div when the user is not logged in.
+          var loginBtn = $("<button id='loginBtn'><a href='./login.html'>Login</a></button>");
+          $("#confirmationDiv").append(loginBtn);
+          $("#confirm").hide();
           $("#changeALocker").hide();
-          $("#confirm").show();
-         
-          alert("Do you wanna use this locker? If yes, press the blue confirm!");
-          console.log("2");
+          console.log("1");
+
         }
-        $("#changeALocker").hide();
-           db.collection('user').doc(user.uid).collection('position').doc('lockerInfo').onSnapshot(function (querySnapshot) {
+        //This is an access to the database that would allow the app to check if the user's log in status
+
+        db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get().then(function () {
+
+          console.log(JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) + "Debugging is so tiring but fun!");
+
+          //This one shows if the user is logged in, but the user did not have a locker.
+          //Under this circumstance, the user is allowed to book a locker.
+          if (JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) == "undefined") {
+            alert("Do you wanna use this locker? If yes, press the blue confirm!");
+            $("#changeALocker").hide();
+            $("#confirm").show();
+
+
+            // Does not necessarily need to do this:
+            // alert("Do you wanna use this locker? If yes, press the blue confirm!");
+            console.log("2");
+          }
+          $("#changeALocker").hide();
+          db.collection('user').doc(user.uid).collection('position').doc('lockerInfo').onSnapshot(function (querySnapshot) {
             //  alert("undefined");
-             if(querySnapshot.data() != null){
-                console.log("3");
-                $("#showConfirmationLockerPosition").html("Wanna change a locker? Plz fill in a form to tell us the reason of a change")
-                $("#confirm").hide();
-                $("#changeALocker").show();
-             }
-        
-        
-                               
+            if (querySnapshot.data() != null) {
+              console.log("3");
+              $("#showConfirmationLockerPosition").html("Wanna change a locker? Plz fill in a form to tell us the reason of a change")
+              $("#confirm").hide();
+              $("#changeALocker").show();
+            }
+
+
+
+          })
+
         })
-          
-          
-          
-          
-        
-          // $("#confirmationDiv").parentNode.removeChild(loginBtn);
-      })
-        
+
       })
 
-
+      //JQuery changes the css, and creates the html elements. this is necessary because the item is created only when the function is invoked.
       $("#locationIndicator").css("color", "red");
       $("#locationIndicator").css("font-size", "5vw");
       $("#locationIndicator").html("You currently chosen " + lockerNum);
@@ -907,138 +918,78 @@ console.log("1");
       checkRandom();
       stepControl();
     });
-    
-    
-    
-  //Step 6
+
+
+
+    //Step 6 (Pick Random)
+
+    //Boolean to check if the function is clicked or not
     var randomPick = false;
+    //Checks which locker is picked
     var query_Random;
+    //Checks which floor is picked
     var floor_Random;
+    //Checks which locker is picked
     var locker_Random;
     function pickRandom() {
-      randomPick=true;
-       var queryRandom = backQuery_section + Math.ceil(Math.random()*3+1);
-       
+      randomPick = true;
+      var queryRandom = backQuery_section + Math.ceil(Math.random() * 3 + 1);
+
       //Query Random is the automatically generated building choice in this area.
-      var queryRandom="SW1";
-      
+      var queryRandom = "SW1";
+
       query_Random = queryRandom;
-      
+
       console.log("checking this building " + queryRandom);
-      var floor=queryRandom +"_floors";
+      var floor = queryRandom + "_floors";
       console.log("checking" + floor);
       db.collectionGroup(floor)
-        .where("vacancy", '>=',  0)
+        .where("vacancy", '>=', 0)
         .onSnapshot(function (snap) {
-        
-        snap.forEach(function (doc) {
-          floor_Random=doc.id;
-          console.log("floor_Num" + floor_Random);
-          
-            console.log("vacancy" +doc.data().vacancy);
+
+          snap.forEach(function (doc) {
+            floor_Random = doc.id;
+            console.log("floor_Num" + floor_Random);
+
+            console.log("vacancy" + doc.data().vacancy);
           });
 
-let arry=[1111,2222,3333,4444]
-locker_Random=arry[Math.ceil(Math.random()*3)];
+          let arry = [1111, 2222, 3333, 4444]
+          locker_Random = arry[Math.ceil(Math.random() * 3)];
 
 
-       locker_Num=locker_Random;
-//        alert("building_Num" + locker_Random);
-       step=6;
+          locker_Num = locker_Random;
+          //        alert("building_Num" + locker_Random);
+          step = 6;
 
 
 
-       $("#showConfirmationLockerPosition").html("You have currently chosen" + locker_Num + " on " + floor_Num + "loor, of building" + building_Num);
-      console.log("This is in building " + backQuery_building);
-       checkRandom();
-       stepControl();
-        
+          $("#showConfirmationLockerPosition").html("You have currently chosen" + locker_Num + " on " + floor_Num + "loor, of building" + building_Num);
+          console.log("This is in building " + backQuery_building);
+          checkRandom();
+          stepControl();
+
         });
     }
-    
-    function checkRandom(){
-      // alert(building_Num);
-      if(randomPick==true)
-        {
-         
-          building_Num=query_Random;
-          // alert(building_Num);
-          
-          floor_Num=floor_Random;
-          // alert(floor_Num);
-        }
-      else
-         {
-           console.log("Did not press random")
-         }
+
+    //This function would assign value if the user clicks on the pick random value.
+    function checkRandom() {
+
+      if (randomPick == true) {
+
+        building_Num = query_Random;
+
+
+        floor_Num = floor_Random;
+
+      }
+      else {
+        console.log("Did not press random")
+      }
       // alert("floor_Num" + floor_Num);
       //     alert("building_Num" + building_Num);
     }
-    
-   
-      // var collectionSection = sections[i].getAttribute("id");
-      //#1-1 the variable "buildingNum" gets the attribute of "name"
-//      let lockerNum = $(e.target).attr("id");
-//      locker_Num = lockerNum;
 
-//      console.log("Current floor is ", lockerNum);
-//
-//
-//
-//      firebase.auth().onAuthStateChanged(function (user) {
-//
-//        if (user == null) {
-//
-//$("#showConfirmationLockerPosition").html("please login before reserving for a locker")
-//
-//
-//var loginBtn = $("<button id='loginBtn'><a href='./login.html'>Login</a></button>");
-////      $("#confirm ").after(loginBtn);
-////let abc123 = $("#confirmationDiv").html();
-////$("#confirmationDiv").html(abc123);
-////$("#confirmationDiv").append()
-//$("#confirmationDiv").append(loginBtn);
-//// $("#confirmationDiv").parentNode.removeChild(loginBtn);
-//$("#confirm").hide();
-//$("#changeALocker").hide();
-//console.log("1");
-//
-//}
-//        db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get().then(function(){
-//
-//        console.log(JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get())+"Debugging is so tiring");
-//
-//        if (JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) == "{}"){
-//          $("#changeALocker").hide();
-//          $("#confirm").show();
-//
-//          alert("Do you wanna use this locker? If yes, press the blue confirm!");
-//          console.log("2");
-//        }
-//
-//        else if(JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) != "{}"){
-//          console.log("3");
-//          $("#showConfirmationLockerPosition").html("Wanna change a locker? Plz fill in a form to tell us the reason of a change")
-//          $("#confirm").hide();
-//          $("#changeALocker").show();}
-//          // $("#confirmationDiv").parentNode.removeChild(loginBtn);
-//      })
-//
-//      })
-//
-//
-//      $("#locationIndicator").css("color", "red");
-//      $("#locationIndicator").css("font-size", "5vw");
-//      $("#locationIndicator").html("You currently chosen " + lockerNum);
-//      $("#showConfirmationLockerPosition").html("You have currently chosen" + lockerNum + " on " + floor_Num + "loor, of building" + building_Num);
-//      console.log("This is in building " + backQuery_building);
-//      stepControl();
-//
-    
-  
-    
-    
-    
   </script>
 
   <!--Integrated firebase settings-->
@@ -1048,7 +999,8 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
 
     function showSectionVacancy() {
 
-
+      //updates the vacancy data automatically
+      //counterNE is the span that would show the vacancy in NE, etc.
       db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').onSnapshot(function (snap) {
         $("#counterNE").html(snap.data().NE);
         $("#counterNW").html(snap.data().NW);
@@ -1077,6 +1029,7 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
 
     }
 
+    // the buil will allow access the "building" parameter from outside.
     var buil;
     function showFloorVacancy(buildings) {
       buil = buildings;
@@ -1084,15 +1037,15 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
        if the building thingy belongs to a section, just trasverse the session,
      for each of the button span in the section, it get access the database once.
      */
+
       console.log("Thisisbuilding" + buildings);
+
+      // floorinfo is a variable that would access the "NE_floor" collection
+      // this is to get access the building's locker vacancies
       let floorinfo = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection(backQuery_section).doc(buildings).collection(buildings + "_floors");
-      //       alert(buildings+'_floors');
-      //      let floorQuery=floorinfo.where(firebase.firestore.FieldPath.collectionId(),'==',floor)
-      //      alert("floorQuery"+Object.toString(floorQuery))
       floorinfo.onSnapshot(function (snap) {
         snap.forEach(function (doc) {
-          //          alert("Document data:"+doc.data().vacancy);
-          //          alert("docID"+doc.id);
+          //attatch the vacanies onto the html folder.
           $("#" + doc.id + "data").html(doc.data().vacancy);
 
         });
@@ -1108,7 +1061,7 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
 
 
 
-
+    //the logout button will lead you to the login page and allows you to log in again.
     $("#logout").click(function () {
       firebase.auth().signOut();
       window.location.href = './login.html';
@@ -1117,26 +1070,26 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
 
 
 
-
+    // this is declared and initialized to be a number.
+    // it is used to store data of vacant locekrs.
     var calcVacancy_floor = 0;
+
+    //When the confirm button is clicked, the app reservates a locker.
     $("#confirm").click(function (event) {
       firebase.auth().onAuthStateChanged(function (user) {
         let getVacancy = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building).collection(backQuery_building + "_floors").doc(floor_Num);
 
+
+        //getting floor data from firebase and pass it as an accessable variable outside.
         getVacancy.onSnapshot(function (snap) {
 
           calcVacancy_floor = snap.data().vacancy;
-          //    alert("calcVacancy_floor "+calcVacancy_floor);
-
           calcVacancy_floor--;
-          //    alert("calcVacancy_floor "+calcVacancy_floor);
-          //    else{
-          //        alert("Not Possible");
-          //           }
+
         })
 
 
-
+        //this one sets the locker ID to the currently clicked button.
         db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").set(
           {
             locker: locker_Num
@@ -1145,7 +1098,7 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
           .then(function () {
             //alert(locker_Num);
             calculate();
-                       window.location.href="./lockermanagement.html";
+            window.location.href = "./lockermanagement.html";
           })
           .catch(function (error) {
             console.error("Error writing document: ", error);
@@ -1172,19 +1125,16 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
 
       let getdataBuil = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building);
 
-      //  getdataBuil.collection(backQuery_building+"_floors").onSnapshot(function (snap) {
-      //        snap.forEach(function (doc) {
-      //          buildingVacancies+=doc.data().vacancy;
-      //
-      //        }
-      //     )})
-  
-
+      //callback hell example
+      //calculates the vacancy in a building
       calculateBuil();
+      //calculates the vacancy in a section
       calculateSec();
     }
 
+    //As always, a variable outside to allow access from the outside.
     var buildingVacancies = 0;
+    //callback hell example
     function calculateBuil() {
 
 
@@ -1192,16 +1142,16 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
       getdataBuil.collection(backQuery_building + "_floors").onSnapshot(function (snap) {
         snap.forEach(function (doc) {
           buildingVacancies = doc.data().vacancy + buildingVacancies;
-          
-//          alert("doc.data().vacancy " + doc.data().vacancy);
-          
+
+          //          alert("doc.data().vacancy " + doc.data().vacancy);
+
         })
-        
+
         // alert("buildingVacancies" + buildingVacancies)
 
         //This function here calculates the callback of the building.
         builCallback();
-        
+
       })
 
     }
@@ -1210,13 +1160,13 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
       // alert(backQuery_building);
       let getdataBuil = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building);
       getdataBuil.get().then(
-        
+
         getdataBuil.set({
-         
+
 
           vacant_lockers: buildingVacancies
         })
-        
+
       )
     }
 
@@ -1230,7 +1180,7 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
         snap.forEach(function (doc) {
 
           sectionVacancies = doc.data().vacant_lockers + sectionVacancies;
-//          alert("doc.data().vacant_lockers " + doc.data().vacant_lockers);
+          //          alert("doc.data().vacant_lockers " + doc.data().vacant_lockers);
         })
         console.log("sectionVacancies" + sectionVacancies)
         callbackSec();
@@ -1238,10 +1188,11 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
 
     }
 
+    //this one would update the amount of lockers
     function callbackSec() {
       getdataSec = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G');
       getdataSec.get().then(
-        
+
         //should use update, rather than set, set would override stuff previously written.
         getdataSec.update({
           [backQuery_section]: sectionVacancies,
@@ -1250,11 +1201,12 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
       )
     }
 
-    function readDoc(){
-      window.location.href="./Why We Design.html"
+    //the button from the drop-down list, it redirects you to the Why we design page.
+    function readDoc() {
+      window.location.href = "./Why We Design.html"
     }
 
-    
+
   </script>
 </body>
 

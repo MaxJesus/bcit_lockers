@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>In hand -> Inventory</title>
   <!--  <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
     integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
@@ -25,73 +25,78 @@
   <!--Authentication Sign in with a pre-built UI-->
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-  
 
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
   <!--style for upload-->
   <style>
-    #submitCreate{
+    #submitCreate {
       background-color: green;
       font-size: 23pt;
       color: honeydew;
     }
-    #uploadImg{
+
+    #uploadImg {
       position: relative;
       top: 15px;
       margin-top: 0px;
       left: 0%;
       font-size: 10pt;
     }
-    #browse{
+
+    #browse {
       color: white;
       background-color: black;
     }
-        .btn-file {
-            position: relative;
-            overflow: hidden;
-        }
 
-        .btn-file input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            min-width: 100%;
-            min-height: 100%;
-            font-size: 50px;
-            text-align: right;
-            filter: alpha(opacity=0);
-            opacity: 0;
-            outline: none;
-            background: transparent;
-            cursor: inherit;
-            display: block;
-        }
-
-        #img-upload {
-            width: 40%;
-        }
-    </style>
-
-
-
-
-
-
-
-<!--draggable style-->
-  <style>
-    body{background: transparent;
+    .btn-file {
+      position: relative;
+      overflow: hidden;
     }
-    #createName{
+
+    .btn-file input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 50px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;
+      background: transparent;
+      cursor: inherit;
+      display: block;
+    }
+
+    #img-upload {
+      width: 40%;
+    }
+  </style>
+
+
+
+
+
+
+
+  <!--draggable style-->
+  <style>
+    body {
+      background: transparent;
+    }
+
+    #createName {
       height: 15vh;
       margin-bottom: 5px;
       font-size: 20pt;
     }
-    
-    #createNewBtn{
+
+    #createNewBtn {
 
       background-color: red;
       /* height: 40px; */
@@ -99,21 +104,23 @@
       color: white;
       z-index: 1001;
       position: fixed;
-      left:45vw;
-      top:0vh;
+      left: 45vw;
+      top: 0vh;
       /* bottom: 10px; */
     }
-    #createNewInstruction{
+
+    #createNewInstruction {
       z-index: 100;
-      width:100vw;
+      width: 100vw;
       background-color: burlywood;
       color: azure;
       position: fixed;
       left: 0vw;
-      top:0vh;
+      top: 0vh;
       height: 400px;
-      font-size:10pt;
+      font-size: 10pt;
     }
+
     #gallery {
       float: left;
       width: 50%;
@@ -174,10 +181,11 @@
       display: inherit;
     }
 
-    
-    #widget{
+
+    #widget {
       background: transparent;
     }
+
     .ui-widget-header {
       margin: 0;
       padding: 0;
@@ -190,7 +198,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script>
 
-  //Accessing the database API through encoded keys.
+    //Accessing the database API through encoded keys.
     var firebaseConfig = {
       apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
       authDomain: "bcit-lockers.firebaseapp.com",
@@ -201,7 +209,7 @@
       appId: "1:380958555512:web:3a1928344614d15da51c8d",
       measurementId: "G-R8V8WMCJRB"
     };
-  // initiallization of the firebase API
+    // initiallization of the firebase API
     firebase.initializeApp(firebaseConfig);
 
     var db = firebase.firestore();
@@ -267,8 +275,8 @@
         //#1-1, the widgets in the left will fadeOut from the "in-hand card".
         $item.fadeOut(function () {
           //#2-1, the itemID variable stores the widget's ID
-          
-//          alert("you put " + this.id + " into the locker");
+
+          //          alert("you put " + this.id + " into the locker");
 
 
 
@@ -295,9 +303,9 @@
 
 
           firebase.auth().onAuthStateChanged(function (user) {
-            
 
-          
+
+
 
 
 
@@ -335,6 +343,7 @@
               .animate({ height: "72px" });
           });
         });
+        //This function will always allow the app to show the correct inventory
         checkItemStatus();
       }
 
@@ -349,8 +358,8 @@
           let itemID = this.id;
           console.log(itemID);
 
-//          alert("the moved out item is " + itemID);
-          
+          //          alert("the moved out item is " + itemID);
+
           $item
             .find("a.ui-icon-refresh")
             .remove()
@@ -365,7 +374,7 @@
             .appendTo($gallery)
             .fadeIn();
 
- 
+
 
           var ID = "id" + nth;
 
@@ -377,57 +386,38 @@
           var data;
           var getIDlist = [];
           firebase.auth().onAuthStateChanged(function (user) {
-            
-          let getIDbeforeDeleting =  db.collection("user").doc(user.uid).collection("items").doc("locker");
-          getIDbeforeDeleting.get().then(function(querySnapshot) {
+
+            let getIDbeforeDeleting = db.collection("user").doc(user.uid).collection("items").doc("locker");
+            getIDbeforeDeleting.get().then(function (querySnapshot) {
               //don't make the
-            
-               data = querySnapshot.data();
-              for(key in data){
-                
-                if(data[key]==itemID){
-                  ID=key;
+
+              data = querySnapshot.data();
+              for (key in data) {
+
+                if (data[key] == itemID) {
+                  ID = key;
                   console.log("id of this one is " + ID);
-                 
+
                 }
 
               }
 
-           
-            //            console.log(itemID);
-            //            //#2-2-1, the action would access user-(the user's uid)-items-locker
-            //            db.collection("user").doc(user.uid).collection("items").doc("hand").set(obj
-            //              // {
-            //              //   //#2-2-2, the id is recorded, when the item is dragged to the locker item list
-            //              //    : itemID,
-            //
-            //              // }
-            //              ,{merge:true}
-            //                //#2-2-3, the name is recorded, when the item is dragged to the locker item list
-            //                //        "name":itemName,
-            //              );
+              console.log("itemID" + itemID);
+              console.log("id of this one is " + ID);
+              let handRef = db.collection("user").doc(user.uid).collection("items").doc("locker");
 
 
-            console.log("itemID" + itemID);
-            console.log("id of this one is " + ID);
-            let handRef = db.collection("user").doc(user.uid).collection("items").doc("locker");
-           
-           
-            handRef.update({
-              [ID]: firebase.firestore.FieldValue.delete()
+              handRef.update({
+                [ID]: firebase.firestore.FieldValue.delete()
+              });
+
             });
-            
-//            removeByID.then(function....)
-            
-            // nth++;
-            // if(nth >= getIDlist.length)
-            //   nth = getIDlist.length-1;
+
           });
-         
+
+
         });
-
-
- });
+        //This function will always allow the app to show the correct inventory
         checkItemStatus();
       }
 
@@ -446,7 +436,7 @@
             img.dialog({
               title: title,
               width: 400,
-//              height: 400,
+              //              height: 400,
               modal: true
             });
           }, 1);
@@ -458,7 +448,7 @@
       $("ul.gallery > li").on("click", function (event) {
         var $item = $(this),
           $target = $(event.target);
-//        alert("you clicked" + this.id);
+        //        alert("you clicked" + this.id);
         if ($target.is("a.ui-icon-trash")) {
           deleteImage($item);
         } else if ($target.is("a.ui-icon-zoomin")) {
@@ -476,58 +466,50 @@
       function checkItemStatus() {
         firebase.auth().onAuthStateChanged(function (user) {
           db.collection("user").doc(user.uid).collection("items").doc("locker").onSnapshot(function (querySnapshot) {
-            // var docRef = db.collection("user").doc(user.uid).collection("items");
-
-            // docRef.get().then(function (doc) {
-            //   if (doc.exists) {
-            //     alert("Stuff inside the locker:", doc.data().stuff);
-
             var data = querySnapshot.data();
             for (key in data) {
               console.log(key);
               ($trash).append(document.getElementById(data[key]));
             };
-
-
           });
         });
       }
 
+      //This function will always allow the app to show the correct inventory
       checkItemStatus();
-
     });
   </script>
 </head>
 
 
 <body>
-    <button id="createNewBtn">+</button>
+  <button id="createNewBtn">+</button>
   <!--HTML elements that allow the users to create new items-->
   <div id="createNewInstruction">
     <fieldset>
-    <legend>create new stuff</legend>
-      
-        <input id="createName" type="text" placeholder="Enter Item Name Here"/>
-        <button id="submitCreate" >Create</button>
-       <div class="container" id="uploadImg">
+      <legend>create new stuff</legend>
+
+      <input id="createName" type="text" placeholder="Enter Item Name Here" />
+      <button id="submitCreate">Create</button>
+      <div class="container" id="uploadImg">
         <div class="col-md-6">
-            <div class="form-group">
-                <!-- <label>Upload Image</label> -->
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <span class="btn btn-default btn-file" id="browse">
-                            BrowsePicture <input type="file" id="imgInp">
-                        </span>
-                    </span>
-                    <input type="text" class="form-control" readonly>
-                </div>
-                <img id='img-upload' />
+          <div class="form-group">
+            <!-- <label>Upload Image</label> -->
+            <div class="input-group">
+              <span class="input-group-btn">
+                <span class="btn btn-default btn-file" id="browse">
+                  BrowsePicture <input type="file" id="imgInp">
+                </span>
+              </span>
+              <input type="text" class="form-control" readonly>
             </div>
+            <img id='img-upload' />
+          </div>
         </div>
-    </div>
-      
+      </div>
+
     </fieldset>
-<!--    <input type="text" placeholder="Enter Item Name Here"/>-->
+    <!--    <input type="text" placeholder="Enter Item Name Here"/>-->
   </div>
   <div class="ui-widget ui-helper-clearfix" id="widget">
 
@@ -536,28 +518,20 @@
         <h5 class="ui-widget-header">Sandwich</h5>
         <img src="img/sandwich.png" alt="sandwich" width="96" height="86">
         <a href="img/sandwich.png" title="sandwich" class="ui-icon ui-icon-zoomin">View larger</a>
-<!--
-        <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory"
-          class="ui-icon ui-icon-trash">Put this into inventory</a>
--->
+
       </li>
       <li class="ui-widget-content ui-corner-tr" id='textbook1' name="textbook1712">
         <h5 class="ui-widget-header">TextBook1</h5>
         <img src="img/textbook.jpg" alt="textbook biz ana" width="96" height="85">
         <a href="img/textbook.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">TextBook1</a>
-<!--
-        <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory"
-          class="ui-icon ui-icon-trash">Put this into inventory</a>
--->
+
       </li>
       <li class="ui-widget-content ui-corner-tr" id='umbrella' name="blackUmbrella">
         <h5 class="ui-widget-header">Unbrella</h5>
         <img src="img/umbrella.jpg" alt="Unbrella" width="96" height="86">
         <a href="images/high_tatras3.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a>
-<!--
-        <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory"
-          class="ui-icon ui-icon-trash">Put this into inventory</a>
--->
+
+
       </li>
 
     </ul>
@@ -566,119 +540,112 @@
     <div id="trash" class="ui-widget-content ui-state-default">
       <h4 class="ui-widget-header">Drag to here</h4>
     </div>
-    
- 
-    
+
+
+
   </div>
 
-  
-  
-  
-  
-  
-    <script>
-      // allows the user to upload image for their customized items.
-      var pictureSrc;
-      $(document).ready(function () {
-            //local Storage reads the attribute "picture" to the document.
-            pictureSrc = window.localStorage.getItem("picture");
-            $('#img-upload').attr('src', pictureSrc);
-
-//            localStorage.clear();
-
-            $(document).on('change', '.btn-file :file', function () {
-                var input = $(this),
-                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                input.trigger('fileselect', [label]);
-            });
-
-            $('.btn-file :file').on('fileselect', function (event, label) {
-
-                var input = $(this).parents('.input-group').find(':text'),
-                    log = label;
-
-                if (input.length) {
-                    input.val(log);
-                } else {
-                    if (log) alert(log);
-                }
-
-            });
-
-            //the function reads the URL to the picture.
-            function readURL(input) {
-                
-
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    pictureSrc = e.target.result;
-                    $('#img-upload').attr('src', pictureSrc);
-                 /*this line of code is crucial, if it is put outside
-                 of the the function(e){} callback, then the memory function
-                 would not work*/
-                    localStorage.setItem("picture", pictureSrc);
-                   
-                }
-                // localStorage.setItem("picture", pictureSrc);
-                reader.readAsDataURL(input.files[0]);
-            }
-
-            //After some picture is upload, the page reads the new URL
-            $("#imgInp").change(function () {
-
-                readURL(this);
-            });
-//       reader.readAsDataURL(input.files[0]);
-        });
 
 
 
 
 
-    </script>
-  
-  
-
-  
-  
   <script>
-//    <li class="ui-widget-content ui-corner-tr" id='sandwich' name="porkSandwich">
-//        <h5 class="ui-widget-header">Sandwich</h5>
-//        <img src="img/sandwich.png" alt="sandwich" width="96" height="86">
-//        <a href="img/sandwich.png" title="sandwich" class="ui-icon ui-icon-zoomin">View larger</a>
-//        <a href="link/to/trash/script/when/we/have/js/off" title="Put this into inventory"
-//          class="ui-icon ui-icon-trash">Put this into inventory</a>
-//      </li>
-    $("#createNewBtn").click(function(e){
+    // allows the user to upload image for their customized items.
+    var pictureSrc;
+    $(document).ready(function () {
+      //local Storage reads the attribute "picture" to the document.
+      pictureSrc = window.localStorage.getItem("picture");
+      $('#img-upload').attr('src', pictureSrc);
+
+      //allows the user to upload their own image.
+      $(document).on('change', '.btn-file :file', function () {
+        var input = $(this),
+          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [label]);
+      });
+
+      $('.btn-file :file').on('fileselect', function (event, label) {
+
+        var input = $(this).parents('.input-group').find(':text'),
+          log = label;
+
+        if (input.length) {
+          input.val(log);
+        } else {
+          if (log) alert(log);
+        }
+
+      });
+
+      //the function reads the URL to the picture.
+      function readURL(input) {
+
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          pictureSrc = e.target.result;
+          $('#img-upload').attr('src', pictureSrc);
+          /*this line of code is crucial, if it is put outside
+          of the the function(e){} callback, then the memory function
+          would not work*/
+          localStorage.setItem("picture", pictureSrc);
+
+        }
+        // localStorage.setItem("picture", pictureSrc);
+        reader.readAsDataURL(input.files[0]);
+      }
+
+      //After some picture is upload, the page reads the new URL
+      $("#imgInp").change(function () {
+
+        readURL(this);
+      });
+      //       reader.readAsDataURL(input.files[0]);
+    });
+
+
+
+
+
+  </script>
+
+
+
+
+
+  <script>
+
+    $("#createNewBtn").click(function (e) {
       e.preventDefault();
-             $("#createNewInstruction").toggle();
+      $("#createNewInstruction").toggle();
     })
-    
+
     //by clicking the button, the function would work properly
     //it will create new items for the user.
-    $("#submitCreate").click(function(){
-       $("#createNewInstruction").hide();
+    $("#submitCreate").click(function () {
+      $("#createNewInstruction").hide();
       var itemName = document.getElementById("createName").value;
       alert(itemName);
-    
+
       let newItem = document.createElement("li");
-      
-      newItem.setAttribute("id",itemName);
-      newItem.setAttribute("class","ui-widget-content ui-corner-tr ui-draggable");
-      
-      let newItemHeader =  document.createElement("h5");
+
+      newItem.setAttribute("id", itemName);
+      newItem.setAttribute("class", "ui-widget-content ui-corner-tr ui-draggable");
+
+      let newItemHeader = document.createElement("h5");
       newItem.appendChild(newItemHeader);
-      newItemHeader.setAttribute("class","ui-widget-header");
-      newItemHeader.innerHTML=itemName;
-      
+      newItemHeader.setAttribute("class", "ui-widget-header");
+      newItemHeader.innerHTML = itemName;
+
       let newItemImage = document.createElement("img");
-      newItemImage.setAttribute("src",pictureSrc);
+      newItemImage.setAttribute("src", pictureSrc);
       newItem.appendChild(newItemImage);
 
 
 
-      
+
       var $gallery = $("#gallery"),
         //#trash is the "<div>" that receives the draggable item
         $trash = $("#trash");
@@ -686,9 +653,9 @@
       //condense : from 655 on
       $("#gallery").append(newItem);
       $(newItem).draggable();
-        $("#createNewInstruction").hide();
-      
-       $("li", $gallery).draggable({
+      $("#createNewInstruction").hide();
+
+      $("li", $gallery).draggable({
         cancel: "a.ui-icon", // clicking an icon won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
         containment: "document",
@@ -697,44 +664,44 @@
       });
 
 
-      
+
       $item
-            .find("a.ui-icon-refresh")
-            .remove()
-            .end()
-            //resize
-            .css("width", "96px")
-            .append(trash_icon)
-            .find("img")
-            .css("height", "72px")
-            .end()
-            //"$gallery" is the "left card"
-            .appendTo($gallery)
-            .fadeIn();
+        .find("a.ui-icon-refresh")
+        .remove()
+        .end()
+        //resize function
+        .css("width", "96px")
+        .append(trash_icon)
+        .find("img")
+        .css("height", "72px")
+        .end()
+        //"$gallery" is the "left card"
+        .appendTo($gallery)
+        .fadeIn();
 
 
     })
-    
-  
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
     //The goal of this function is to read if the stuff is in the locker, and the
     //result will be shown in the cards.
 
     $(document).ready(function () {
       //this actually works, why?
-//      checkItemStatus();
-      
-      
-      
+      //      checkItemStatus();
+
+
+
       $("#createNewInstruction").hide();
-      
-      
+
+
     }
     );
 
@@ -742,9 +709,9 @@
   <!-- all the widgets are draggable-->
   <script>$("*.widget").draggable();</script>
 
-  
-  
-  
+
+
+
 
 </body>
 

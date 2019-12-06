@@ -22,6 +22,24 @@
   <!--Authentication Sign in with a pre-built UI-->
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <!--Firebase initialization:-->
+  <script>
+    // Our web app's Firebase configuration 
+    var firebaseConfig = {
+      apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
+      authDomain: "bcit-lockers.firebaseapp.com",
+      databaseURL: "https://bcit-lockers.firebaseio.com",
+      projectId: "bcit-lockers",
+      storageBucket: "bcit-lockers.appspot.com",
+      messagingSenderId: "380958555512",
+      appId: "1:380958555512:web:3a1928344614d15da51c8d",
+      measurementId: "G-R8V8WMCJRB"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
 
   <style>
     #intro {
@@ -49,14 +67,14 @@
     }
 
     body {
-      background:linear-gradient(to bottom,#bfceff,#f8bfff,#fffcbf);
+      background: linear-gradient(to bottom, #bfceff, #f8bfff, #fffcbf);
       background-size: 100vw 120vh;
-/*      background-repeat: repeat;*/
+      /*      background-repeat: repeat;*/
       text-align: center;
     }
 
     #loginDiv {
-    
+
       transform: scale(2.5, 2.8);
       width: 70vw;
       position: relative;
@@ -67,35 +85,20 @@
       margin-top: 15vh;
     }
 
-    #continue{
+    #continue {
       position: relative;
-      margin-top: 15vh;
+      margin-top: 29vh;
       z-index: 10;
-      background-color:darkseagreen;
+      background-color: darkseagreen;
       color: white;
-      height: 5vh;
+      height: 8vh;
       font: bolder;
       font-size: 40pt;
-      top: 1vh;
-     
+      top: 4vh;
+
     }
   </style>
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
-      authDomain: "bcit-lockers.firebaseapp.com",
-      databaseURL: "https://bcit-lockers.firebaseio.com",
-      projectId: "bcit-lockers",
-      storageBucket: "bcit-lockers.appspot.com",
-      messagingSenderId: "380958555512",
-      appId: "1:380958555512:web:3a1928344614d15da51c8d",
-      measurementId: "G-R8V8WMCJRB"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-  </script>
+
 </head>
 
 
@@ -115,15 +118,11 @@
 
     </div>
 
-
-
-
-
     <div id="loginDiv">
       <div id="firebaseui-auth-container"></div>
       <div id="loader">Loading...</div>
 
-      
+
 
     </div>
     <button id="continue" onclick="window.location.href = './lockermap.html';">Continue without login</button>
@@ -154,8 +153,7 @@
                 console.log("Error happened" + error)
               });
           }
-          else
-          {
+          else {
             return true;
           }
           return false;
@@ -167,7 +165,8 @@
         }
       },
       // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-      credentialHelper:firebaseui.auth.CredentialHelper.NONE,
+      // Sign up configuration 
+      credentialHelper: firebaseui.auth.CredentialHelper.NONE,
       signInFlow: 'popup',
       signInSuccessUrl: 'lockermanagement.html',
       signInOptions: [

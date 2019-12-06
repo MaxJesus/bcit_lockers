@@ -56,25 +56,28 @@
     }
 
     #loginDiv {
-      transform: scale(1.6, 1.6);
+    
+      transform: scale(2.5, 2.8);
       width: 70vw;
       position: relative;
       text-align: center;
       height: 25vh;
       left: 15%;
       top: 20vh;
-      margin-top: 1vh;
+      margin-top: 15vh;
     }
 
-    #continue {
+    #continue{
       position: relative;
-      top: 0vh;
+      margin-top: 15vh;
       z-index: 10;
-      background: #FFC300;
+      background-color:darkseagreen;
       color: white;
-      height: 4vh;
-      font: bold;
+      height: 5vh;
+      font: bolder;
+      font-size: 40pt;
       top: 1vh;
+     
     }
   </style>
   <script>
@@ -120,9 +123,10 @@
       <div id="firebaseui-auth-container"></div>
       <div id="loader">Loading...</div>
 
-      <button id="continue" onclick="window.location.href = './lockermap.html';">Continue without login</button>
+      
 
     </div>
+    <button id="continue" onclick="window.location.href = './lockermap.html';">Continue without login</button>
   </div>
 
   <script>

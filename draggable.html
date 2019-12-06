@@ -674,7 +674,14 @@
       let newItemImage = document.createElement("img");
       newItemImage.setAttribute("src",pictureSrc);
       newItem.appendChild(newItemImage);
+
+
+
       
+      var $gallery = $("#gallery"),
+        //#trash is the "<div>" that receives the draggable item
+        $trash = $("#trash");
+
       //condense : from 655 on
       $("#gallery").append(newItem);
       $(newItem).draggable();
@@ -689,27 +696,20 @@
       });
 
 
-      $trash.droppable({
-        //list items in gallery are droppable
-        accept: "#gallery > li",
-        classes: {
-          "ui-droppable-active": "ui-state-highlight"
-        },
-        drop: function (event, ui) {
-          deleteImage(ui.draggable);
-        }
-      });
-
-      // Let the gallery be droppable as well, accepting items from the trash
-      $gallery.droppable({
-        accept: "#trash li",
-        classes: {
-          "ui-droppable-active": "custom-state-active"
-        },
-        drop: function (event, ui) {
-          recycleImage(ui.draggable);
-        }
-      });
+      
+      $item
+            .find("a.ui-icon-refresh")
+            .remove()
+            .end()
+            //resize
+            .css("width", "96px")
+            .append(trash_icon)
+            .find("img")
+            .css("height", "72px")
+            .end()
+            //"$gallery" is the "left card"
+            .appendTo($gallery)
+            .fadeIn();
 
 
     })

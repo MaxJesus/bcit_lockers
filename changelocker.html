@@ -226,7 +226,9 @@
       dbUpdate();
     }
 
-   $("#cfm").click(function(event){
+   $("#cfm").click(function(e){
+     e.preventDefault();
+//     window.location.href ='./lockermanagement.html';
   firebase.auth().onAuthStateChanged(function (user) {
  db.collection("user").doc(user.uid).collection("position").doc(Q1).set(
           {
@@ -235,14 +237,16 @@
             reason: Q3,
             startDate: Q4
           })
-
+    
           .then(function () {
             console.log("Document successfully written!");
+            window.location.href ='./lockermanagement.html'
           })
           .catch(function (error) {
             console.error("Error writing document: ", error);
           });
       })
+     window.location.href ='./lockermanagement.html';
 });
     
     $("#goBackBtn").click(function(){

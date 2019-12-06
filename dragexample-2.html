@@ -33,11 +33,16 @@
     
   <!--style for upload-->
   <style>
-    #container{
+    #uploadImg{
+      position: relative;
+      top: 15px;
+      margin-top: 0px;
+      left: 0%;
       font-size: 10pt;
     }
     #browse{
-      background-color: azure;
+      color: white;
+      background-color: black;
     }
         .btn-file {
             position: relative;
@@ -55,13 +60,13 @@
             filter: alpha(opacity=0);
             opacity: 0;
             outline: none;
-            background: white;
+            background: transparent;
             cursor: inherit;
             display: block;
         }
 
         #img-upload {
-            width: 100%;
+            width: 40%;
         }
     </style>
 
@@ -73,27 +78,31 @@
 
 <!--draggable style-->
   <style>
+    body{background: transparent;}
     #createName{
-      height: 3vh;
+      height: 15vh;
+      margin-bottom: 5px;
       font-size: 20pt;
     }
     
     #createNewBtn{
-      z-index: 100;
+
+      z-index: 1001;
       position: fixed;
-      left:35vw;
-      top:88vh;
+      left:45vw;
+      top:0vh;
+      /* bottom: 10px; */
     }
     #createNewInstruction{
-      z-index: 10;
-      width: 40vw;
+      z-index: 100;
+      width:100vw;
       background-color: burlywood;
       color: azure;
       position: fixed;
-      left: 25vw;
-      top:5vh;
-      height: 55vh;
-      font-size:20pt;
+      left: 0vw;
+      top:0vh;
+      height: 400px;
+      font-size:10pt;
     }
     #gallery {
       float: left;
@@ -155,6 +164,10 @@
       display: inherit;
     }
 
+    
+    #widget{
+      background: transparent;
+    }
     .ui-widget-header {
       margin: 0;
       padding: 0;
@@ -167,6 +180,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script>
 
+  //Accessing the database API through encoded keys.
     var firebaseConfig = {
       apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
       authDomain: "bcit-lockers.firebaseapp.com",
@@ -177,7 +191,7 @@
       appId: "1:380958555512:web:3a1928344614d15da51c8d",
       measurementId: "G-R8V8WMCJRB"
     };
-
+  // initiallization of the firebase API
     firebase.initializeApp(firebaseConfig);
 
     var db = firebase.firestore();
@@ -446,6 +460,9 @@
         return false;
       });
 
+
+      // The function is implemented to interact with firebase,
+      // allowing the app to know if the item is in the locker. 
       function checkItemStatus() {
         firebase.auth().onAuthStateChanged(function (user) {
           db.collection("user").doc(user.uid).collection("items").doc("locker").onSnapshot(function (querySnapshot) {
@@ -474,6 +491,8 @@
 
 
 <body>
+    <button id="createNewBtn">+</button>
+  <!--HTML elements that allow the users to create new items-->
   <div id="createNewInstruction">
     <fieldset>
     <legend>create new stuff</legend>
@@ -483,7 +502,7 @@
        <div class="container" id="uploadImg">
         <div class="col-md-6">
             <div class="form-group">
-                <label>Upload Image</label>
+                <!-- <label>Upload Image</label> -->
                 <div class="input-group">
                     <span class="input-group-btn">
                         <span class="btn btn-default btn-file" id="browse">
@@ -538,7 +557,7 @@
       <h4 class="ui-widget-header">Drag to here</h4>
     </div>
     
-  <button id="createNewBtn"> create new object</button>
+ 
     
   </div>
 
@@ -548,6 +567,7 @@
   
   
     <script>
+      // allows the user to upload image for their customized items.
       var pictureSrc;
       $(document).ready(function () {
             //local Storage reads the attribute "picture" to the document.
@@ -609,30 +629,7 @@
     </script>
   
   
-  
-  
-  
-  
-  
-  
-  
-  <!-- all the widgets are draggable-->
-  <script>$("*.widget").draggable();</script>
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   <script>
@@ -645,9 +642,11 @@
 //      </li>
     $("#createNewBtn").click(function(e){
       e.preventDefault();
-             $("#createNewInstruction").show();
+             $("#createNewInstruction").toggle();
     })
     
+    //by clicking the button, the function would work properly
+    //it will create new items for the user.
     $("#submitCreate").click(function(){
        $("#createNewInstruction").hide();
       var itemName = document.getElementById("createName").value;
@@ -667,7 +666,7 @@
       newItemImage.setAttribute("src",pictureSrc);
       newItem.appendChild(newItemImage);
       
-      
+      //condense : from 655 on
       $("#gallery").append(newItem);
       $(newItem).draggable();
         $("#createNewInstruction").hide();
@@ -679,6 +678,31 @@
         helper: "clone",
         cursor: "move"
       });
+
+
+      $trash.droppable({
+        //list items in gallery are droppable
+        accept: "#gallery > li",
+        classes: {
+          "ui-droppable-active": "ui-state-highlight"
+        },
+        drop: function (event, ui) {
+          deleteImage(ui.draggable);
+        }
+      });
+
+      // Let the gallery be droppable as well, accepting items from the trash
+      $gallery.droppable({
+        accept: "#trash li",
+        classes: {
+          "ui-droppable-active": "custom-state-active"
+        },
+        drop: function (event, ui) {
+          recycleImage(ui.draggable);
+        }
+      });
+
+
     })
     
   
@@ -705,7 +729,8 @@
     );
 
   </script>
-  
+  <!-- all the widgets are draggable-->
+  <script>$("*.widget").draggable();</script>
 
   
   

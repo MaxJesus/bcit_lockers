@@ -1,0 +1,178 @@
+<html>
+  <head>
+  
+  </head>
+  <body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-firestore.js"></script>
+
+  <!--Authentication Sign in with a pre-built UI-->
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <script>
+      
+      
+      
+          // the web app's Firebase configuration
+    //"bcit-lockers" is the project name
+    var firebaseConfig = {
+      apiKey: "AIzaSyASFWH5KsgmLDY3HcRUmDIwbFtYv5Ayf8o",
+      authDomain: "bcit-lockers.firebaseapp.com",
+      databaseURL: "https://bcit-lockers.firebaseio.com",
+      projectId: "bcit-lockers",
+      storageBucket: "bcit-lockers.appspot.com",
+      messagingSenderId: "380958555512",
+      appId: "1:380958555512:web:3a1928344614d15da51c8d",
+      measurementId: "G-R8V8WMCJRB"
+    };
+    // Initialize Firebase
+
+    firebase.initializeApp(firebaseConfig);
+    //  Do not know how it works yet.
+    //  firebase.analytics();
+    var db = firebase.firestore();
+
+$(document).ready(function(){
+    var docUserID = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G");
+
+docUserID.set({
+  NE:100,
+  SE:120,
+  NW:132,
+  SW:52,
+})
+  
+  
+  //dealing with NE
+    var docNE1 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("NE").doc("NE1");
+  docNE1.set({
+    "vacant_lockers":37,
+  })
+      console.log("set")
+
+      
+    var docNE2 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("NE").doc("NE2");
+  docNE2.set({
+    "vacant_lockers":1,
+  })
+      console.log("set")
+
+     var docNE3 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("NE").doc("NE3");
+  docNE3.set({
+    "vacant_lockers":5,
+  })
+      console.log("set")
+  
+   var docNE5 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("NE").doc("NE5");
+  docNE5.set({
+    "vacant_lockers":2,
+  })
+  
+   var docNE6 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("NE").doc("NE6");
+  docNE6.set({
+    "vacant_lockers":0,
+  })
+  
+  //dealing with NW
+    var docNW1 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("NW").doc("NW1");
+  docNW1.set({
+    "vacant_lockers":10,
+  })
+      console.log("set")
+
+      
+    var docNW2 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("NW").doc("NW2");
+  docNW2.set({
+    "vacant_lockers":9,
+  })
+      console.log("set")
+
+     var docNW3 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("NW").doc("NW3");
+  docNW3.set({
+    "vacant_lockers":8,
+  })
+      console.log("set")
+  
+   var docNW5 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("NW").doc("NW5");
+  docNW5.set({
+    "vacant_lockers":7,
+  })
+  
+   var docNW6 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("NW").doc("NW6");
+  docNW6.set({
+    "vacant_lockers":6,
+  })
+  
+  //dealing with SE
+  var docSE1 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("SE").doc("SE1");
+  docSE1.set({
+    "vacant_lockers":5,
+  })
+      console.log("set")
+
+      
+    var docSE2 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("SE").doc("SE2");
+  docSE2.set({
+    "vacant_lockers":4,
+  })
+      console.log("set")
+
+     var docSE3 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("SE").doc("SE3");
+  docSE3.set({
+    "vacant_lockers":3,
+  })
+      console.log("set")
+  
+   var docSE4 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("SE").doc("SE4");
+  docSE4.set({
+    "vacant_lockers":2,
+  })
+  
+  
+  //DEALING WITH SW
+  var docSW1 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("SW").doc("SW1");
+  docSW1.set({
+    "vacant_lockers":14,
+  })
+      console.log("set")
+
+      
+    var docSW2 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("SW").doc("SW2");
+  docSW2.set({
+    "vacant_lockers":13,
+  })
+      console.log("set")
+
+     var docSW3 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("SW").doc("SW3");
+  docSW3.set({
+    "vacant_lockers":12,
+  })
+      console.log("set")
+  
+  
+    docSW1.collection("SW1_floors").onSnapshot(function (snap) {
+        snap.forEach(function (doc) {
+         doc.data().set({
+           vacancy:15,
+         })
+        });
+      });
+  
+
+  
+  
+})
+    
+    </script>
+  
+  </body>
+</html>

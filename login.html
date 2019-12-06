@@ -144,7 +144,7 @@
               .then(function () {
                 console.log("new user added to firestore");
                 //instead of using signInSuccessfulURL, I do the redirect here,
-                window.location.assign('lockermanagement.html');
+                window.location.assign('lockermap.html');
               })
               .catch(function (error) {
                 console.log("Error happened" + error)
@@ -176,7 +176,7 @@
         // firebase.auth.PhoneAuthProvider.PROVIDER_ID
       ],
       // Terms of service url.
-      tosUrl: 'lockermanagement.html',
+      tosUrl: 'lockermap.html',
       // Privacy policy url.
       privacyPolicyUrl: '<your-privacy-policy-url>'
     };

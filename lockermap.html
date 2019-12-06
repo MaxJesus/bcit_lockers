@@ -868,6 +868,7 @@ console.log("1");
         console.log(JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get())+"Debugging is so tiring");
 
         if (JSON.stringify(db.collection("user").doc(user.uid).collection("position").doc("lockerInfo").get()) == "undefined"){
+          alert("Do you wanna use this locker? If yes, press the blue confirm!");
           $("#changeALocker").hide();
           $("#confirm").show();
          
@@ -877,7 +878,7 @@ console.log("1");
         $("#changeALocker").hide();
            db.collection('user').doc(user.uid).collection('position').doc('lockerInfo').onSnapshot(function (querySnapshot) {
             //  alert("undefined");
-             if(querySnapshot.data().locker != null){
+             if(querySnapshot.data() != null){
                 console.log("3");
                 $("#showConfirmationLockerPosition").html("Wanna change a locker? Plz fill in a form to tell us the reason of a change")
                 $("#confirm").hide();
@@ -948,7 +949,7 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
 
 
        $("#showConfirmationLockerPosition").html("You have currently chosen" + locker_Num + " on " + floor_Num + "loor, of building" + building_Num);
-      console.log("This is in building " + backQuery_building); 
+      console.log("This is in building " + backQuery_building);
        checkRandom();
        stepControl();
         
@@ -1229,7 +1230,7 @@ locker_Random=arry[Math.ceil(Math.random()*3)];
         snap.forEach(function (doc) {
 
           sectionVacancies = doc.data().vacant_lockers + sectionVacancies;
-          alert("doc.data().vacant_lockers " + doc.data().vacant_lockers);
+//          alert("doc.data().vacant_lockers " + doc.data().vacant_lockers);
         })
         console.log("sectionVacancies" + sectionVacancies)
         callbackSec();

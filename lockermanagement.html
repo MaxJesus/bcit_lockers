@@ -47,10 +47,11 @@
         }
       db.collection('user').doc(user.uid).onSnapshot(function (snap) {
         console.log("Current uid is ", user.uid);
+//        $("#welcome").html("Welcome back " + "<br/>" + snap.data().name);
         $("#welcome").html("Welcome back " + "<br/>" + snap.data().name);
-        $("#welcome").css("font-size", "2vh");
+        $("#welcome").css("font-size", "15pt");
         $("#welcome").css("float", "left");
-        $("#welcome").css("color", "white")
+        $("#welcome").css("color", "black")
       })
     })
   </script>
@@ -66,7 +67,8 @@
 */
      background-image: url(img/background.jpg);
      background-repeat: no-repeat;
-     background-size: 100vw auto;
+     background-position-y: 12vh;
+     background-size: 100vw 75vh;
     }
 
   </style>
@@ -377,7 +379,7 @@
       $(drag).css("position", "absolute");
       $(drag).css("left", "0px");
       $(drag).css("top", "5vh");
-      $(drag).css("height", "100%");
+      $(drag).css("height", "90%");
       $(drag).css("width", "100%");
       $(drag).attr("frameborder", "0");
       $(drag).attr("seamless");

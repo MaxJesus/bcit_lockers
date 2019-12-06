@@ -42,7 +42,7 @@
 
       if (user == null)
         {
-          
+
           window.location.href = './login.html';
         }
       db.collection('user').doc(user.uid).onSnapshot(function (snap) {
@@ -62,13 +62,13 @@
       background-size: 100vw 120vh;
       background-repeat: repeat;
       text-align: center;
-     
+
 */
      background-image: url(img/background.jpg);
      background-repeat: no-repeat;
      background-size: 100vw auto;
     }
-    
+
   </style>
 </head>
 
@@ -165,7 +165,7 @@
   <script>
     // $(document).ready(function () {
     //   firebase.auth().onAuthStateChanged(function (user) {
-        
+
     //   })
     // })
 
@@ -388,7 +388,7 @@
         window.location.href = './login.html';
       })
 
-      
+
 
 
       //If locked, unlock. If unlocked, lock.
@@ -412,20 +412,20 @@
 
     }
     lockerEvent();
-    
-    
+
+
 $("#showCurrent").hide();
       function showCurrent(){
 //          $("#showCurrent").css("position","fixed");
 //          $("#showCurrent").css("left","35vw");
 //          $("#showCurrent").show();
           firebase.auth().onAuthStateChanged(function (user) {
-            
+
            db.collection('user').doc(user.uid).collection('position').doc('lockerInfo').onSnapshot(function (querySnapshot) {
         alert("Your locker is "+querySnapshot.data().locker);
-        
-        
-                               
+
+
+
         })
       })
       }

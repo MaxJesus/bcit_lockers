@@ -43,7 +43,7 @@
     }
 
     #logo {
-      
+
       position: absolute;
       left:-10vw;
       width: calc(10vh - 2vh);
@@ -59,7 +59,7 @@
   left: 30vw;
   top: 0vh;
   background-color: beige;
-  
+
 }
 
 
@@ -146,7 +146,7 @@
     }
 
     #bottomToolBar {
-      
+
 /*      background-image: url(../img/lockermanagement_background2.jpg);*/
       position: absolute;
       width: 100vw;
@@ -159,6 +159,7 @@
 
     #mapBtn {
       width: 19vw;
+      margin-top: 4vh;
     }
 
     #mapBtn:hover {
@@ -168,6 +169,7 @@
 
     #checklistBtn {
       width: 20vw;
+      margin-top: 4vh
     }
 
     #checklistBtn:hover {
@@ -176,7 +178,7 @@
     }
 
     #unlockBtn {
-
+      margin-top: 4vh;
       width: 20vw;
     }
 
@@ -187,6 +189,7 @@
 
     #checkContentBtn{
       width: 20vw;
+      margin-top: 4vh
     }
 
     #checkContentBtn:hover{

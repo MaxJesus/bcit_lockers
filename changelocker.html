@@ -5,7 +5,7 @@
 <title></title>
 
 <head>
-  <title>Login-BCIT_LOCKERs</title>
+  <title>change locker position</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
@@ -26,7 +26,7 @@
   <link type="text/css" rel="stylesheet" href="./style/changelocker.css" />
 
   <style>
-    
+    *{font-weight: 900;}
 #goBackBtn{position:fixed;
          width:15vw;
         left:3vw;
@@ -39,7 +39,27 @@
       background:linear-gradient(to bottom,#bfceff,#f8bfff,#fffcbf);
       background-size: 100vw 120vh;
 /*      background-repeat: repeat;*/
-      text-align: center;
+      /* text-align: center; */
+    }
+
+    #next{
+      color:rgb(22, 1, 9);
+      background-color: dodgerblue;
+      width: 20vw;
+      position: relative;
+      left: 38vw;
+    }
+
+    #cfm{
+      font-size: 40pt;
+      background-color: indigo;
+      color: lemonchiffon;
+    }
+
+    #goBack{
+      background-color: rgb(130, 0, 28);
+      color: floralwhite;
+      font-size: 40pt;
     }
 
   </style>
@@ -99,7 +119,7 @@
       <br>Please state the reason to change.<br>
       <input type="text" id="reason"><br />
       <br>
-      <div onclick="submission()" id="next">submit</div>
+      <div onclick="submission()" id="next">NEXT</div>
       <br />
 
     </form>
@@ -119,8 +139,10 @@
         <br>Please state the reason to change.<br>
         <div type="text" id="reasonAnswer"></div><br />
         <br>
-        <div onclick="goBack()" id="goBack">Go Back</div>
+        <button onclick="goBack()" id="goBack">Go Back</button>
+        <button id="cfm">Confirm</button>
         <br/>
+
 
       </form>
     </div>
@@ -181,10 +203,11 @@
     function goBack() {
         $("#questions").show();
         $("#answers").hide();
+        $("#goBackBtn").show();
 
       }
     function submission() {
-
+      $("#goBackBtn").hide();
       function checkInfo(){
         $("#questions").hide();
         $("#answers").show();
@@ -192,6 +215,7 @@
        $("#stuIDAnswer").html($("#stuID").val());
        $("#stuEmailAnswer").html($("#stuEmail").val());
        $("#reasonAnswer").html($("#reason").val());
+
 
       }
 

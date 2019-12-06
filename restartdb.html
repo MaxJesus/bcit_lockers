@@ -43,12 +43,11 @@
 
 $(document).ready(function(){
     var docUserID = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G");
-
 docUserID.set({
-  NE:100,
-  SE:120,
-  NW:132,
-  SW:52,
+  NE:49,
+  SE:41,
+  NW:37,
+  SW:107,
 })
   
   
@@ -156,8 +155,16 @@ docUserID.set({
   docSW3.set({
     "vacant_lockers":12,
   })
-      console.log("set")
+     
+   var docSW5 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("SW").doc("SW5");
+  docSW5.set({
+    "vacant_lockers":11,
+  })
   
+   var docSW9 = db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("SW").doc("SW9");
+  docSW9.set({
+    "vacant_lockers":9,
+  })
   
     docSW1.collection("SW1_floors").onSnapshot(function (snap) {
         snap.forEach(function (doc) {
@@ -167,6 +174,23 @@ docUserID.set({
         });
       });
   
+  
+  
+  var floor="b1";
+  var sec="SW";
+  var buil="SW2";
+  var floorCol=buil+"_floors";
+   var docsecXbuilYfloorN =db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection(sec).doc(buil).collection(floorCol).doc(floor);
+  docsecXbuilYfloorN.set({
+   vacancy:10,
+  })
+  
+//  var floor="1f";
+//   var docSW9floorN =db.collection("lockerinfo").doc("nqsuYINSdLRJSCJBEO9G").collection("SW").doc("SW9").collection("SW9_floors").doc(floor);
+//  docSW9floorN.set({
+//   vacancy:10,
+//  })
+//
 
   
   

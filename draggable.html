@@ -33,6 +33,11 @@
     
   <!--style for upload-->
   <style>
+    #submitCreate{
+      background-color: green;
+      font-size: 23pt;
+      color: honeydew;
+    }
     #uploadImg{
       position: relative;
       top: 15px;
@@ -87,6 +92,10 @@
     
     #createNewBtn{
 
+      background-color: red;
+      /* height: 40px; */
+      font-size: 20pt;
+      color: white;
       z-index: 1001;
       position: fixed;
       left:45vw;
@@ -498,7 +507,7 @@
     <legend>create new stuff</legend>
       
         <input id="createName" type="text" placeholder="Enter Item Name Here"/>
-        <button id="submitCreate" >submitCreate</button>
+        <button id="submitCreate" >Create</button>
        <div class="container" id="uploadImg">
         <div class="col-md-6">
             <div class="form-group">
@@ -506,7 +515,7 @@
                 <div class="input-group">
                     <span class="input-group-btn">
                         <span class="btn btn-default btn-file" id="browse">
-                            Browse… <input type="file" id="imgInp">
+                            BrowsePicture <input type="file" id="imgInp">
                         </span>
                     </span>
                     <input type="text" class="form-control" readonly>

@@ -44,6 +44,10 @@
       font-size: 40pt;
     }
 
+    #changeALocker{
+      font-size: 40pt;
+    }
+
     /*header includes logo and */
     .spinner-grow {
       float: left;
@@ -421,7 +425,7 @@
 
         <!--  </button>-->
         <div class="dropdown-menu">
-          <button class="dropdown-item" onclick="showCurrent()">Locker Info</button>
+          <button class="dropdown-item" onclick="showCurrent()">Read Instructions</button>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="lockermanagement.html">Locker Management</a>
           <a class="dropdown-item" id="logout">Logout</a>
@@ -439,14 +443,7 @@
     <span>Please Choose a <span id="choosingScope">section</span> to view the available lockers</span>
   </div>
   
-  <!--We can delete the div above this?>
-  <div>
-<<<<<<< HEAD
-    
-=======
-    <button id="pickRandom">Pick a campus section for me</button>
->>>>>>> 586fcee54de99ec3355e7e386f94b19ce0a17945
-  </div>
+  
   <!--A div that allows the user to choose a section to view avaiable lockers-->
   <div id="sectionChoice" class="1stuff">
     <div id="NW" class="1">
@@ -703,8 +700,8 @@
           $("#locker-choice").show();
           $("#choosingScope").html("number");
           $("#cfmPage").show();
-           $("#pickRandom").hide();
-          
+          $("#pickRandom").hide();
+          $("#changeALocker").hide();
 
           break;
       }
@@ -877,9 +874,9 @@ console.log("1");
           alert("Do you wanna use this locker? If yes, press the blue confirm!");
           console.log("2");
         }
-
+        $("#changeALocker").hide();
            db.collection('user').doc(user.uid).collection('position').doc('lockerInfo').onSnapshot(function (querySnapshot) {
-             alert(querySnapshot.data().locker);
+            //  alert("undefined");
              if(querySnapshot.data().locker != null){
                 console.log("3");
                 $("#showConfirmationLockerPosition").html("Wanna change a locker? Plz fill in a form to tell us the reason of a change")
@@ -935,32 +932,46 @@ console.log("1");
         
         snap.forEach(function (doc) {
           floor_Random=doc.id;
-          alert("floor_Num" + floor_Random);
+          console.log("floor_Num" + floor_Random);
           
             console.log("vacancy" +doc.data().vacancy);
           });
+
+let arry=[1111,2222,3333,4444]
+locker_Random=arry[Math.ceil(Math.random()*3)];
+
+
        locker_Num=locker_Random;
 //        alert("building_Num" + locker_Random);
        step=6;
-        
-       
+
+
+
+       $("#showConfirmationLockerPosition").html("You have currently chosen" + locker_Num + " on " + floor_Num + "loor, of building" + building_Num);
+      console.log("This is in building " + backQuery_building); 
+       checkRandom();
        stepControl();
         
         });
     }
     
     function checkRandom(){
+      // alert(building_Num);
       if(randomPick==true)
         {
+         
           building_Num=query_Random;
+          // alert(building_Num);
+          
           floor_Num=floor_Random;
+          // alert(floor_Num);
         }
       else
          {
            console.log("Did not press random")
          }
-      alert("floor_Num" + floor_Num);
-          alert("building_Num" + building_Num);
+      // alert("floor_Num" + floor_Num);
+      //     alert("building_Num" + building_Num);
     }
     
    
@@ -1131,7 +1142,7 @@ console.log("1");
           })
 
           .then(function () {
-            //            alert(locker_Num);
+            //alert(locker_Num);
             calculate();
                        window.location.href="./lockermanagement.html";
           })
@@ -1141,6 +1152,9 @@ console.log("1");
       })
     })
 
+    //function calculate() packs up calculateBuil() as well as calculateSec()
+    // The former one would calculate the vacancies in buildings,
+    // while the latter would calculate the vacancies in this given Section.
     function calculate() {
 
       let getdataFloor = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building).collection(backQuery_building + "_floors").doc(floor_Num);
@@ -1154,6 +1168,7 @@ console.log("1");
 
       )
 
+
       let getdataBuil = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building);
 
       //  getdataBuil.collection(backQuery_building+"_floors").onSnapshot(function (snap) {
@@ -1162,6 +1177,8 @@ console.log("1");
       //
       //        }
       //     )})
+  
+
       calculateBuil();
       calculateSec();
     }
@@ -1179,7 +1196,9 @@ console.log("1");
           
         })
         
-        alert("buildingVacancies" + buildingVacancies)
+        // alert("buildingVacancies" + buildingVacancies)
+
+        //This function here calculates the callback of the building.
         builCallback();
         
       })
@@ -1187,26 +1206,32 @@ console.log("1");
     }
 
     function builCallback() {
+      // alert(backQuery_building);
       let getdataBuil = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building);
       getdataBuil.get().then(
+        
         getdataBuil.set({
+         
 
           vacant_lockers: buildingVacancies
         })
+        
       )
     }
 
+
+
+    // this function helps update the locker numbers.
     var sectionVacancies = 0;
     function calculateSec() {
-
-
-      let getdataSec = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section).doc(backQuery_building);
-      getdataSec.collection(backQuery_building + "_floors").onSnapshot(function (snap) {
+      let getdataSec = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G').collection(backQuery_section);
+      getdataSec.onSnapshot(function (snap) {
         snap.forEach(function (doc) {
+
           sectionVacancies = doc.data().vacant_lockers + sectionVacancies;
-          alert("doc.data().vacancy " + doc.data().vacancy);
+          alert("doc.data().vacant_lockers " + doc.data().vacant_lockers);
         })
-        alert("sectionVacancies" + sectionVacancies)
+        console.log("sectionVacancies" + sectionVacancies)
         callbackSec();
       })
 
@@ -1215,7 +1240,9 @@ console.log("1");
     function callbackSec() {
       getdataSec = db.collection('lockerinfo').doc('nqsuYINSdLRJSCJBEO9G');
       getdataSec.get().then(
-        getdataSec.set({
+        
+        //should use update, rather than set, set would override stuff previously written.
+        getdataSec.update({
           [backQuery_section]: sectionVacancies,
           //      backQuery_section: sectionVacancies
         })
